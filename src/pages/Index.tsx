@@ -1,12 +1,27 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+import Header from "@/components/Header";
+import HeroSection from "@/components/HeroSection";
+import JobFilters from "@/components/JobFilters";
+import JobList from "@/components/JobList";
+import Footer from "@/components/Footer";
 
 const Index = () => {
   return (
-    <div className="min-h-screen flex items-center justify-center bg-background">
-      <div className="text-center">
-        <h1 className="text-4xl font-bold mb-4">Welcome to Your Blank App</h1>
-        <p className="text-xl text-muted-foreground">Start building your amazing project here!</p>
-      </div>
+    <div className="min-h-screen bg-background">
+      <Header />
+      <HeroSection />
+      
+      <main className="container mx-auto px-4 py-12">
+        <div className="flex gap-8">
+          <aside className="hidden lg:block">
+            <JobFilters />
+          </aside>
+          <div className="flex-1">
+            <JobList />
+          </div>
+        </div>
+      </main>
+      
+      <Footer />
     </div>
   );
 };
