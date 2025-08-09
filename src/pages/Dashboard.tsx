@@ -15,6 +15,8 @@ import JobManager from "@/components/dashboard/JobManager";
 import CandidatesTable from "@/components/dashboard/CandidatesTable";
 import FilterBar from "@/components/dashboard/FilterBar";
 import MetricsOverview from "@/components/dashboard/MetricsOverview";
+import type { CandidateProfileData } from "@/components/dashboard/CandidateProfile";
+import type { CompanyData } from "@/components/dashboard/RecruiterCompanyCard";
 import { useToast } from "@/hooks/use-toast";
 
 const Dashboard: React.FC = () => {
@@ -23,12 +25,12 @@ const Dashboard: React.FC = () => {
   const [recruiterOpen, setRecruiterOpen] = React.useState(false);
   const [resumeOpen, setResumeOpen] = React.useState(false);
 
-  const [candidateData, setCandidateData] = React.useState({
+  const [candidateData, setCandidateData] = React.useState<CandidateProfileData>({
     fullName: "João da Silva",
     city: "São Paulo",
     country: "Brasil",
     profession: "Designer UI/UX",
-    status: "Empregado atualmente" as const,
+    status: "Empregado atualmente",
     bio: "Designer com 6+ anos em produtos digitais. Foco em acessibilidade e métricas.",
     salaryExpectation: "R$ 8.000 - 10.000",
     seniority: "Sênior",
@@ -43,7 +45,7 @@ const Dashboard: React.FC = () => {
     ],
   });
 
-  const [recruiterData, setRecruiterData] = React.useState({
+  const [recruiterData, setRecruiterData] = React.useState<CompanyData>({
     name: "Agência TalentHub",
     location: "Belo Horizonte, Brasil",
     description: "Especialistas em recrutamento para tecnologia e produto.",
@@ -111,7 +113,7 @@ const Dashboard: React.FC = () => {
                     ]}
                   />
                 </div>
-
+              </div>
               <div className="lg:col-span-2 space-y-6">
                 <section>
                   <div className="mb-3 flex items-center justify-between">
