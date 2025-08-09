@@ -92,6 +92,9 @@ const Footer = () => {
               <Link to="/politica-de-cookies" className="text-muted-foreground hover:text-primary transition-colors">
                 Cookies
               </Link>
+              <Link to="/admin" className="text-muted-foreground hover:text-primary transition-colors">
+                Admin
+              </Link>
             </div>
           </div>
         </div>
