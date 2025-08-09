@@ -10,6 +10,8 @@ import PoliticaDePrivacidade from "./pages/PoliticaDePrivacidade";
 import PoliticaDeCookies from "./pages/PoliticaDeCookies";
 import Admin from "./pages/Admin";
 import Dashboard from "./pages/Dashboard";
+import Login from "./pages/Login";
+import Cadastro from "./pages/Cadastro";
 
 const queryClient = new QueryClient();
 
@@ -26,6 +28,8 @@ const App = () => (
           <Route path="/politica-de-cookies" element={<PoliticaDeCookies />} />
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/admin" element={<Admin />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/cadastro" element={<Cadastro />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

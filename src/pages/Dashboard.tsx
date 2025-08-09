@@ -4,16 +4,54 @@ import Footer from "@/components/Footer";
 import SEO from "@/components/SEO";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Button } from "@/components/ui/button";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import CandidateProfile from "@/components/dashboard/CandidateProfile";
+import CandidateProfileForm from "@/components/dashboard/CandidateProfileForm";
 import ApplicationsList from "@/components/dashboard/ApplicationsList";
 import ChatPanel from "@/components/dashboard/ChatPanel";
 import RecruiterCompanyCard from "@/components/dashboard/RecruiterCompanyCard";
+import RecruiterProfileForm from "@/components/dashboard/RecruiterProfileForm";
 import JobManager from "@/components/dashboard/JobManager";
 import CandidatesTable from "@/components/dashboard/CandidatesTable";
 import FilterBar from "@/components/dashboard/FilterBar";
 import MetricsOverview from "@/components/dashboard/MetricsOverview";
+import { useToast } from "@/hooks/use-toast";
 
 const Dashboard: React.FC = () => {
+  const { toast } = useToast();
+  const [candidateOpen, setCandidateOpen] = React.useState(false);
+  const [recruiterOpen, setRecruiterOpen] = React.useState(false);
+  const [resumeOpen, setResumeOpen] = React.useState(false);
+
+  const [candidateData, setCandidateData] = React.useState({
+    fullName: "João da Silva",
+    city: "São Paulo",
+    country: "Brasil",
+    profession: "Designer UI/UX",
+    status: "Empregado atualmente" as const,
+    bio: "Designer com 6+ anos em produtos digitais. Foco em acessibilidade e métricas.",
+    salaryExpectation: "R$ 8.000 - 10.000",
+    seniority: "Sênior",
+    skills: ["Figma", "Design System", "UX Research", "Prototipagem"],
+    experiences: [
+      { role: "Senior Product Designer", company: "Acme", period: "2022 — atual" },
+      { role: "UI/UX Designer", company: "Startup XYZ", period: "2019 — 2022" },
+    ],
+    portfolio: [
+      { title: "Case: App de Delivery", url: "https://exemplo.com/case1" },
+      { title: "Dashboard Analytics", url: "https://exemplo.com/case2" },
+    ],
+  });
+
+  const [recruiterData, setRecruiterData] = React.useState({
+    name: "Agência TalentHub",
+    location: "Belo Horizonte, Brasil",
+    description: "Especialistas em recrutamento para tecnologia e produto.",
+    seals: ["Ótimo ambiente", "Empresa certificada"],
+    email: "contato@talenthub.com",
+    phone: "+55 31 99999-0000",
+  });
+
   return (
     <div className="min-h-screen bg-background">
       <SEO
@@ -42,28 +80,28 @@ const Dashboard: React.FC = () => {
 
             <section className="grid grid-cols-1 gap-6 lg:grid-cols-3">
               <div className="lg:col-span-1 space-y-6">
-                <CandidateProfile
-                  data={{
-                    fullName: "João da Silva",
-                    city: "São Paulo",
-                    country: "Brasil",
-                    profession: "Designer UI/UX",
-                    status: "Empregado atualmente",
-                    bio: "Designer com 6+ anos em produtos digitais. Foco em acessibilidade e métricas.",
-                    salaryExpectation: "R$ 8.000 - 10.000",
-                    seniority: "Sênior",
-                    skills: ["Figma", "Design System", "UX Research", "Prototipagem"],
-                    experiences: [
-                      { role: "Senior Product Designer", company: "Acme", period: "2022 — atual" },
-                      { role: "UI/UX Designer", company: "Startup XYZ", period: "2019 — 2022" },
-                    ],
-                    portfolio: [
-                      { title: "Case: App de Delivery", url: "https://exemplo.com/case1" },
-                      { title: "Dashboard Analytics", url: "https://exemplo.com/case2" },
-                    ],
-                  }}
-                />
-
+                <div className="flex items-center justify-between">
+                  <h2 className="text-lg font-medium">Perfil</h2>
+                  <Dialog open={candidateOpen} onOpenChange={setCandidateOpen}>
+                    <DialogTrigger asChild>
+                      <Button size="sm" variant="secondary">Editar perfil</Button>
+                    </DialogTrigger>
+                    <DialogContent>
+                      <DialogHeader>
+                        <DialogTitle>Editar perfil do candidato</DialogTitle>
+                      </DialogHeader>
+                      <CandidateProfileForm
+                        defaultValues={candidateData}
+                        onSubmit={(data) => {
+                          setCandidateData(data);
+                          setCandidateOpen(false);
+                          toast({ title: "Perfil atualizado" });
+                        }}
+                      />
+                    </DialogContent>
+                  </Dialog>
+                </div>
+                <CandidateProfile data={candidateData} />
                 <div>
                   <h2 className="mb-3 text-lg font-medium">Chat com recrutadores</h2>
                   <ChatPanel
@@ -73,7 +111,6 @@ const Dashboard: React.FC = () => {
                     ]}
                   />
                 </div>
-              </div>
 
               <div className="lg:col-span-2 space-y-6">
                 <section>
@@ -97,16 +134,28 @@ const Dashboard: React.FC = () => {
           <TabsContent value="recrutador" className="mt-6">
             <section className="grid grid-cols-1 gap-6 lg:grid-cols-3">
               <div className="space-y-6">
-                <RecruiterCompanyCard
-                  data={{
-                    name: "Agência TalentHub",
-                    location: "Belo Horizonte, Brasil",
-                    description: "Especialistas em recrutamento para tecnologia e produto.",
-                    seals: ["Ótimo ambiente", "Empresa certificada"],
-                    email: "contato@talenthub.com",
-                    phone: "+55 31 99999-0000",
-                  }}
-                />
+                <div className="flex items-center justify-between">
+                  <h2 className="text-lg font-medium">Perfil da empresa</h2>
+                  <Dialog open={recruiterOpen} onOpenChange={setRecruiterOpen}>
+                    <DialogTrigger asChild>
+                      <Button size="sm" variant="secondary">Editar perfil</Button>
+                    </DialogTrigger>
+                    <DialogContent>
+                      <DialogHeader>
+                        <DialogTitle>Editar perfil do recrutador</DialogTitle>
+                      </DialogHeader>
+                      <RecruiterProfileForm
+                        defaultValues={recruiterData}
+                        onSubmit={(data) => {
+                          setRecruiterData(data);
+                          setRecruiterOpen(false);
+                          toast({ title: "Perfil da empresa atualizado" });
+                        }}
+                      />
+                    </DialogContent>
+                  </Dialog>
+                </div>
+                <RecruiterCompanyCard data={recruiterData} />
                 <MetricsOverview evaluatedPct={46} />
                 <div>
                   <h2 className="mb-3 text-lg font-medium">Chat com candidatos</h2>
