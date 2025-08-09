@@ -14,7 +14,7 @@ const Footer = () => {
                   alt="Logo Vagas de Trabalhos - vagas de emprego"
                   width={160}
                   height={40}
-                  className="h-8 w-auto"
+                  className="h-12 w-auto"
                   loading="lazy"
                   decoding="async"
                 />
