@@ -1,4 +1,5 @@
 import { Mail, Phone, MapPin, Facebook, Twitter, Instagram, Linkedin } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const Footer = () => {
   return (
@@ -82,15 +83,15 @@ const Footer = () => {
               © 2024 VagasTrabalhos. Todos os direitos reservados.
             </p>
             <div className="flex gap-6">
-              <a href="#" className="text-muted-foreground hover:text-primary transition-colors">
-                Termos de Uso
-              </a>
-              <a href="#" className="text-muted-foreground hover:text-primary transition-colors">
+              <Link to="/politica-de-uso" className="text-muted-foreground hover:text-primary transition-colors">
+                Política de Uso
+              </Link>
+              <Link to="/politica-de-privacidade" className="text-muted-foreground hover:text-primary transition-colors">
                 Política de Privacidade
-              </a>
-              <a href="#" className="text-muted-foreground hover:text-primary transition-colors">
+              </Link>
+              <Link to="/politica-de-cookies" className="text-muted-foreground hover:text-primary transition-colors">
                 Cookies
-              </a>
+              </Link>
             </div>
           </div>
         </div>
