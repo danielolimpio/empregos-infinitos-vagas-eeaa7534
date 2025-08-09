@@ -31,7 +31,7 @@ const HeroSection = () => {
         <div className="max-w-4xl mx-auto text-center">
           <h1 className="text-5xl md:text-6xl font-bold mb-6 leading-tight">
             Encontre sua próxima{" "}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 to-orange-300">
+            <span className="text-transparent bg-clip-text bg-gradient-primary">
               oportunidade
             </span>
           </h1>
