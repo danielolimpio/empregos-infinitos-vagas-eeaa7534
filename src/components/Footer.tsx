@@ -1,4 +1,4 @@
-import { Building, Mail, Phone, MapPin, Facebook, Twitter, Instagram, Linkedin } from "lucide-react";
+import { Mail, Phone, MapPin, Facebook, Twitter, Instagram, Linkedin } from "lucide-react";
 
 const Footer = () => {
   return (
@@ -8,12 +8,18 @@ const Footer = () => {
           {/* Logo and Description */}
           <div className="space-y-4">
             <div className="flex items-center gap-2">
-              <div className="w-8 h-8 bg-gradient-primary rounded-lg flex items-center justify-center">
-                <Building className="w-5 h-5 text-white" />
-              </div>
-              <span className="text-xl font-bold bg-gradient-primary bg-clip-text text-transparent">
-                VagasTrabalhos
-              </span>
+              <a href="/" className="flex items-center" aria-label="Vagas de Trabalhos - Página inicial">
+                <img
+                  src="/lovable-uploads/0fb39e57-ff37-438d-945d-7b1bc027b381.png"
+                  alt="Logo Vagas de Trabalhos - vagas de emprego"
+                  width={160}
+                  height={40}
+                  className="h-8 w-auto"
+                  loading="lazy"
+                  decoding="async"
+                />
+                <span className="sr-only">Vagas de Trabalhos</span>
+              </a>
             </div>
             <p className="text-muted-foreground">
               Conectamos talentos com as melhores empresas do Brasil. Sua carreira dos sonhos está a um clique de distância.
