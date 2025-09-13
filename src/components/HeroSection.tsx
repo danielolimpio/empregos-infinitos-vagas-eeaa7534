@@ -1,4 +1,4 @@
-import { Search, MapPin, TrendingUp, Users, Building } from "lucide-react";
+import { Search, MapPin, TrendingUp, Users, Building, Briefcase, UserCheck, Target } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent } from "@/components/ui/card";
@@ -6,17 +6,27 @@ const HeroSection = () => {
   const stats = [{
     icon: Building,
     label: "Empresas",
-    value: "5.000+"
+    value: "5.000+",
+    color: "text-[hsl(204_100%_59%)]"
   }, {
-    icon: Users,
+    icon: UserCheck,
     label: "Candidatos",
-    value: "50.000+"
+    value: "50.000+",
+    color: "text-[hsl(142_69%_58%)]"
   }, {
-    icon: TrendingUp,
+    icon: Target,
     label: "Vagas Ativas",
-    value: "15.000+"
+    value: "15.000+",
+    color: "text-[hsl(348_83%_47%)]"
   }];
-  const popularSearches = ["Desenvolvedor React", "Designer UX/UI", "Analista de Dados", "Gerente de Projetos", "Desenvolvedor Backend", "Marketing Digital"];
+  const popularSearches = [
+    { name: "Desenvolvedor React", color: "bg-[hsl(214_100%_59%)] hover:bg-[hsl(214_100%_54%)]" },
+    { name: "Designer UX/UI", color: "bg-[hsl(280_100%_70%)] hover:bg-[hsl(280_100%_65%)]" },
+    { name: "Analista de Dados", color: "bg-[hsl(142_69%_58%)] hover:bg-[hsl(142_69%_53%)]" },
+    { name: "Gerente de Projetos", color: "bg-[hsl(348_83%_47%)] hover:bg-[hsl(348_83%_42%)]" },
+    { name: "Desenvolvedor Backend", color: "bg-[hsl(204_100%_59%)] hover:bg-[hsl(204_100%_54%)]" },
+    { name: "Marketing Digital", color: "bg-[hsl(25_95%_53%)] hover:bg-[hsl(25_95%_48%)]" }
+  ];
   return <section className="relative bg-gradient-hero text-white py-20 overflow-hidden">
       {/* Background Pattern */}
       <div className="absolute inset-0 opacity-10">
@@ -57,21 +67,32 @@ const HeroSection = () => {
           <div className="mb-12">
             <p className="text-white/80 mb-4">Buscas populares:</p>
             <div className="flex flex-wrap justify-center gap-2">
-              {popularSearches.map((search, index) => <Button key={index} variant="outline" size="sm" className="bg-white/10 border-white/30 text-white hover:bg-white/20 hover:border-white/50">
-                  {search}
-                </Button>)}
+              {popularSearches.map((search, index) => (
+                <Button 
+                  key={index} 
+                  variant="outline" 
+                  size="sm" 
+                  className={`${search.color} border-transparent text-white font-medium transition-all duration-300 shadow-md hover:shadow-lg hover:scale-105`}
+                >
+                  {search.name}
+                </Button>
+              ))}
             </div>
           </div>
 
           {/* Stats */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {stats.map((stat, index) => <Card key={index} className="bg-white/10 border-white/20 backdrop-blur-sm">
+            {stats.map((stat, index) => (
+              <Card key={index} className="bg-white/10 border-white/20 backdrop-blur-sm hover:bg-white/15 transition-all duration-300 hover:scale-105">
                 <CardContent className="p-6 text-center">
-                  <stat.icon className="w-8 h-8 mx-auto mb-2 text-white" />
+                  <div className="w-12 h-12 mx-auto mb-3 bg-white/20 rounded-full flex items-center justify-center">
+                    <stat.icon className={`w-6 h-6 ${stat.color}`} />
+                  </div>
                   <p className="text-3xl font-bold text-white mb-1">{stat.value}</p>
                   <p className="text-white/80">{stat.label}</p>
                 </CardContent>
-              </Card>)}
+              </Card>
+            ))}
           </div>
         </div>
       </div>
