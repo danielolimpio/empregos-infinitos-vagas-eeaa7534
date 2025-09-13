@@ -7,31 +7,32 @@ const HeroSection = () => {
     icon: Building,
     label: "Empresas",
     value: "5.000+",
-    color: "text-[hsl(204_100%_59%)]"
+    gradient: "from-blue-400 to-cyan-400"
   }, {
     icon: UserCheck,
     label: "Candidatos",
     value: "50.000+",
-    color: "text-[hsl(142_69%_58%)]"
+    gradient: "from-green-400 to-emerald-400"
   }, {
     icon: Target,
     label: "Vagas Ativas",
     value: "15.000+",
-    color: "text-[hsl(348_83%_47%)]"
+    gradient: "from-purple-400 to-pink-400"
   }];
   const popularSearches = [
-    { name: "Desenvolvedor React", color: "bg-[hsl(214_100%_59%)] hover:bg-[hsl(214_100%_54%)]" },
-    { name: "Designer UX/UI", color: "bg-[hsl(280_100%_70%)] hover:bg-[hsl(280_100%_65%)]" },
-    { name: "Analista de Dados", color: "bg-[hsl(142_69%_58%)] hover:bg-[hsl(142_69%_53%)]" },
-    { name: "Gerente de Projetos", color: "bg-[hsl(348_83%_47%)] hover:bg-[hsl(348_83%_42%)]" },
-    { name: "Desenvolvedor Backend", color: "bg-[hsl(204_100%_59%)] hover:bg-[hsl(204_100%_54%)]" },
-    { name: "Marketing Digital", color: "bg-[hsl(25_95%_53%)] hover:bg-[hsl(25_95%_48%)]" }
+    { name: "Desenvolvedor React", bg: "bg-gradient-to-r from-blue-500 to-cyan-500", border: "border-blue-400", hover: "hover:from-blue-600 hover:to-cyan-600" },
+    { name: "Designer UX/UI", bg: "bg-gradient-to-r from-purple-500 to-pink-500", border: "border-purple-400", hover: "hover:from-purple-600 hover:to-pink-600" },
+    { name: "Analista de Dados", bg: "bg-gradient-to-r from-green-500 to-emerald-500", border: "border-green-400", hover: "hover:from-green-600 hover:to-emerald-600" },
+    { name: "Gerente de Projetos", bg: "bg-gradient-to-r from-red-500 to-orange-500", border: "border-red-400", hover: "hover:from-red-600 hover:to-orange-600" },
+    { name: "Desenvolvedor Backend", bg: "bg-gradient-to-r from-indigo-500 to-blue-600", border: "border-indigo-400", hover: "hover:from-indigo-600 hover:to-blue-700" },
+    { name: "Marketing Digital", bg: "bg-gradient-to-r from-orange-500 to-yellow-500", border: "border-orange-400", hover: "hover:from-orange-600 hover:to-yellow-600" }
   ];
-  return <section className="relative bg-gradient-hero text-white py-20 overflow-hidden">
-      {/* Background Pattern */}
-      <div className="absolute inset-0 opacity-10">
-        <div className="absolute top-20 left-20 w-72 h-72 bg-white/20 rounded-full blur-3xl"></div>
-        <div className="absolute bottom-20 right-20 w-96 h-96 bg-white/10 rounded-full blur-3xl"></div>
+   return <section className="relative bg-gradient-hero text-white py-20 overflow-hidden">
+      {/* Enhanced Background Pattern */}
+      <div className="absolute inset-0 opacity-20">
+        <div className="absolute top-20 left-20 w-72 h-72 bg-gradient-to-r from-blue-400/30 to-cyan-400/30 rounded-full blur-3xl"></div>
+        <div className="absolute bottom-20 right-20 w-96 h-96 bg-gradient-to-r from-purple-400/20 to-pink-400/20 rounded-full blur-3xl"></div>
+        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-gradient-to-r from-green-400/15 to-emerald-400/15 rounded-full blur-3xl"></div>
       </div>
 
       <div className="container mx-auto px-4 relative z-10">
@@ -72,7 +73,7 @@ const HeroSection = () => {
                   key={index} 
                   variant="outline" 
                   size="sm" 
-                  className={`${search.color} border-transparent text-white font-medium transition-all duration-300 shadow-md hover:shadow-lg hover:scale-105`}
+                  className={`${search.bg} ${search.border} ${search.hover} border-2 text-white font-medium transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105 backdrop-blur-sm`}
                 >
                   {search.name}
                 </Button>
@@ -83,13 +84,13 @@ const HeroSection = () => {
           {/* Stats */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {stats.map((stat, index) => (
-              <Card key={index} className="bg-white/10 border-white/20 backdrop-blur-sm hover:bg-white/15 transition-all duration-300 hover:scale-105">
+              <Card key={index} className="bg-white/10 border-white/30 backdrop-blur-sm hover:bg-white/15 transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-xl">
                 <CardContent className="p-6 text-center">
-                  <div className="w-12 h-12 mx-auto mb-3 bg-white/20 rounded-full flex items-center justify-center">
-                    <stat.icon className={`w-6 h-6 ${stat.color}`} />
+                  <div className={`w-12 h-12 mx-auto mb-3 bg-gradient-to-br ${stat.gradient} rounded-full flex items-center justify-center shadow-lg`}>
+                    <stat.icon className="w-6 h-6 text-white drop-shadow-sm" />
                   </div>
-                  <p className="text-3xl font-bold text-white mb-1">{stat.value}</p>
-                  <p className="text-white/80">{stat.label}</p>
+                  <p className="text-3xl font-bold text-white mb-1 drop-shadow-sm">{stat.value}</p>
+                  <p className="text-white/90 font-medium">{stat.label}</p>
                 </CardContent>
               </Card>
             ))}
