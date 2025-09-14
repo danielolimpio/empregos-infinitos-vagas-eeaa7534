@@ -2,6 +2,7 @@ import { Search, MapPin, TrendingUp, Users, Building, Briefcase, UserCheck, Targ
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent } from "@/components/ui/card";
+import diversityBackground from "@/assets/diversity-background.jpg";
 const HeroSection = () => {
   const stats = [{
     icon: Building,
@@ -28,6 +29,13 @@ const HeroSection = () => {
     { name: "Marketing Digital", bg: "bg-gradient-to-r from-orange-500 to-yellow-500", border: "border-orange-400", hover: "hover:from-orange-600 hover:to-yellow-600" }
   ];
    return <section className="relative bg-gradient-hero text-white py-20 overflow-hidden">
+      {/* Background Image with Dark Overlay */}
+      <div 
+        className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+        style={{ backgroundImage: `url(${diversityBackground})` }}
+      ></div>
+      <div className="absolute inset-0 bg-gradient-to-br from-primary/90 via-primary/85 to-secondary/90"></div>
+      
       {/* Enhanced Background Pattern */}
       <div className="absolute inset-0 opacity-20">
         <div className="absolute top-20 left-20 w-72 h-72 bg-gradient-to-r from-blue-400/30 to-cyan-400/30 rounded-full blur-3xl"></div>
