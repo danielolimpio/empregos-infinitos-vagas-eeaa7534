@@ -32,35 +32,37 @@ const FilterBar: React.FC = () => {
             <SelectItem value="marketing">Marketing</SelectItem>
             <SelectItem value="vendas">Vendas</SelectItem>
             <SelectItem value="rh">Recursos Humanos</SelectItem>
+            <SelectItem value="financeiro">Financeiro</SelectItem>
+            <SelectItem value="juridico">Jurídico</SelectItem>
+            <SelectItem value="operacional">Operacional</SelectItem>
+            <SelectItem value="educacao">Educação</SelectItem>
           </SelectContent>
         </Select>
 
-        <div className="grid grid-cols-1 gap-2">
-          <Select value={selectedState} onValueChange={handleStateChange}>
-            <SelectTrigger><SelectValue placeholder="Estado" /></SelectTrigger>
-            <SelectContent>
-              {brazilianStates.map((state) => (
-                <SelectItem key={state.value} value={state.value}>
-                  {state.label}
-                </SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
-          
-          <Select value={selectedCity} onValueChange={setSelectedCity} disabled={!selectedState}>
-            <SelectTrigger><SelectValue placeholder="Cidade" /></SelectTrigger>
-            <SelectContent>
-              <SelectItem value="remoto">Remoto</SelectItem>
-              <SelectItem value="hibrido">Híbrido</SelectItem>
-              <SelectItem value="internacional">Internacional</SelectItem>
-              {availableCities.map((city) => (
-                <SelectItem key={city.value} value={city.value}>
-                  {city.label}
-                </SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
-        </div>
+        <Select value={selectedState} onValueChange={handleStateChange}>
+          <SelectTrigger><SelectValue placeholder="Estado" /></SelectTrigger>
+          <SelectContent>
+            {brazilianStates.map((state) => (
+              <SelectItem key={state.value} value={state.value}>
+                {state.label}
+              </SelectItem>
+            ))}
+          </SelectContent>
+        </Select>
+
+        <Select value={selectedCity} onValueChange={setSelectedCity} disabled={!selectedState}>
+          <SelectTrigger><SelectValue placeholder="Cidade" /></SelectTrigger>
+          <SelectContent>
+            <SelectItem value="remoto">Remoto</SelectItem>
+            <SelectItem value="hibrido">Híbrido</SelectItem>
+            <SelectItem value="internacional">Internacional</SelectItem>
+            {availableCities.map((city) => (
+              <SelectItem key={city.value} value={city.value}>
+                {city.label}
+              </SelectItem>
+            ))}
+          </SelectContent>
+        </Select>
 
         <Select>
           <SelectTrigger><SelectValue placeholder="Tipo de Trabalho" /></SelectTrigger>

@@ -31,11 +31,13 @@ import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover
 import { Calendar as CalendarIcon, Plus, CheckCircle2, XCircle } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useToast } from "@/hooks/use-toast";
+import { brazilianStates, citiesByState, jobTypes } from "@/data/locations";
 
 // Tipos e validação
 const jobSchema = z.object({
   titulo: z.string().min(3, "Informe um título"),
-  profissao: z.string().min(1, "Selecione a profissão"),
+  profissao: z.string().min(1, "Informe a especialização"),
+  estado: z.string().min(1, "Selecione o estado"),
   municipio: z.string().min(2, "Informe o município"),
   periodo: z.string().min(1, "Selecione o período"),
   salario: z.string().optional(),
@@ -52,6 +54,7 @@ type JobFormValues = z.infer<typeof jobSchema>;
 
 const Admin: React.FC = () => {
   const { toast } = useToast();
+  const [selectedState, setSelectedState] = React.useState<string>("");
   const [profissoes, setProfissoes] = React.useState<string[]>([
     "Desenvolvedor(a)",
     "Designer",
@@ -73,6 +76,7 @@ const Admin: React.FC = () => {
     defaultValues: {
       titulo: "",
       profissao: "",
+      estado: "",
       municipio: "",
       periodo: "",
       salario: "",
@@ -85,6 +89,8 @@ const Admin: React.FC = () => {
       dataLimite: undefined,
     },
   });
+
+  const availableCities = selectedState ? citiesByState[selectedState] || [] : [];
 
   React.useEffect(() => {
     // noindex para evitar indexação do admin
@@ -188,13 +194,56 @@ const Admin: React.FC = () => {
 
                         <FormField
                           control={form.control}
+                          name="estado"
+                          render={({ field }) => (
+                            <FormItem>
+                              <FormLabel>Estado</FormLabel>
+                              <Select value={field.value} onValueChange={(value) => {
+                                field.onChange(value);
+                                setSelectedState(value);
+                                form.setValue("municipio", ""); // Reset municipality when state changes
+                              }}>
+                                <FormControl>
+                                  <SelectTrigger>
+                                    <SelectValue placeholder="Selecione o estado" />
+                                  </SelectTrigger>
+                                </FormControl>
+                                <SelectContent>
+                                  {brazilianStates.map((state) => (
+                                    <SelectItem key={state.value} value={state.value}>
+                                      {state.label}
+                                    </SelectItem>
+                                  ))}
+                                </SelectContent>
+                              </Select>
+                              <FormMessage />
+                            </FormItem>
+                          )}
+                        />
+
+                        <FormField
+                          control={form.control}
                           name="municipio"
                           render={({ field }) => (
                             <FormItem>
                               <FormLabel>Município</FormLabel>
-                              <FormControl>
-                                <Input placeholder="Ex.: São Paulo" {...field} />
-                              </FormControl>
+                              <Select value={field.value} onValueChange={field.onChange} disabled={!selectedState}>
+                                <FormControl>
+                                  <SelectTrigger>
+                                    <SelectValue placeholder="Selecione o município" />
+                                  </SelectTrigger>
+                                </FormControl>
+                                <SelectContent>
+                                  <SelectItem value="remoto">Remoto</SelectItem>
+                                  <SelectItem value="hibrido">Híbrido</SelectItem>
+                                  <SelectItem value="internacional">Internacional</SelectItem>
+                                  {availableCities.map((city) => (
+                                    <SelectItem key={city.value} value={city.value}>
+                                      {city.label}
+                                    </SelectItem>
+                                  ))}
+                                </SelectContent>
+                              </Select>
                               <FormMessage />
                             </FormItem>
                           )}
@@ -205,25 +254,19 @@ const Admin: React.FC = () => {
                           name="periodo"
                           render={({ field }) => (
                             <FormItem>
-                              <FormLabel>Período</FormLabel>
+                              <FormLabel>Tipo de Trabalho</FormLabel>
                               <Select value={field.value} onValueChange={field.onChange}>
                                 <FormControl>
                                   <SelectTrigger>
-                                    <SelectValue placeholder="Selecione o período" />
+                                    <SelectValue placeholder="Selecione o tipo" />
                                   </SelectTrigger>
                                 </FormControl>
                                 <SelectContent>
-                                  <SelectItem value="integral">Integral</SelectItem>
-                                  <SelectItem value="meio-periodo">Meio período</SelectItem>
-                                  <SelectItem value="temporario">Temporário</SelectItem>
-                                  <SelectItem value="estagio">Estágio</SelectItem>
-                                  <SelectItem value="freelancer">Freelancer</SelectItem>
-                                  <SelectItem value="aprendiz">Aprendiz</SelectItem>
-                                  <SelectItem value="voluntariado">Voluntariado</SelectItem>
-                                  <SelectItem value="horario-flexivel">Horário Flexível</SelectItem>
-                                  <SelectItem value="turnos-rotativos">Turnos Rotativos</SelectItem>
-                                  <SelectItem value="consultoria">Consultoria</SelectItem>
-                                  <SelectItem value="parceria">Parceria</SelectItem>
+                                  {jobTypes.map((type) => (
+                                    <SelectItem key={type.value} value={type.value}>
+                                      {type.label}
+                                    </SelectItem>
+                                  ))}
                                 </SelectContent>
                               </Select>
                               <FormMessage />

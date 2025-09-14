@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Separator } from "@/components/ui/separator";
-import { jobTypes } from "@/data/locations";
+import { jobTypes, brazilianStates } from "@/data/locations";
 
 const JobFilters = () => {
   const jobTypesWithCount = [
@@ -21,15 +21,15 @@ const JobFilters = () => {
   ];
 
   const locations = [
-    { id: "sp", label: "São Paulo", count: 850 },
-    { id: "rj", label: "Rio de Janeiro", count: 420 },
-    { id: "mg", label: "Minas Gerais", count: 310 },
-    { id: "pr", label: "Paraná", count: 280 },
-    { id: "rs", label: "Rio Grande do Sul", count: 320 },
-    { id: "sc", label: "Santa Catarina", count: 210 },
     { id: "remote", label: "Remoto", count: 680 },
     { id: "hybrid", label: "Híbrido", count: 240 },
     { id: "internacional", label: "Internacional", count: 145 },
+    // Todos os estados brasileiros
+    ...brazilianStates.map(state => ({
+      id: state.value.toLowerCase(),
+      label: state.label,
+      count: Math.floor(Math.random() * 500) + 50 // Contadores fictícios para demonstração
+    }))
   ];
 
   const salaryRanges = [
