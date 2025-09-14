@@ -6,6 +6,7 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
+import { ImageUpload } from "@/components/ui/image-upload";
 import type { CandidateProfileData } from "./CandidateProfile";
 
 const schema = z.object({
@@ -72,9 +73,13 @@ const CandidateProfileForm: React.FC<{
           name="photoUrl"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Foto (URL)</FormLabel>
+              <FormLabel>Foto do perfil</FormLabel>
               <FormControl>
-                <Input placeholder="https://..." {...field} />
+                <ImageUpload 
+                  value={field.value} 
+                  onChange={field.onChange}
+                  placeholder="Adicionar foto do perfil"
+                />
               </FormControl>
               <FormMessage />
             </FormItem>

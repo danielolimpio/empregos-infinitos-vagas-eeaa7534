@@ -177,19 +177,10 @@ const Admin: React.FC = () => {
                           name="profissao"
                           render={({ field }) => (
                             <FormItem>
-                              <FormLabel>Profissão</FormLabel>
-                              <Select value={field.value} onValueChange={field.onChange}>
-                                <FormControl>
-                                  <SelectTrigger>
-                                    <SelectValue placeholder="Selecione a profissão" />
-                                  </SelectTrigger>
-                                </FormControl>
-                                <SelectContent>
-                                  {profissoes.map((p) => (
-                                    <SelectItem key={p} value={p}>{p}</SelectItem>
-                                  ))}
-                                </SelectContent>
-                              </Select>
+                              <FormLabel>Especialização</FormLabel>
+                              <FormControl>
+                                <Input placeholder="Ex.: React, Machine Learning, UX/UI Design" {...field} />
+                              </FormControl>
                               <FormMessage />
                             </FormItem>
                           )}
@@ -227,6 +218,12 @@ const Admin: React.FC = () => {
                                   <SelectItem value="temporario">Temporário</SelectItem>
                                   <SelectItem value="estagio">Estágio</SelectItem>
                                   <SelectItem value="freelancer">Freelancer</SelectItem>
+                                  <SelectItem value="aprendiz">Aprendiz</SelectItem>
+                                  <SelectItem value="voluntariado">Voluntariado</SelectItem>
+                                  <SelectItem value="horario-flexivel">Horário Flexível</SelectItem>
+                                  <SelectItem value="turnos-rotativos">Turnos Rotativos</SelectItem>
+                                  <SelectItem value="consultoria">Consultoria</SelectItem>
+                                  <SelectItem value="parceria">Parceria</SelectItem>
                                 </SelectContent>
                               </Select>
                               <FormMessage />

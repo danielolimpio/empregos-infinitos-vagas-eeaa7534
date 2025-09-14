@@ -6,6 +6,7 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
+import { ImageUpload } from "@/components/ui/image-upload";
 import type { CompanyData } from "./RecruiterCompanyCard";
 
 const schema = z.object({
@@ -58,8 +59,14 @@ const RecruiterProfileForm: React.FC<{
       <form onSubmit={form.handleSubmit(submit)} className="space-y-4">
         <FormField control={form.control} name="logoUrl" render={({ field }) => (
           <FormItem>
-            <FormLabel>Logo (URL)</FormLabel>
-            <FormControl><Input placeholder="https://..." {...field} /></FormControl>
+            <FormLabel>Logo da empresa</FormLabel>
+            <FormControl>
+              <ImageUpload 
+                value={field.value} 
+                onChange={field.onChange}
+                placeholder="Adicionar logo da empresa"
+              />
+            </FormControl>
             <FormMessage />
           </FormItem>
         )} />

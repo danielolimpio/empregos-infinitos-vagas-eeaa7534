@@ -3,22 +3,33 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Separator } from "@/components/ui/separator";
+import { jobTypes } from "@/data/locations";
 
 const JobFilters = () => {
-  const jobTypes = [
-    { id: "full-time", label: "Tempo Integral", count: 1250 },
-    { id: "part-time", label: "Meio Período", count: 340 },
-    { id: "contract", label: "Contrato", count: 560 },
-    { id: "freelance", label: "Freelance", count: 180 },
-    { id: "internship", label: "Estágio", count: 290 },
+  const jobTypesWithCount = [
+    { id: "integral", label: "Tempo Integral", count: 1250 },
+    { id: "meio-periodo", label: "Meio Período", count: 340 },
+    { id: "temporario", label: "Temporário", count: 560 },
+    { id: "freelancer", label: "Freelancer", count: 180 },
+    { id: "estagio", label: "Estágio", count: 290 },
+    { id: "aprendiz", label: "Aprendiz", count: 85 },
+    { id: "voluntariado", label: "Voluntariado", count: 120 },
+    { id: "horario-flexivel", label: "Horário Flexível", count: 350 },
+    { id: "turnos-rotativos", label: "Turnos Rotativos", count: 240 },
+    { id: "consultoria", label: "Consultoria", count: 160 },
+    { id: "parceria", label: "Parceria", count: 95 },
   ];
 
   const locations = [
     { id: "sp", label: "São Paulo", count: 850 },
     { id: "rj", label: "Rio de Janeiro", count: 420 },
     { id: "mg", label: "Minas Gerais", count: 310 },
+    { id: "pr", label: "Paraná", count: 280 },
+    { id: "rs", label: "Rio Grande do Sul", count: 320 },
+    { id: "sc", label: "Santa Catarina", count: 210 },
     { id: "remote", label: "Remoto", count: 680 },
     { id: "hybrid", label: "Híbrido", count: 240 },
+    { id: "internacional", label: "Internacional", count: 145 },
   ];
 
   const salaryRanges = [
@@ -54,7 +65,7 @@ const JobFilters = () => {
               Tipo de Trabalho
             </h4>
             <div className="space-y-2">
-              {jobTypes.map((type) => (
+              {jobTypesWithCount.map((type) => (
                 <div key={type.id} className="flex items-center justify-between">
                   <div className="flex items-center space-x-2">
                     <Checkbox id={type.id} />
