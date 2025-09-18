@@ -37,11 +37,11 @@ const Footer = () => {
           <div>
             <h4 className="font-semibold mb-4">Para Candidatos</h4>
             <ul className="space-y-2">
-              <li><a href="#" className="text-muted-foreground hover:text-primary transition-colors">Buscar Vagas</a></li>
-              <li><a href="#" className="text-muted-foreground hover:text-primary transition-colors">Criar Perfil</a></li>
-              <li><a href="#" className="text-muted-foreground hover:text-primary transition-colors">Dicas de Carreira</a></li>
-              <li><a href="#" className="text-muted-foreground hover:text-primary transition-colors">Salários</a></li>
-              <li><a href="#" className="text-muted-foreground hover:text-primary transition-colors">Empresas</a></li>
+              <li><Link to="/buscar-vagas" className="text-muted-foreground hover:text-primary transition-colors">Buscar Vagas</Link></li>
+              <li><Link to="/criar-perfil" className="text-muted-foreground hover:text-primary transition-colors">Criar Perfil</Link></li>
+              <li><Link to="/dicas-carreira" className="text-muted-foreground hover:text-primary transition-colors">Dicas de Carreira</Link></li>
+              <li><Link to="/salarios" className="text-muted-foreground hover:text-primary transition-colors">Salários</Link></li>
+              <li><Link to="/empresas" className="text-muted-foreground hover:text-primary transition-colors">Empresas</Link></li>
             </ul>
           </div>
 
@@ -49,11 +49,11 @@ const Footer = () => {
           <div>
             <h4 className="font-semibold mb-4">Para Empresas</h4>
             <ul className="space-y-2">
-              <li><a href="#" className="text-muted-foreground hover:text-primary transition-colors">Publicar Vaga</a></li>
-              <li><a href="#" className="text-muted-foreground hover:text-primary transition-colors">Buscar Candidatos</a></li>
-              <li><a href="#" className="text-muted-foreground hover:text-primary transition-colors">Planos</a></li>
-              <li><a href="#" className="text-muted-foreground hover:text-primary transition-colors">Ferramentas</a></li>
-              <li><a href="#" className="text-muted-foreground hover:text-primary transition-colors">Suporte</a></li>
+              <li><Link to="/publicar-vaga" className="text-muted-foreground hover:text-primary transition-colors">Publicar Vaga</Link></li>
+              <li><Link to="/buscar-candidatos" className="text-muted-foreground hover:text-primary transition-colors">Buscar Candidatos</Link></li>
+              <li><Link to="/planos" className="text-muted-foreground hover:text-primary transition-colors">Planos</Link></li>
+              <li><Link to="/ferramentas" className="text-muted-foreground hover:text-primary transition-colors">Ferramentas</Link></li>
+              <li><Link to="/suporte" className="text-muted-foreground hover:text-primary transition-colors">Suporte</Link></li>
             </ul>
           </div>
 
