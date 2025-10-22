@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import SEO from "@/components/SEO";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -9,6 +9,8 @@ import { Button } from "@/components/ui/button";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { useToast } from "@/hooks/use-toast";
+import { supabase } from "@/integrations/supabase/client";
+import { useNavigate } from "react-router-dom";
 
 const loginSchema = z.object({
   email: z.string().email("E-mail inválido"),
@@ -19,10 +21,64 @@ type LoginValues = z.infer<typeof loginSchema>;
 
 const Login: React.FC = () => {
   const { toast } = useToast();
-  const form = useForm<LoginValues>({ resolver: zodResolver(loginSchema), defaultValues: { email: "", password: "" } });
+  const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
+  const form = useForm<LoginValues>({ 
+    resolver: zodResolver(loginSchema), 
+    defaultValues: { email: "", password: "" } 
+  });
 
-  function onSubmit(values: LoginValues) {
-    toast({ title: "Login", description: `Simulando login para ${values.email}` });
+  useEffect(() => {
+    const checkUser = async () => {
+      const { data: { session } } = await supabase.auth.getSession();
+      if (session) {
+        navigate("/");
+      }
+    };
+    checkUser();
+  }, [navigate]);
+
+  async function onSubmit(values: LoginValues) {
+    setLoading(true);
+    try {
+      const { data, error } = await supabase.auth.signInWithPassword({
+        email: values.email,
+        password: values.password,
+      });
+
+      if (error) {
+        if (error.message.includes("Invalid login credentials")) {
+          toast({
+            title: "Erro",
+            description: "E-mail ou senha incorretos.",
+            variant: "destructive",
+          });
+        } else {
+          toast({
+            title: "Erro no login",
+            description: error.message,
+            variant: "destructive",
+          });
+        }
+        return;
+      }
+
+      if (data.user) {
+        toast({
+          title: "Login realizado!",
+          description: "Bem-vindo de volta!",
+        });
+        setTimeout(() => navigate("/"), 1000);
+      }
+    } catch (error: any) {
+      toast({
+        title: "Erro",
+        description: error.message || "Erro ao fazer login. Tente novamente.",
+        variant: "destructive",
+      });
+    } finally {
+      setLoading(false);
+    }
   }
 
   return (
@@ -63,7 +119,9 @@ const Login: React.FC = () => {
                   </FormItem>
                 )}
               />
-              <Button className="w-full" type="submit">Entrar</Button>
+              <Button className="w-full" type="submit" disabled={loading}>
+                {loading ? "Entrando..." : "Entrar"}
+              </Button>
             </form>
           </Form>
           <p className="mt-4 text-center text-sm text-muted-foreground">

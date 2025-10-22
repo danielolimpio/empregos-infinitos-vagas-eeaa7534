@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import SEO from "@/components/SEO";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -9,6 +9,8 @@ import { Button } from "@/components/ui/button";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { useToast } from "@/hooks/use-toast";
+import { supabase } from "@/integrations/supabase/client";
+import { useNavigate } from "react-router-dom";
 
 const cadastroSchema = z
   .object({
@@ -27,13 +29,71 @@ type CadastroValues = z.infer<typeof cadastroSchema>;
 
 const Cadastro: React.FC = () => {
   const { toast } = useToast();
+  const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
   const form = useForm<CadastroValues>({
     resolver: zodResolver(cadastroSchema),
     defaultValues: { name: "", email: "", password: "", confirm: "", tipo: undefined as any },
   });
 
-  function onSubmit(values: CadastroValues) {
-    toast({ title: "Cadastro", description: `Conta (${values.tipo}) criada para ${values.email} (simulado)` });
+  useEffect(() => {
+    const checkUser = async () => {
+      const { data: { session } } = await supabase.auth.getSession();
+      if (session) {
+        navigate("/");
+      }
+    };
+    checkUser();
+  }, [navigate]);
+
+  async function onSubmit(values: CadastroValues) {
+    setLoading(true);
+    try {
+      const { data, error } = await supabase.auth.signUp({
+        email: values.email,
+        password: values.password,
+        options: {
+          data: {
+            full_name: values.name,
+            account_type: values.tipo === "candidato" ? "candidate" : "recruiter",
+          },
+          emailRedirectTo: `${window.location.origin}/`,
+        },
+      });
+
+      if (error) {
+        if (error.message.includes("already registered")) {
+          toast({
+            title: "Erro",
+            description: "Este e-mail já está cadastrado. Tente fazer login.",
+            variant: "destructive",
+          });
+        } else {
+          toast({
+            title: "Erro no cadastro",
+            description: error.message,
+            variant: "destructive",
+          });
+        }
+        return;
+      }
+
+      if (data.user) {
+        toast({
+          title: "Cadastro realizado!",
+          description: "Bem-vindo! Você será redirecionado...",
+        });
+        setTimeout(() => navigate("/"), 1500);
+      }
+    } catch (error: any) {
+      toast({
+        title: "Erro",
+        description: error.message || "Erro ao criar conta. Tente novamente.",
+        variant: "destructive",
+      });
+    } finally {
+      setLoading(false);
+    }
   }
 
   return (
@@ -123,7 +183,9 @@ const Cadastro: React.FC = () => {
                 )}
               />
 
-              <Button className="w-full" type="submit">Criar conta</Button>
+              <Button className="w-full" type="submit" disabled={loading}>
+                {loading ? "Criando conta..." : "Criar conta"}
+              </Button>
             </form>
           </Form>
 

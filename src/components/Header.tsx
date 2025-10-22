@@ -1,8 +1,35 @@
-import { Search, MapPin } from "lucide-react";
+import { Search, MapPin, LogOut, User } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { supabase } from "@/integrations/supabase/client";
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useToast } from "@/hooks/use-toast";
+import type { User as SupabaseUser } from "@supabase/supabase-js";
 
 const Header = () => {
+  const [user, setUser] = useState<SupabaseUser | null>(null);
+  const navigate = useNavigate();
+  const { toast } = useToast();
+
+  useEffect(() => {
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
+      setUser(session?.user ?? null);
+    });
+
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      setUser(session?.user ?? null);
+    });
+
+    return () => subscription.unsubscribe();
+  }, []);
+
+  const handleLogout = async () => {
+    await supabase.auth.signOut();
+    toast({ title: "Logout", description: "Você saiu da conta." });
+    navigate("/");
+  };
+
   return (
     <header className="sticky top-0 z-50 w-full bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 border-b border-border">
       <div className="container mx-auto px-4 py-4">
@@ -49,12 +76,27 @@ const Header = () => {
             <Button variant="ghost" size="sm">
               Para Empresas
             </Button>
-            <Button variant="outline" size="sm">
-              Entrar
-            </Button>
-            <Button variant="default" size="sm">
-              Cadastrar
-            </Button>
+            {user ? (
+              <>
+                <Button variant="ghost" size="sm" className="gap-2">
+                  <User className="h-4 w-4" />
+                  {user.email?.split("@")[0]}
+                </Button>
+                <Button variant="outline" size="sm" onClick={handleLogout} className="gap-2">
+                  <LogOut className="h-4 w-4" />
+                  Sair
+                </Button>
+              </>
+            ) : (
+              <>
+                <Button variant="outline" size="sm" onClick={() => navigate("/login")}>
+                  Entrar
+                </Button>
+                <Button variant="default" size="sm" onClick={() => navigate("/cadastro")}>
+                  Cadastrar
+                </Button>
+              </>
+            )}
           </div>
         </div>
 
