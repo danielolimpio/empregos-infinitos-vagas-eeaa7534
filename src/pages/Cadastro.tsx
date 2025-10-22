@@ -83,7 +83,15 @@ const Cadastro: React.FC = () => {
           title: "Cadastro realizado!",
           description: "Bem-vindo! Você será redirecionado...",
         });
-        setTimeout(() => navigate("/"), 1500);
+
+        // Redirecionar baseado no tipo de conta
+        setTimeout(() => {
+          if (values.tipo === "recrutador") {
+            navigate("/dashboard");
+          } else {
+            navigate("/");
+          }
+        }, 1500);
       }
     } catch (error: any) {
       toast({

@@ -64,11 +64,26 @@ const Login: React.FC = () => {
       }
 
       if (data.user) {
+        // Buscar perfil do usuário para verificar tipo de conta
+        const { data: profile } = await supabase
+          .from("profiles")
+          .select("account_type")
+          .eq("id", data.user.id)
+          .single();
+
         toast({
           title: "Login realizado!",
           description: "Bem-vindo de volta!",
         });
-        setTimeout(() => navigate("/"), 1000);
+
+        // Redirecionar baseado no tipo de conta
+        setTimeout(() => {
+          if (profile?.account_type === "recruiter") {
+            navigate("/dashboard");
+          } else {
+            navigate("/");
+          }
+        }, 1000);
       }
     } catch (error: any) {
       toast({
