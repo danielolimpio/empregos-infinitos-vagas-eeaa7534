@@ -1,3 +1,4 @@
+import { useState, useMemo } from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import SEO from "@/components/SEO";
@@ -9,6 +10,9 @@ import { Badge } from "@/components/ui/badge";
 import { Search, TrendingUp, MapPin, Briefcase, DollarSign } from "lucide-react";
 
 const Salarios = () => {
+  const [searchRole, setSearchRole] = useState("");
+  const [selectedLocation, setSelectedLocation] = useState("");
+  const [selectedExperience, setSelectedExperience] = useState("");
   const structuredData = {
     "@context": "https://schema.org",
     "@type": "WebPage",
@@ -68,6 +72,25 @@ const Salarios = () => {
     }
   ];
 
+  const filteredSalaries = useMemo(() => {
+    return salaryData.filter((item) => {
+      if (searchRole && !item.role.toLowerCase().includes(searchRole.toLowerCase())) {
+        return false;
+      }
+      if (selectedLocation && !item.location.includes(selectedLocation)) {
+        return false;
+      }
+      if (selectedExperience && item.experience !== selectedExperience) {
+        return false;
+      }
+      return true;
+    });
+  }, [searchRole, selectedLocation, selectedExperience]);
+
+  const handleSearch = () => {
+    // The filtering happens automatically via useMemo
+  };
+
   return (
     <>
       <SEO
@@ -102,38 +125,45 @@ const Salarios = () => {
                 <div className="grid md:grid-cols-3 gap-4">
                   <div>
                     <label className="text-sm font-medium mb-2 block">Cargo ou Profissão</label>
-                    <Input placeholder="Ex: Desenvolvedor, Analista..." />
+                    <Input 
+                      placeholder="Ex: Desenvolvedor, Analista..." 
+                      value={searchRole}
+                      onChange={(e) => setSearchRole(e.target.value)}
+                    />
                   </div>
                   <div>
                     <label className="text-sm font-medium mb-2 block">Localização</label>
-                    <Select>
+                    <Select value={selectedLocation} onValueChange={setSelectedLocation}>
                       <SelectTrigger>
                         <SelectValue placeholder="Selecione a cidade" />
                       </SelectTrigger>
                       <SelectContent>
-                        <SelectItem value="sp">São Paulo, SP</SelectItem>
-                        <SelectItem value="rj">Rio de Janeiro, RJ</SelectItem>
-                        <SelectItem value="bh">Belo Horizonte, MG</SelectItem>
-                        <SelectItem value="poa">Porto Alegre, RS</SelectItem>
-                        <SelectItem value="bsb">Brasília, DF</SelectItem>
+                        <SelectItem value="">Todas</SelectItem>
+                        <SelectItem value="São Paulo, SP">São Paulo, SP</SelectItem>
+                        <SelectItem value="Rio de Janeiro, RJ">Rio de Janeiro, RJ</SelectItem>
+                        <SelectItem value="Belo Horizonte, MG">Belo Horizonte, MG</SelectItem>
+                        <SelectItem value="Porto Alegre, RS">Porto Alegre, RS</SelectItem>
+                        <SelectItem value="Brasília, DF">Brasília, DF</SelectItem>
+                        <SelectItem value="Florianópolis, SC">Florianópolis, SC</SelectItem>
                       </SelectContent>
                     </Select>
                   </div>
                   <div>
                     <label className="text-sm font-medium mb-2 block">Experiência</label>
-                    <Select>
+                    <Select value={selectedExperience} onValueChange={setSelectedExperience}>
                       <SelectTrigger>
                         <SelectValue placeholder="Nível de experiência" />
                       </SelectTrigger>
                       <SelectContent>
-                        <SelectItem value="junior">Júnior (0-2 anos)</SelectItem>
-                        <SelectItem value="pleno">Pleno (3-5 anos)</SelectItem>
-                        <SelectItem value="senior">Sênior (5+ anos)</SelectItem>
+                        <SelectItem value="">Todos</SelectItem>
+                        <SelectItem value="Júnior">Júnior (0-2 anos)</SelectItem>
+                        <SelectItem value="Pleno">Pleno (3-5 anos)</SelectItem>
+                        <SelectItem value="Sênior">Sênior (5+ anos)</SelectItem>
                       </SelectContent>
                     </Select>
                   </div>
                 </div>
-                <Button className="w-full mt-4" size="lg">
+                <Button className="w-full mt-4" size="lg" onClick={handleSearch}>
                   <Search className="w-4 h-4 mr-2" />
                   Pesquisar Salários
                 </Button>
@@ -142,12 +172,27 @@ const Salarios = () => {
           </section>
 
           <section className="mb-12">
-            <div className="flex items-center gap-2 mb-6">
-              <TrendingUp className="w-6 h-6 text-primary" />
-              <h2 className="text-2xl font-semibold">Salários em Destaque</h2>
+            <div className="flex items-center justify-between mb-6">
+              <div className="flex items-center gap-2">
+                <TrendingUp className="w-6 h-6 text-primary" />
+                <h2 className="text-2xl font-semibold">Salários em Destaque</h2>
+              </div>
+              <Badge variant="secondary">
+                {filteredSalaries.length} resultados
+              </Badge>
             </div>
-            <div className="grid gap-4">
-              {salaryData.map((item, index) => (
+            {filteredSalaries.length === 0 ? (
+              <div className="text-center py-12">
+                <p className="text-muted-foreground text-lg">
+                  Nenhum salário encontrado com os filtros selecionados.
+                </p>
+                <p className="text-muted-foreground mt-2">
+                  Tente ajustar seus filtros para ver mais resultados.
+                </p>
+              </div>
+            ) : (
+              <div className="grid gap-4">
+                {filteredSalaries.map((item, index) => (
                 <Card key={index} className="hover:shadow-md transition-shadow">
                   <CardContent className="p-6">
                     <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
@@ -175,8 +220,9 @@ const Salarios = () => {
                     </div>
                   </CardContent>
                 </Card>
-              ))}
-            </div>
+                ))}
+              </div>
+            )}
           </section>
 
           <section className="grid md:grid-cols-2 gap-8">

@@ -1,3 +1,4 @@
+import { useState, useMemo } from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import SEO from "@/components/SEO";
@@ -9,6 +10,10 @@ import { Badge } from "@/components/ui/badge";
 import { Search, Users, MapPin, Briefcase, GraduationCap, Star } from "lucide-react";
 
 const BuscarCandidatos = () => {
+  const [searchQuery, setSearchQuery] = useState("");
+  const [selectedLocation, setSelectedLocation] = useState("");
+  const [selectedExperience, setSelectedExperience] = useState("");
+  const [selectedAvailability, setSelectedAvailability] = useState("");
   const structuredData = {
     "@context": "https://schema.org",
     "@type": "WebPage",
@@ -60,6 +65,39 @@ const BuscarCandidatos = () => {
     }
   ];
 
+  const filteredCandidates = useMemo(() => {
+    return candidates.filter((candidate) => {
+      if (searchQuery) {
+        const query = searchQuery.toLowerCase();
+        const matchesSearch = 
+          candidate.name.toLowerCase().includes(query) ||
+          candidate.title.toLowerCase().includes(query) ||
+          candidate.skills.some(skill => skill.toLowerCase().includes(query));
+        if (!matchesSearch) return false;
+      }
+
+      if (selectedLocation && !candidate.location.includes(selectedLocation)) {
+        return false;
+      }
+
+      if (selectedExperience) {
+        const years = parseInt(candidate.experience);
+        if (selectedExperience === "junior" && years > 2) return false;
+        if (selectedExperience === "pleno" && (years < 3 || years > 5)) return false;
+        if (selectedExperience === "senior" && years < 5) return false;
+      }
+
+      if (selectedAvailability === "available" && !candidate.available) return false;
+      if (selectedAvailability === "employed" && candidate.available) return false;
+
+      return true;
+    });
+  }, [searchQuery, selectedLocation, selectedExperience, selectedAvailability]);
+
+  const handleSearch = () => {
+    // The filtering happens automatically via useMemo
+  };
+
   return (
     <>
       <SEO
@@ -94,30 +132,35 @@ const BuscarCandidatos = () => {
                 <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
                   <div>
                     <label className="text-sm font-medium mb-2 block">Cargo ou Habilidade</label>
-                    <Input placeholder="Ex: Desenvolvedor, Marketing..." />
+                    <Input 
+                      placeholder="Ex: Desenvolvedor, Marketing..." 
+                      value={searchQuery}
+                      onChange={(e) => setSearchQuery(e.target.value)}
+                    />
                   </div>
                   <div>
                     <label className="text-sm font-medium mb-2 block">Localização</label>
-                    <Select>
+                    <Select value={selectedLocation} onValueChange={setSelectedLocation}>
                       <SelectTrigger>
                         <SelectValue placeholder="Selecione a cidade" />
                       </SelectTrigger>
                       <SelectContent>
-                        <SelectItem value="sp">São Paulo, SP</SelectItem>
-                        <SelectItem value="rj">Rio de Janeiro, RJ</SelectItem>
-                        <SelectItem value="bh">Belo Horizonte, MG</SelectItem>
-                        <SelectItem value="poa">Porto Alegre, RS</SelectItem>
-                        <SelectItem value="remote">Trabalho Remoto</SelectItem>
+                        <SelectItem value="">Todas</SelectItem>
+                        <SelectItem value="São Paulo, SP">São Paulo, SP</SelectItem>
+                        <SelectItem value="Rio de Janeiro, RJ">Rio de Janeiro, RJ</SelectItem>
+                        <SelectItem value="Belo Horizonte, MG">Belo Horizonte, MG</SelectItem>
+                        <SelectItem value="Porto Alegre, RS">Porto Alegre, RS</SelectItem>
                       </SelectContent>
                     </Select>
                   </div>
                   <div>
                     <label className="text-sm font-medium mb-2 block">Experiência</label>
-                    <Select>
+                    <Select value={selectedExperience} onValueChange={setSelectedExperience}>
                       <SelectTrigger>
                         <SelectValue placeholder="Anos de experiência" />
                       </SelectTrigger>
                       <SelectContent>
+                        <SelectItem value="">Todos</SelectItem>
                         <SelectItem value="junior">Júnior (0-2 anos)</SelectItem>
                         <SelectItem value="pleno">Pleno (3-5 anos)</SelectItem>
                         <SelectItem value="senior">Sênior (5+ anos)</SelectItem>
@@ -126,19 +169,19 @@ const BuscarCandidatos = () => {
                   </div>
                   <div>
                     <label className="text-sm font-medium mb-2 block">Disponibilidade</label>
-                    <Select>
+                    <Select value={selectedAvailability} onValueChange={setSelectedAvailability}>
                       <SelectTrigger>
                         <SelectValue placeholder="Status" />
                       </SelectTrigger>
                       <SelectContent>
+                        <SelectItem value="">Todos</SelectItem>
                         <SelectItem value="available">Disponível</SelectItem>
                         <SelectItem value="employed">Empregado</SelectItem>
-                        <SelectItem value="all">Todos</SelectItem>
                       </SelectContent>
                     </Select>
                   </div>
                 </div>
-                <Button className="w-full mt-4" size="lg">
+                <Button className="w-full mt-4" size="lg" onClick={handleSearch}>
                   <Search className="w-4 h-4 mr-2" />
                   Buscar Candidatos
                 </Button>
@@ -153,12 +196,22 @@ const BuscarCandidatos = () => {
                 <h2 className="text-2xl font-semibold">Candidatos Recomendados</h2>
               </div>
               <Badge variant="secondary">
-                {candidates.length} perfis encontrados
+                {filteredCandidates.length} perfis encontrados
               </Badge>
             </div>
             
-            <div className="grid gap-6">
-              {candidates.map((candidate, index) => (
+            {filteredCandidates.length === 0 ? (
+              <div className="text-center py-12">
+                <p className="text-muted-foreground text-lg">
+                  Nenhum candidato encontrado com os filtros selecionados.
+                </p>
+                <p className="text-muted-foreground mt-2">
+                  Tente ajustar seus filtros para ver mais resultados.
+                </p>
+              </div>
+            ) : (
+              <div className="grid gap-6">
+                {filteredCandidates.map((candidate, index) => (
                 <Card key={index} className="hover:shadow-lg transition-shadow">
                   <CardContent className="p-6">
                     <div className="flex flex-col lg:flex-row gap-6">
@@ -212,8 +265,9 @@ const BuscarCandidatos = () => {
                     </div>
                   </CardContent>
                 </Card>
-              ))}
-            </div>
+                ))}
+              </div>
+            )}
           </section>
 
           <section className="grid md:grid-cols-3 gap-6 mb-12">

@@ -4,8 +4,31 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Separator } from "@/components/ui/separator";
 import { jobTypes, brazilianStates } from "@/data/locations";
+import type { JobFilters as JobFiltersType } from "@/pages/BuscarVagas";
 
-const JobFilters = () => {
+type JobFiltersProps = {
+  filters: JobFiltersType;
+  setFilters: (filters: JobFiltersType) => void;
+};
+
+const JobFilters = ({ filters, setFilters }: JobFiltersProps) => {
+  const handleCheckboxChange = (category: keyof JobFiltersType, value: string) => {
+    const currentValues = filters[category] as string[];
+    const newValues = currentValues.includes(value)
+      ? currentValues.filter((v) => v !== value)
+      : [...currentValues, value];
+    setFilters({ ...filters, [category]: newValues });
+  };
+
+  const clearFilters = () => {
+    setFilters({
+      searchQuery: "",
+      jobTypes: [],
+      locations: [],
+      salaryRanges: [],
+      companies: [],
+    });
+  };
   const jobTypesWithCount = [
     { id: "integral", label: "Tempo Integral", count: 1250 },
     { id: "meio-periodo", label: "Meio Período", count: 340 },
@@ -68,10 +91,14 @@ const JobFilters = () => {
               {jobTypesWithCount.map((type) => (
                 <div key={type.id} className="flex items-center justify-between">
                   <div className="flex items-center space-x-2">
-                    <Checkbox id={type.id} />
+                    <Checkbox 
+                      id={type.id}
+                      checked={filters.jobTypes.includes(type.id)}
+                      onCheckedChange={() => handleCheckboxChange("jobTypes", type.id)}
+                    />
                     <label
                       htmlFor={type.id}
-                      className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                      className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 cursor-pointer"
                     >
                       {type.label}
                     </label>
@@ -96,10 +123,14 @@ const JobFilters = () => {
               {locations.map((location) => (
                 <div key={location.id} className="flex items-center justify-between">
                   <div className="flex items-center space-x-2">
-                    <Checkbox id={location.id} />
+                    <Checkbox 
+                      id={location.id}
+                      checked={filters.locations.includes(location.id)}
+                      onCheckedChange={() => handleCheckboxChange("locations", location.id)}
+                    />
                     <label
                       htmlFor={location.id}
-                      className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                      className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 cursor-pointer"
                     >
                       {location.label}
                     </label>
@@ -124,10 +155,14 @@ const JobFilters = () => {
               {salaryRanges.map((range) => (
                 <div key={range.id} className="flex items-center justify-between">
                   <div className="flex items-center space-x-2">
-                    <Checkbox id={range.id} />
+                    <Checkbox 
+                      id={range.id}
+                      checked={filters.salaryRanges.includes(range.id)}
+                      onCheckedChange={() => handleCheckboxChange("salaryRanges", range.id)}
+                    />
                     <label
                       htmlFor={range.id}
-                      className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                      className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 cursor-pointer"
                     >
                       {range.label}
                     </label>
@@ -152,10 +187,14 @@ const JobFilters = () => {
               {companies.map((company) => (
                 <div key={company.id} className="flex items-center justify-between">
                   <div className="flex items-center space-x-2">
-                    <Checkbox id={company.id} />
+                    <Checkbox 
+                      id={company.id}
+                      checked={filters.companies.includes(company.id)}
+                      onCheckedChange={() => handleCheckboxChange("companies", company.id)}
+                    />
                     <label
                       htmlFor={company.id}
-                      className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                      className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 cursor-pointer"
                     >
                       {company.label}
                     </label>
@@ -170,7 +209,7 @@ const JobFilters = () => {
         </CardContent>
       </Card>
 
-      <Button variant="outline" className="w-full">
+      <Button variant="outline" className="w-full" onClick={clearFilters}>
         Limpar Filtros
       </Button>
     </div>

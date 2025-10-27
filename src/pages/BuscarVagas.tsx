@@ -1,3 +1,4 @@
+import { useState } from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import SEO from "@/components/SEO";
@@ -7,7 +8,22 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Search } from "lucide-react";
 
+export type JobFilters = {
+  searchQuery: string;
+  jobTypes: string[];
+  locations: string[];
+  salaryRanges: string[];
+  companies: string[];
+};
+
 const BuscarVagas = () => {
+  const [filters, setFilters] = useState<JobFilters>({
+    searchQuery: "",
+    jobTypes: [],
+    locations: [],
+    salaryRanges: [],
+    companies: [],
+  });
   const structuredData = {
     "@context": "https://schema.org",
     "@type": "WebPage",
@@ -36,22 +52,24 @@ const BuscarVagas = () => {
             
             <div className="max-w-2xl mx-auto flex gap-4">
               <div className="flex-1 relative">
-                <Search className="absolute left-3 top-1/2 transform -y-1/2 text-muted-foreground w-4 h-4" />
+                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground w-4 h-4" />
                 <Input
                   placeholder="Busque por cargo, empresa ou palavra-chave..."
                   className="pl-10"
+                  value={filters.searchQuery}
+                  onChange={(e) => setFilters({ ...filters, searchQuery: e.target.value })}
                 />
               </div>
-              <Button size="lg">Buscar Vagas</Button>
+              <Button size="lg" onClick={() => {}}>Buscar Vagas</Button>
             </div>
           </header>
 
           <div className="flex gap-8">
             <aside className="hidden lg:block">
-              <JobFilters />
+              <JobFilters filters={filters} setFilters={setFilters} />
             </aside>
             <div className="flex-1">
-              <JobList />
+              <JobList filters={filters} />
             </div>
           </div>
         </main>
