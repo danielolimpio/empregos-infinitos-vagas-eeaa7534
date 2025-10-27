@@ -3,6 +3,8 @@ import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Upload, User, Camera } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { supabase } from "@/integrations/supabase/client";
+import { useToast } from "@/hooks/use-toast";
 
 interface ImageUploadProps {
   value?: string;
@@ -20,36 +22,66 @@ export const ImageUpload: React.FC<ImageUploadProps> = ({
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [isLoading, setIsLoading] = useState(false);
 
+  const { toast } = useToast();
+
   const handleFileSelect = async (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     if (!file) return;
 
     // Validate file type
     if (!file.type.startsWith('image/')) {
-      alert('Por favor, selecione apenas arquivos de imagem.');
+      toast({
+        variant: "destructive",
+        title: "Arquivo inválido",
+        description: "Por favor, selecione apenas arquivos de imagem.",
+      });
       return;
     }
 
     // Validate file size (max 5MB)
     if (file.size > 5 * 1024 * 1024) {
-      alert('A imagem deve ter no máximo 5MB.');
+      toast({
+        variant: "destructive",
+        title: "Arquivo muito grande",
+        description: "A imagem deve ter no máximo 5MB.",
+      });
       return;
     }
 
     setIsLoading(true);
 
     try {
-      // Convert to base64 or create object URL for preview
-      const reader = new FileReader();
-      reader.onload = (e) => {
-        const result = e.target?.result as string;
-        onChange(result);
-        setIsLoading(false);
-      };
-      reader.readAsDataURL(file);
+      const { data: { user } } = await supabase.auth.getUser();
+      if (!user) throw new Error("Usuário não autenticado");
+
+      // Upload to Supabase Storage
+      const fileExt = file.name.split('.').pop();
+      const fileName = `${user.id}/${Math.random()}.${fileExt}`;
+
+      const { error: uploadError } = await supabase.storage
+        .from('avatars')
+        .upload(fileName, file, { upsert: true });
+
+      if (uploadError) throw uploadError;
+
+      // Get public URL
+      const { data: { publicUrl } } = supabase.storage
+        .from('avatars')
+        .getPublicUrl(fileName);
+
+      onChange(publicUrl);
+      toast({
+        title: "Sucesso!",
+        description: "Imagem carregada com sucesso.",
+      });
+      setIsLoading(false);
     } catch (error) {
       console.error('Erro ao processar imagem:', error);
-      alert('Erro ao processar a imagem. Tente novamente.');
+      toast({
+        variant: "destructive",
+        title: "Erro",
+        description: "Erro ao processar a imagem. Tente novamente.",
+      });
       setIsLoading(false);
     }
   };

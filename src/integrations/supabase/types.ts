@@ -18,28 +18,73 @@ export type Database = {
         Row: {
           account_type: Database["public"]["Enums"]["account_type"]
           avatar_url: string | null
+          bio: string | null
+          city: string | null
           company_name: string | null
+          country: string | null
           created_at: string
+          description: string | null
+          email: string | null
+          experiences: Json | null
           full_name: string | null
           id: string
+          location: string | null
+          phone: string | null
+          portfolio: Json | null
+          profession: string | null
+          salary_expectation: string | null
+          seals: string[] | null
+          seniority: string | null
+          skills: string[] | null
+          status: string | null
           updated_at: string
         }
         Insert: {
           account_type?: Database["public"]["Enums"]["account_type"]
           avatar_url?: string | null
+          bio?: string | null
+          city?: string | null
           company_name?: string | null
+          country?: string | null
           created_at?: string
+          description?: string | null
+          email?: string | null
+          experiences?: Json | null
           full_name?: string | null
           id: string
+          location?: string | null
+          phone?: string | null
+          portfolio?: Json | null
+          profession?: string | null
+          salary_expectation?: string | null
+          seals?: string[] | null
+          seniority?: string | null
+          skills?: string[] | null
+          status?: string | null
           updated_at?: string
         }
         Update: {
           account_type?: Database["public"]["Enums"]["account_type"]
           avatar_url?: string | null
+          bio?: string | null
+          city?: string | null
           company_name?: string | null
+          country?: string | null
           created_at?: string
+          description?: string | null
+          email?: string | null
+          experiences?: Json | null
           full_name?: string | null
           id?: string
+          location?: string | null
+          phone?: string | null
+          portfolio?: Json | null
+          profession?: string | null
+          salary_expectation?: string | null
+          seals?: string[] | null
+          seniority?: string | null
+          skills?: string[] | null
+          status?: string | null
           updated_at?: string
         }
         Relationships: []

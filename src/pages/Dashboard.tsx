@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import SEO from "@/components/SEO";
@@ -18,41 +18,191 @@ import MetricsOverview from "@/components/dashboard/MetricsOverview";
 import type { CandidateProfileData } from "@/components/dashboard/CandidateProfile";
 import type { CompanyData } from "@/components/dashboard/RecruiterCompanyCard";
 import { useToast } from "@/hooks/use-toast";
+import { supabase } from "@/integrations/supabase/client";
+import { useNavigate } from "react-router-dom";
 
 const Dashboard: React.FC = () => {
   const { toast } = useToast();
+  const navigate = useNavigate();
   const [candidateOpen, setCandidateOpen] = React.useState(false);
   const [recruiterOpen, setRecruiterOpen] = React.useState(false);
-  const [resumeOpen, setResumeOpen] = React.useState(false);
+  const [loading, setLoading] = React.useState(true);
+  const [accountType, setAccountType] = React.useState<'candidate' | 'recruiter'>('candidate');
 
   const [candidateData, setCandidateData] = React.useState<CandidateProfileData>({
-    fullName: "João da Silva",
-    city: "São Paulo",
-    country: "Brasil",
-    profession: "Designer UI/UX",
-    status: "Empregado atualmente",
-    bio: "Designer com 6+ anos em produtos digitais. Foco em acessibilidade e métricas.",
-    salaryExpectation: "R$ 8.000 - 10.000",
-    seniority: "Sênior",
-    skills: ["Figma", "Design System", "UX Research", "Prototipagem"],
-    experiences: [
-      { role: "Senior Product Designer", company: "Acme", period: "2022 — atual" },
-      { role: "UI/UX Designer", company: "Startup XYZ", period: "2019 — 2022" },
-    ],
-    portfolio: [
-      { title: "Case: App de Delivery", url: "https://exemplo.com/case1" },
-      { title: "Dashboard Analytics", url: "https://exemplo.com/case2" },
-    ],
+    fullName: "",
+    city: "",
+    country: "",
+    profession: "",
+    status: "Desempregado",
+    bio: "",
+    salaryExpectation: "",
+    seniority: "",
+    skills: [],
+    experiences: [],
+    portfolio: [],
   });
 
   const [recruiterData, setRecruiterData] = React.useState<CompanyData>({
-    name: "Agência TalentHub",
-    location: "Belo Horizonte, Brasil",
-    description: "Especialistas em recrutamento para tecnologia e produto.",
-    seals: ["Ótimo ambiente", "Empresa certificada"],
-    email: "contato@talenthub.com",
-    phone: "+55 31 99999-0000",
+    name: "",
+    location: "",
+    description: "",
+    seals: [],
+    email: "",
+    phone: "",
   });
+
+  // Carregar dados do perfil
+  useEffect(() => {
+    const loadProfile = async () => {
+      try {
+        const { data: { user } } = await supabase.auth.getUser();
+        
+        if (!user) {
+          navigate("/login");
+          return;
+        }
+
+        const { data: profile, error } = await supabase
+          .from("profiles")
+          .select("*")
+          .eq("id", user.id)
+          .single();
+
+        if (error) throw error;
+
+        if (profile) {
+          setAccountType(profile.account_type);
+
+          if (profile.account_type === "candidate") {
+            setCandidateData({
+              photoUrl: profile.avatar_url || "",
+              fullName: profile.full_name || "",
+              city: profile.city || "",
+              country: profile.country || "",
+              profession: profile.profession || "",
+              status: (profile.status as "Desempregado" | "Empregado atualmente") || "Desempregado",
+              bio: profile.bio || "",
+              salaryExpectation: profile.salary_expectation || "",
+              seniority: profile.seniority || "",
+              skills: profile.skills || [],
+              experiences: (profile.experiences as any) || [],
+              portfolio: (profile.portfolio as any) || [],
+            });
+          } else {
+            setRecruiterData({
+              logoUrl: profile.avatar_url || "",
+              name: profile.company_name || "",
+              location: profile.location || "",
+              description: profile.description || "",
+              seals: profile.seals || [],
+              email: profile.email || "",
+              phone: profile.phone || "",
+            });
+          }
+        }
+      } catch (error) {
+        console.error("Erro ao carregar perfil:", error);
+        toast({
+          variant: "destructive",
+          title: "Erro",
+          description: "Erro ao carregar perfil. Tente novamente.",
+        });
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    loadProfile();
+  }, [navigate, toast]);
+
+  const handleCandidateSubmit = async (data: CandidateProfileData) => {
+    try {
+      const { data: { user } } = await supabase.auth.getUser();
+      if (!user) throw new Error("Usuário não autenticado");
+
+      const { error } = await supabase
+        .from("profiles")
+        .update({
+          avatar_url: data.photoUrl,
+          full_name: data.fullName,
+          city: data.city,
+          country: data.country,
+          profession: data.profession,
+          status: data.status,
+          bio: data.bio,
+          salary_expectation: data.salaryExpectation,
+          seniority: data.seniority,
+          skills: data.skills,
+          experiences: data.experiences,
+          portfolio: data.portfolio,
+        })
+        .eq("id", user.id);
+
+      if (error) throw error;
+
+      setCandidateData(data);
+      setCandidateOpen(false);
+      toast({ 
+        title: "Perfil atualizado com sucesso!",
+        description: "Suas informações foram salvas.",
+      });
+    } catch (error) {
+      console.error("Erro ao salvar perfil:", error);
+      toast({
+        variant: "destructive",
+        title: "Erro",
+        description: "Erro ao salvar perfil. Tente novamente.",
+      });
+    }
+  };
+
+  const handleRecruiterSubmit = async (data: CompanyData) => {
+    try {
+      const { data: { user } } = await supabase.auth.getUser();
+      if (!user) throw new Error("Usuário não autenticado");
+
+      const { error } = await supabase
+        .from("profiles")
+        .update({
+          avatar_url: data.logoUrl,
+          company_name: data.name,
+          location: data.location,
+          description: data.description,
+          seals: data.seals,
+          email: data.email,
+          phone: data.phone,
+        })
+        .eq("id", user.id);
+
+      if (error) throw error;
+
+      setRecruiterData(data);
+      setRecruiterOpen(false);
+      toast({ 
+        title: "Perfil da empresa atualizado com sucesso!",
+        description: "As informações foram salvas.",
+      });
+    } catch (error) {
+      console.error("Erro ao salvar perfil:", error);
+      toast({
+        variant: "destructive",
+        title: "Erro",
+        description: "Erro ao salvar perfil. Tente novamente.",
+      });
+    }
+  };
+
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-background flex items-center justify-center">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto"></div>
+          <p className="mt-4 text-muted-foreground">Carregando...</p>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-background">
@@ -94,11 +244,7 @@ const Dashboard: React.FC = () => {
                       </DialogHeader>
                       <CandidateProfileForm
                         defaultValues={candidateData}
-                        onSubmit={(data) => {
-                          setCandidateData(data);
-                          setCandidateOpen(false);
-                          toast({ title: "Perfil atualizado" });
-                        }}
+                        onSubmit={handleCandidateSubmit}
                       />
                     </DialogContent>
                   </Dialog>
@@ -148,11 +294,7 @@ const Dashboard: React.FC = () => {
                       </DialogHeader>
                       <RecruiterProfileForm
                         defaultValues={recruiterData}
-                        onSubmit={(data) => {
-                          setRecruiterData(data);
-                          setRecruiterOpen(false);
-                          toast({ title: "Perfil da empresa atualizado" });
-                        }}
+                        onSubmit={handleRecruiterSubmit}
                       />
                     </DialogContent>
                   </Dialog>
