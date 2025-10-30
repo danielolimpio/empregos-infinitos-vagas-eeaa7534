@@ -64,12 +64,6 @@ const Header = () => {
             <Button variant="ghost" size="sm" onClick={() => navigate("/planos")}>
               Planos
             </Button>
-            <Button variant="ghost" size="sm" onClick={() => navigate("/dicas-carreira")}>
-              Blog
-            </Button>
-            <Button variant="ghost" size="sm" onClick={() => navigate("/suporte")}>
-              Contato
-            </Button>
             <Button variant="ghost" size="sm" onClick={() => navigate("/publicar-vaga")}>
               Publicar Vaga
             </Button>
@@ -81,6 +75,12 @@ const Header = () => {
             </Button>
             <Button variant="ghost" size="sm" onClick={() => navigate("/empresas")}>
               Empresas
+            </Button>
+            <Button variant="ghost" size="sm" onClick={() => navigate("/dicas-carreira")}>
+              Blog
+            </Button>
+            <Button variant="ghost" size="sm" onClick={() => navigate("/suporte")}>
+              Contato
             </Button>
           </nav>
 

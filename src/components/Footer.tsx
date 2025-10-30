@@ -93,13 +93,13 @@ const Footer = () => {
             </p>
             <div className="flex gap-6">
               <Link to="/politica-de-uso" className="text-muted-foreground hover:text-primary transition-colors">
-                Política de Uso
+                Termos de Uso
               </Link>
               <Link to="/politica-de-privacidade" className="text-muted-foreground hover:text-primary transition-colors">
                 Política de Privacidade
               </Link>
               <Link to="/politica-de-cookies" className="text-muted-foreground hover:text-primary transition-colors">
-                Cookies
+                Política de Cookies
               </Link>
               <Link to="/admin" className="text-muted-foreground hover:text-primary transition-colors">
                 Admin
