@@ -77,10 +77,10 @@ const Salarios = () => {
       if (searchRole && !item.role.toLowerCase().includes(searchRole.toLowerCase())) {
         return false;
       }
-      if (selectedLocation && !item.location.includes(selectedLocation)) {
+      if (selectedLocation && selectedLocation !== "all" && !item.location.includes(selectedLocation)) {
         return false;
       }
-      if (selectedExperience && item.experience !== selectedExperience) {
+      if (selectedExperience && selectedExperience !== "all" && item.experience !== selectedExperience) {
         return false;
       }
       return true;
@@ -138,7 +138,7 @@ const Salarios = () => {
                         <SelectValue placeholder="Selecione a cidade" />
                       </SelectTrigger>
                       <SelectContent>
-                        <SelectItem value="">Todas</SelectItem>
+                        <SelectItem value="all">Todas</SelectItem>
                         <SelectItem value="São Paulo, SP">São Paulo, SP</SelectItem>
                         <SelectItem value="Rio de Janeiro, RJ">Rio de Janeiro, RJ</SelectItem>
                         <SelectItem value="Belo Horizonte, MG">Belo Horizonte, MG</SelectItem>
@@ -155,7 +155,7 @@ const Salarios = () => {
                         <SelectValue placeholder="Nível de experiência" />
                       </SelectTrigger>
                       <SelectContent>
-                        <SelectItem value="">Todos</SelectItem>
+                        <SelectItem value="all">Todos</SelectItem>
                         <SelectItem value="Júnior">Júnior (0-2 anos)</SelectItem>
                         <SelectItem value="Pleno">Pleno (3-5 anos)</SelectItem>
                         <SelectItem value="Sênior">Sênior (5+ anos)</SelectItem>
