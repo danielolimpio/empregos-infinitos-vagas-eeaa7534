@@ -33,7 +33,7 @@ const Header = () => {
   return (
     <header className="sticky top-0 z-50 w-full bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 border-b border-border">
       <div className="container mx-auto px-4 py-4">
-        <div className="flex items-center justify-between">
+        <div className="flex items-center justify-between gap-4">
           {/* Logo */}
           <div className="flex items-center gap-2">
             <a href="/" className="flex items-center" aria-label="Vagas de Trabalhos - Página inicial">
@@ -51,7 +51,7 @@ const Header = () => {
           </div>
 
           {/* Navigation Menu */}
-          <nav className="hidden md:flex items-center gap-6">
+          <nav className="hidden md:flex items-center gap-4 lg:gap-6">
             <Button variant="ghost" size="sm" onClick={() => navigate("/")}>
               Home
             </Button>
@@ -69,6 +69,18 @@ const Header = () => {
             </Button>
             <Button variant="ghost" size="sm" onClick={() => navigate("/suporte")}>
               Contato
+            </Button>
+            <Button variant="ghost" size="sm" onClick={() => navigate("/publicar-vaga")}>
+              Publicar Vaga
+            </Button>
+            <Button variant="ghost" size="sm" onClick={() => navigate("/buscar-candidatos")}>
+              Candidatos
+            </Button>
+            <Button variant="ghost" size="sm" onClick={() => navigate("/salarios")}>
+              Salários
+            </Button>
+            <Button variant="ghost" size="sm" onClick={() => navigate("/empresas")}>
+              Empresas
             </Button>
           </nav>
 
