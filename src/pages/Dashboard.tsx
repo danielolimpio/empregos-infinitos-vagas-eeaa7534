@@ -114,7 +114,16 @@ const Dashboard: React.FC = () => {
     };
 
     loadProfile();
-  }, [navigate, toast]);
+    
+    // Recarregar perfil quando dialog for fechado
+    const reloadOnDialogClose = () => {
+      if (!candidateOpen && !recruiterOpen) {
+        loadProfile();
+      }
+    };
+    
+    reloadOnDialogClose();
+  }, [navigate, toast, candidateOpen, recruiterOpen]);
 
   const handleCandidateSubmit = async (data: CandidateProfileData) => {
     try {

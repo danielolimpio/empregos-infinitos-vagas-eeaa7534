@@ -1,4 +1,4 @@
-import { Search, MapPin, LogOut, User } from "lucide-react";
+import { LogOut, User } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { supabase } from "@/integrations/supabase/client";
@@ -50,35 +50,33 @@ const Header = () => {
             </a>
           </div>
 
-          {/* Search Bar */}
-          <div className="hidden md:flex items-center gap-2 flex-1 max-w-2xl mx-8">
-            <div className="relative flex-1">
-              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground w-4 h-4" />
-              <Input
-                placeholder="Pesquisar vagas, empresas, cargos..."
-                className="pl-10 pr-4 h-11 border-2 border-muted focus:border-primary"
-              />
-            </div>
-            <div className="relative">
-              <MapPin className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground w-4 h-4" />
-              <Input
-                placeholder="Localização"
-                className="pl-10 pr-4 h-11 w-40 border-2 border-muted focus:border-primary"
-              />
-            </div>
-            <Button variant="hero" size="lg" className="h-11">
-              Buscar
+          {/* Navigation Menu */}
+          <nav className="hidden md:flex items-center gap-6">
+            <Button variant="ghost" size="sm" onClick={() => navigate("/")}>
+              Home
             </Button>
-          </div>
+            <Button variant="ghost" size="sm" onClick={() => navigate("/empresas")}>
+              Sobre
+            </Button>
+            <Button variant="ghost" size="sm" onClick={() => navigate("/ferramentas")}>
+              Ferramentas
+            </Button>
+            <Button variant="ghost" size="sm" onClick={() => navigate("/planos")}>
+              Planos
+            </Button>
+            <Button variant="ghost" size="sm" onClick={() => navigate("/dicas-carreira")}>
+              Blog
+            </Button>
+            <Button variant="ghost" size="sm" onClick={() => navigate("/suporte")}>
+              Contato
+            </Button>
+          </nav>
 
           {/* User Actions */}
           <div className="flex items-center gap-3">
-            <Button variant="ghost" size="sm">
-              Para Empresas
-            </Button>
             {user ? (
               <>
-                <Button variant="ghost" size="sm" className="gap-2">
+                <Button variant="ghost" size="sm" className="gap-2" onClick={() => navigate("/dashboard")}>
                   <User className="h-4 w-4" />
                   {user.email?.split("@")[0]}
                 </Button>
@@ -97,22 +95,6 @@ const Header = () => {
                 </Button>
               </>
             )}
-          </div>
-        </div>
-
-        {/* Mobile Search */}
-        <div className="md:hidden mt-4">
-          <div className="flex items-center gap-2">
-            <div className="relative flex-1">
-              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground w-4 h-4" />
-              <Input
-                placeholder="Pesquisar vagas..."
-                className="pl-10 pr-4 h-11 border-2 border-muted focus:border-primary"
-              />
-            </div>
-            <Button variant="hero" size="lg" className="h-11">
-              Buscar
-            </Button>
           </div>
         </div>
       </div>

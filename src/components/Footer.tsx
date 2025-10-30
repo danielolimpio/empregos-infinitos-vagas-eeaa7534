@@ -37,6 +37,7 @@ const Footer = () => {
           <div>
             <h4 className="font-semibold mb-4">Para Candidatos</h4>
             <ul className="space-y-2">
+              <li><Link to="/" className="text-muted-foreground hover:text-primary transition-colors">Home</Link></li>
               <li><Link to="/buscar-vagas" className="text-muted-foreground hover:text-primary transition-colors">Buscar Vagas</Link></li>
               <li><Link to="/criar-perfil" className="text-muted-foreground hover:text-primary transition-colors">Criar Perfil</Link></li>
               <li><Link to="/dicas-carreira" className="text-muted-foreground hover:text-primary transition-colors">Dicas de Carreira</Link></li>
@@ -79,8 +80,16 @@ const Footer = () => {
 
         <div className="border-t border-border pt-8 mt-8">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
-            <p className="text-muted-foreground">
-              © 2024 VagasTrabalhos. Todos os direitos reservados.
+            <p className="text-muted-foreground text-sm text-center md:text-left">
+              © Copyright 2025 | Vagas de Trabalhos | Todos os direitos reservados | Desenvolvido por{" "}
+              <a 
+                href="https://danielolimpio.com/" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="text-primary hover:underline"
+              >
+                DanielOlimpio
+              </a>
             </p>
             <div className="flex gap-6">
               <Link to="/politica-de-uso" className="text-muted-foreground hover:text-primary transition-colors">
