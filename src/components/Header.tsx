@@ -51,7 +51,7 @@ const Header = () => {
           </div>
 
           {/* Navigation Menu */}
-          <nav className="hidden md:flex items-center gap-4 lg:gap-6">
+          <nav className="hidden md:flex items-center gap-2 lg:gap-3">
             <Button variant="ghost" size="sm" onClick={() => navigate("/")}>
               Home
             </Button>
