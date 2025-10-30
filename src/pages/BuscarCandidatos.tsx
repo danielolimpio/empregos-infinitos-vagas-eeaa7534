@@ -76,19 +76,21 @@ const BuscarCandidatos = () => {
         if (!matchesSearch) return false;
       }
 
-      if (selectedLocation && !candidate.location.includes(selectedLocation)) {
+      if (selectedLocation && selectedLocation !== "all" && !candidate.location.includes(selectedLocation)) {
         return false;
       }
 
-      if (selectedExperience) {
+      if (selectedExperience && selectedExperience !== "all") {
         const years = parseInt(candidate.experience);
         if (selectedExperience === "junior" && years > 2) return false;
         if (selectedExperience === "pleno" && (years < 3 || years > 5)) return false;
         if (selectedExperience === "senior" && years < 5) return false;
       }
 
-      if (selectedAvailability === "available" && !candidate.available) return false;
-      if (selectedAvailability === "employed" && candidate.available) return false;
+      if (selectedAvailability && selectedAvailability !== "all") {
+        if (selectedAvailability === "available" && !candidate.available) return false;
+        if (selectedAvailability === "employed" && candidate.available) return false;
+      }
 
       return true;
     });
@@ -145,7 +147,7 @@ const BuscarCandidatos = () => {
                         <SelectValue placeholder="Selecione a cidade" />
                       </SelectTrigger>
                       <SelectContent>
-                        <SelectItem value="">Todas</SelectItem>
+                        <SelectItem value="all">Todas</SelectItem>
                         <SelectItem value="São Paulo, SP">São Paulo, SP</SelectItem>
                         <SelectItem value="Rio de Janeiro, RJ">Rio de Janeiro, RJ</SelectItem>
                         <SelectItem value="Belo Horizonte, MG">Belo Horizonte, MG</SelectItem>
@@ -160,7 +162,7 @@ const BuscarCandidatos = () => {
                         <SelectValue placeholder="Anos de experiência" />
                       </SelectTrigger>
                       <SelectContent>
-                        <SelectItem value="">Todos</SelectItem>
+                        <SelectItem value="all">Todos</SelectItem>
                         <SelectItem value="junior">Júnior (0-2 anos)</SelectItem>
                         <SelectItem value="pleno">Pleno (3-5 anos)</SelectItem>
                         <SelectItem value="senior">Sênior (5+ anos)</SelectItem>
@@ -174,7 +176,7 @@ const BuscarCandidatos = () => {
                         <SelectValue placeholder="Status" />
                       </SelectTrigger>
                       <SelectContent>
-                        <SelectItem value="">Todos</SelectItem>
+                        <SelectItem value="all">Todos</SelectItem>
                         <SelectItem value="available">Disponível</SelectItem>
                         <SelectItem value="employed">Empregado</SelectItem>
                       </SelectContent>
