@@ -3,86 +3,84 @@ import { Loader2 } from "lucide-react";
 import JobCard from "./JobCard";
 import { Button } from "@/components/ui/button";
 import type { JobFilters } from "@/pages/BuscarVagas";
+import { supabase } from "@/integrations/supabase/client";
+import { useToast } from "@/hooks/use-toast";
 
-// Mock data for demonstration
-const mockJobs = [
-  {
-    id: "1",
-    title: "Desenvolvedor Frontend React",
-    company: "TechCorp",
-    location: "São Paulo, SP",
-    type: "Tempo Integral",
-    salary: "R$ 8.000 - 12.000",
-    posted: "há 2 dias",
-    description: "Estamos procurando um desenvolvedor frontend experiente em React para integrar nossa equipe de desenvolvimento. Você trabalhará em projetos inovadores e desafiadores.",
-    requirements: ["React", "TypeScript", "CSS", "JavaScript", "Git"],
-  },
-  {
-    id: "2",
-    title: "Designer UX/UI",
-    company: "Design Studio",
-    location: "Rio de Janeiro, RJ",
-    type: "Tempo Integral",
-    salary: "R$ 6.000 - 9.000",
-    posted: "há 1 dia",
-    description: "Buscamos um designer UX/UI criativo para criar interfaces incríveis e experiências de usuário memoráveis para nossos clientes.",
-    requirements: ["Figma", "Adobe XD", "UI Design", "UX Research", "Prototipagem"],
-  },
-  {
-    id: "3",
-    title: "Desenvolvedor Backend Java",
-    company: "Enterprise Solutions",
-    location: "Remoto",
-    type: "Tempo Integral",
-    salary: "R$ 10.000 - 15.000",
-    posted: "há 3 dias",
-    description: "Desenvolvedor backend sênior para trabalhar com sistemas de grande escala usando Java e Spring Boot. Trabalho 100% remoto.",
-    requirements: ["Java", "Spring Boot", "MySQL", "AWS", "Docker"],
-  },
-  {
-    id: "4",
-    title: "Analista de Dados",
-    company: "DataTech",
-    location: "Belo Horizonte, MG",
-    type: "Tempo Integral",
-    salary: "R$ 7.000 - 10.000",
-    posted: "há 1 semana",
-    description: "Analista de dados para extrair insights valiosos dos dados da empresa e apoiar decisões estratégicas.",
-    requirements: ["Python", "SQL", "Power BI", "Excel", "Estatística"],
-  },
-  {
-    id: "5",
-    title: "Gerente de Projetos",
-    company: "Project Management Co.",
-    location: "São Paulo, SP",
-    type: "Tempo Integral",
-    salary: "R$ 12.000 - 18.000",
-    posted: "há 4 dias",
-    description: "Gerente de projetos experiente para liderar equipes multidisciplinares e garantir a entrega de projetos no prazo e dentro do orçamento.",
-    requirements: ["PMP", "Scrum", "Gestão de Equipes", "Excel", "Comunicação"],
-  },
-  {
-    id: "6",
-    title: "Desenvolvedor Mobile Flutter",
-    company: "MobileApp Inc.",
-    location: "Híbrido - São Paulo",
-    type: "Tempo Integral",
-    salary: "R$ 9.000 - 13.000",
-    posted: "há 2 dias",
-    description: "Desenvolvedor mobile especializado em Flutter para criar aplicativos multiplataforma inovadores.",
-    requirements: ["Flutter", "Dart", "Firebase", "REST APIs", "Git"],
-  },
-];
+type Job = {
+  id: string;
+  title: string;
+  company: string;
+  location: string;
+  type: string;
+  salary: string;
+  posted: string;
+  description: string;
+  requirements: string[];
+};
 
 type JobListProps = {
   filters?: JobFilters;
 };
 
 const JobList = ({ filters }: JobListProps) => {
-  const [jobs, setJobs] = useState(mockJobs);
-  const [loading, setLoading] = useState(false);
-  const [hasMore, setHasMore] = useState(true);
+  const { toast } = useToast();
+  const [jobs, setJobs] = useState<Job[]>([]);
+  const [loading, setLoading] = useState(true);
   const [sortBy, setSortBy] = useState("recent");
+
+  // Carregar vagas aprovadas do banco de dados
+  useEffect(() => {
+    const loadJobs = async () => {
+      try {
+        const { data, error } = await supabase
+          .from("jobs")
+          .select("*")
+          .eq("status", "approved")
+          .order("created_at", { ascending: false });
+
+        if (error) throw error;
+
+        // Transformar dados do banco para o formato do JobCard
+        const transformedJobs: Job[] = (data || []).map((job) => {
+          const now = new Date();
+          const created = new Date(job.created_at);
+          const diffDays = Math.floor((now.getTime() - created.getTime()) / (1000 * 60 * 60 * 24));
+          
+          let posted = "";
+          if (diffDays === 0) posted = "hoje";
+          else if (diffDays === 1) posted = "há 1 dia";
+          else if (diffDays < 7) posted = `há ${diffDays} dias`;
+          else if (diffDays < 30) posted = `há ${Math.floor(diffDays / 7)} semana${Math.floor(diffDays / 7) > 1 ? 's' : ''}`;
+          else posted = `há ${Math.floor(diffDays / 30)} mês${Math.floor(diffDays / 30) > 1 ? 'es' : ''}`;
+
+          return {
+            id: job.id,
+            title: job.title,
+            company: job.company_name,
+            location: job.location,
+            type: job.type,
+            salary: job.salary || "A combinar",
+            posted,
+            description: job.description,
+            requirements: job.requirements ? job.requirements.split(",").map(r => r.trim()) : [],
+          };
+        });
+
+        setJobs(transformedJobs);
+      } catch (error) {
+        console.error("Erro ao carregar vagas:", error);
+        toast({
+          variant: "destructive",
+          title: "Erro",
+          description: "Não foi possível carregar as vagas. Tente novamente.",
+        });
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    loadJobs();
+  }, [toast]);
 
   const filteredJobs = useMemo(() => {
     if (!filters) return jobs;
@@ -101,7 +99,7 @@ const JobList = ({ filters }: JobListProps) => {
       // Job type filter
       if (filters.jobTypes.length > 0) {
         const jobTypeMatch = filters.jobTypes.some(type => {
-          if (type === "integral") return job.type === "Tempo Integral";
+          if (type === "integral") return job.type.includes("Presencial") || job.type.includes("Remoto") || job.type.includes("Híbrido");
           if (type === "meio-periodo") return job.type === "Meio Período";
           if (type === "temporario") return job.type === "Temporário";
           if (type === "freelancer") return job.type === "Freelancer";
@@ -165,40 +163,14 @@ const JobList = ({ filters }: JobListProps) => {
     return jobsCopy; // recent (default)
   }, [filteredJobs, sortBy]);
 
-  // Simulate infinite scroll
-  const loadMoreJobs = () => {
-    if (loading || !hasMore) return;
-    
-    setLoading(true);
-    
-    // Simulate API call
-    setTimeout(() => {
-      const newJobs = mockJobs.map((job, index) => ({
-        ...job,
-        id: `${job.id}-${Date.now()}-${index}`,
-      }));
-      
-      setJobs(prev => [...prev, ...newJobs]);
-      setLoading(false);
-      
-      // After 3 loads, simulate no more jobs
-      if (jobs.length >= 18) {
-        setHasMore(false);
-      }
-    }, 1000);
-  };
-
-  // Infinite scroll handler
-  useEffect(() => {
-    const handleScroll = () => {
-      if (window.innerHeight + document.documentElement.scrollTop >= document.documentElement.offsetHeight - 1000) {
-        loadMoreJobs();
-      }
-    };
-
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, [jobs.length, loading, hasMore]);
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center py-12">
+        <Loader2 className="w-8 h-8 animate-spin text-primary" />
+        <span className="ml-2 text-muted-foreground">Carregando vagas...</span>
+      </div>
+    );
+  }
 
   return (
     <div className="space-y-6">
@@ -237,19 +209,9 @@ const JobList = ({ filters }: JobListProps) => {
         </div>
       )}
 
-      {loading && (
-        <div className="flex items-center justify-center py-8">
-          <Loader2 className="w-8 h-8 animate-spin text-primary" />
-          <span className="ml-2 text-muted-foreground">Carregando mais vagas...</span>
-        </div>
-      )}
-
-      {!hasMore && (
+      {sortedJobs.length > 0 && (
         <div className="text-center py-8">
-          <p className="text-muted-foreground">
-            Você chegou ao final das vagas disponíveis.
-          </p>
-          <Button variant="outline" className="mt-4" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
+          <Button variant="outline" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
             Voltar ao topo
           </Button>
         </div>

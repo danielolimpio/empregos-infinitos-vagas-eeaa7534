@@ -14,6 +14,66 @@ export type Database = {
   }
   public: {
     Tables: {
+      jobs: {
+        Row: {
+          approved_at: string | null
+          approved_by: string | null
+          benefits: string | null
+          company_name: string
+          contract: string
+          created_at: string
+          description: string
+          id: string
+          location: string
+          recruiter_id: string
+          rejection_reason: string | null
+          requirements: string | null
+          salary: string | null
+          status: Database["public"]["Enums"]["job_status"]
+          title: string
+          type: string
+          updated_at: string
+        }
+        Insert: {
+          approved_at?: string | null
+          approved_by?: string | null
+          benefits?: string | null
+          company_name: string
+          contract: string
+          created_at?: string
+          description: string
+          id?: string
+          location: string
+          recruiter_id: string
+          rejection_reason?: string | null
+          requirements?: string | null
+          salary?: string | null
+          status?: Database["public"]["Enums"]["job_status"]
+          title: string
+          type: string
+          updated_at?: string
+        }
+        Update: {
+          approved_at?: string | null
+          approved_by?: string | null
+          benefits?: string | null
+          company_name?: string
+          contract?: string
+          created_at?: string
+          description?: string
+          id?: string
+          location?: string
+          recruiter_id?: string
+          rejection_reason?: string | null
+          requirements?: string | null
+          salary?: string | null
+          status?: Database["public"]["Enums"]["job_status"]
+          title?: string
+          type?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
       profiles: {
         Row: {
           account_type: Database["public"]["Enums"]["account_type"]
@@ -89,15 +149,44 @@ export type Database = {
         }
         Relationships: []
       }
+      user_roles: {
+        Row: {
+          created_at: string
+          id: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          role?: Database["public"]["Enums"]["app_role"]
+          user_id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      has_role: {
+        Args: {
+          _role: Database["public"]["Enums"]["app_role"]
+          _user_id: string
+        }
+        Returns: boolean
+      }
     }
     Enums: {
       account_type: "candidate" | "recruiter"
+      app_role: "admin" | "moderator" | "user"
+      job_status: "pending" | "approved" | "rejected"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -226,6 +315,8 @@ export const Constants = {
   public: {
     Enums: {
       account_type: ["candidate", "recruiter"],
+      app_role: ["admin", "moderator", "user"],
+      job_status: ["pending", "approved", "rejected"],
     },
   },
 } as const

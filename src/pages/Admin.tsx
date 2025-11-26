@@ -32,6 +32,7 @@ import { Calendar as CalendarIcon, Plus, CheckCircle2, XCircle } from "lucide-re
 import { cn } from "@/lib/utils";
 import { useToast } from "@/hooks/use-toast";
 import { brazilianStates, citiesByState, jobTypes } from "@/data/locations";
+import { JobApprovalList } from "@/components/admin/JobApprovalList";
 
 // Tipos e validação
 const jobSchema = z.object({
@@ -482,30 +483,7 @@ const Admin: React.FC = () => {
           </TabsContent>
 
           <TabsContent value="aprovacoes" className="mt-6">
-            <section className="rounded-lg border bg-card p-6 shadow-sm">
-              <h2 className="text-lg font-medium mb-4">Aprovação de vagas enviadas por usuários</h2>
-              <div className="space-y-3">
-                {pendentes.length === 0 && (
-                  <p className="text-muted-foreground">Nenhuma vaga pendente no momento.</p>
-                )}
-                {pendentes.map((v) => (
-                  <div key={v.id} className="flex items-center justify-between rounded-md border p-4">
-                    <div>
-                      <p className="font-medium">{v.titulo}</p>
-                      <p className="text-sm text-muted-foreground">{v.empresa} • Enviada por {v.enviadaPor} em {v.data}</p>
-                    </div>
-                    <div className="flex gap-2">
-                      <Button onClick={() => aprovar(v.id)} className="inline-flex items-center gap-1">
-                        <CheckCircle2 className="h-4 w-4" /> Aprovar
-                      </Button>
-                      <Button onClick={() => rejeitar(v.id)} variant="destructive" className="inline-flex items-center gap-1">
-                        <XCircle className="h-4 w-4" /> Rejeitar
-                      </Button>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </section>
+            <JobApprovalList />
           </TabsContent>
         </Tabs>
       </main>
