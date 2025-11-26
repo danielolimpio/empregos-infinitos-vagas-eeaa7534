@@ -15,6 +15,7 @@ import JobManager from "@/components/dashboard/JobManager";
 import CandidatesTable from "@/components/dashboard/CandidatesTable";
 import FilterBar from "@/components/dashboard/FilterBar";
 import MetricsOverview from "@/components/dashboard/MetricsOverview";
+import { RecruiterJobsList } from "@/components/dashboard/RecruiterJobsList";
 import type { CandidateProfileData } from "@/components/dashboard/CandidateProfile";
 import type { CompanyData } from "@/components/dashboard/RecruiterCompanyCard";
 import { useToast } from "@/hooks/use-toast";
@@ -330,13 +331,7 @@ const Dashboard: React.FC = () => {
               </div>
 
               <div className="lg:col-span-2 space-y-6">
-                <JobManager
-                  jobs={[
-                    { id: "j1", title: "Visual Designer", location: "São Paulo", type: "Presencial", status: "Aberta" },
-                    { id: "j2", title: "Product Designer", location: "Remoto", type: "Remota", status: "Aberta" },
-                    { id: "j3", title: "Senior Interaction Designer", location: "Curitiba", type: "Híbrida", status: "Preenchida" },
-                  ]}
-                />
+                <RecruiterJobsList />
                 <CandidatesTable
                   items={[
                     { id: "c1", name: "Ana Lima", role: "Product Designer", experience: "5 anos", status: "Em processo" },
