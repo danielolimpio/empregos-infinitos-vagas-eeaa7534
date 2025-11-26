@@ -15,7 +15,7 @@ const Footer = () => {
                   alt="Logo Vagas de Trabalhos - vagas de emprego"
                   width={160}
                   height={40}
-                  className="h-12 w-auto"
+                  className="h-8 sm:h-10 md:h-12 w-auto object-contain"
                   loading="lazy"
                   decoding="async"
                 />
@@ -100,9 +100,6 @@ const Footer = () => {
               </Link>
               <Link to="/politica-de-cookies" className="text-muted-foreground hover:text-primary transition-colors">
                 Política de Cookies
-              </Link>
-              <Link to="/admin" className="text-muted-foreground hover:text-primary transition-colors">
-                Admin
               </Link>
             </div>
           </div>
