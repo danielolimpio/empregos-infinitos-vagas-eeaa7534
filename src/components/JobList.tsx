@@ -62,7 +62,9 @@ const JobList = ({ filters }: JobListProps) => {
             salary: job.salary || "A combinar",
             posted,
             description: job.description,
-            requirements: job.requirements ? job.requirements.split(",").map(r => r.trim()) : [],
+            requirements: job.requirements
+              ? job.requirements.replace(/<[^>]+>/g, " ").split(/[,.•\n]/).map(r => r.trim()).filter(Boolean)
+              : [],
           };
         });
 
