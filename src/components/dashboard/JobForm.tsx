@@ -4,9 +4,9 @@ import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { RichTextEditor } from "@/components/ui/rich-text-editor";
 
 const jobSchema = z.object({
   company_name: z.string().min(2, "Nome da empresa obrigatório"),
@@ -177,10 +177,10 @@ export const JobForm: React.FC<JobFormProps> = ({
             <FormItem>
               <FormLabel>Descrição da Vaga</FormLabel>
               <FormControl>
-                <Textarea 
-                  rows={5} 
-                  placeholder="Descreva as principais responsabilidades e atribuições da vaga..." 
-                  {...field} 
+                <RichTextEditor
+                  value={field.value || ""}
+                  onChange={field.onChange}
+                  placeholder="Descreva as principais responsabilidades e atribuições da vaga..."
                 />
               </FormControl>
               <FormMessage />
@@ -195,10 +195,10 @@ export const JobForm: React.FC<JobFormProps> = ({
             <FormItem>
               <FormLabel>Requisitos (opcional)</FormLabel>
               <FormControl>
-                <Textarea 
-                  rows={4} 
-                  placeholder="Liste os requisitos técnicos e experiências necessárias..." 
-                  {...field} 
+                <RichTextEditor
+                  value={field.value || ""}
+                  onChange={field.onChange}
+                  placeholder="Liste os requisitos técnicos e experiências necessárias..."
                 />
               </FormControl>
               <FormMessage />
@@ -213,10 +213,10 @@ export const JobForm: React.FC<JobFormProps> = ({
             <FormItem>
               <FormLabel>Benefícios (opcional)</FormLabel>
               <FormControl>
-                <Textarea 
-                  rows={3} 
-                  placeholder="Ex: Vale alimentação, plano de saúde, home office..." 
-                  {...field} 
+                <RichTextEditor
+                  value={field.value || ""}
+                  onChange={field.onChange}
+                  placeholder="Ex: Vale alimentação, plano de saúde, home office..."
                 />
               </FormControl>
               <FormMessage />
