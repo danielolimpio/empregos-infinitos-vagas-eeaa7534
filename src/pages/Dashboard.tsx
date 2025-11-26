@@ -16,6 +16,8 @@ import CandidatesTable from "@/components/dashboard/CandidatesTable";
 import FilterBar from "@/components/dashboard/FilterBar";
 import MetricsOverview from "@/components/dashboard/MetricsOverview";
 import { RecruiterJobsList } from "@/components/dashboard/RecruiterJobsList";
+import { CandidateApplicationsList } from "@/components/applications/CandidateApplicationsList";
+import { RecruiterApplicationsList } from "@/components/applications/RecruiterApplicationsList";
 import type { CandidateProfileData } from "@/components/dashboard/CandidateProfile";
 import type { CompanyData } from "@/components/dashboard/RecruiterCompanyCard";
 import { useToast } from "@/hooks/use-toast";
@@ -279,19 +281,7 @@ const Dashboard: React.FC = () => {
                 </div>
               </div>
               <div className="lg:col-span-2 space-y-6">
-                <section>
-                  <div className="mb-3 flex items-center justify-between">
-                    <h2 className="text-lg font-medium">Minhas candidaturas</h2>
-                    <Button variant="secondary">Ver histórico</Button>
-                  </div>
-                  <ApplicationsList
-                    items={[
-                      { id: "a1", title: "Product Designer", company: "Pickolab", location: "São Paulo", type: "Remota", jobStatus: "Aberta", appStatus: "Em análise", appliedAt: new Date(Date.now() - 86400000).toISOString(), applicants: 74, daysLeft: 3 },
-                      { id: "a2", title: "UI Designer", company: "Studio ABC", location: "Rio de Janeiro", type: "Híbrida", jobStatus: "Aberta", appStatus: "Visualizada", appliedAt: new Date(Date.now() - 3600000 * 5).toISOString(), applicants: 32, daysLeft: 5 },
-                      { id: "a3", title: "Front-end Designer", company: "Tech.io", location: "Remoto", type: "Remota", jobStatus: "Preenchida", appStatus: "Reprovada", appliedAt: new Date(Date.now() - 3600000 * 30).toISOString(), applicants: 120 },
-                    ]}
-                  />
-                </section>
+                <CandidateApplicationsList />
               </div>
             </section>
           </TabsContent>
@@ -332,13 +322,7 @@ const Dashboard: React.FC = () => {
 
               <div className="lg:col-span-2 space-y-6">
                 <RecruiterJobsList />
-                <CandidatesTable
-                  items={[
-                    { id: "c1", name: "Ana Lima", role: "Product Designer", experience: "5 anos", status: "Em processo" },
-                    { id: "c2", name: "Bruno Souza", role: "UI Designer", experience: "3 anos", status: "Novo" },
-                    { id: "c3", name: "Carla Nunes", role: "UX Researcher", experience: "4 anos", status: "Selecionado" },
-                  ]}
-                />
+                <RecruiterApplicationsList />
               </div>
             </section>
           </TabsContent>
