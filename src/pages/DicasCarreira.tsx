@@ -1,6 +1,7 @@
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import SEO from "@/components/SEO";
+import CurriculoCard from "@/components/CurriculoCard";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Clock, User, TrendingUp, Target, Lightbulb, Users } from "lucide-react";
@@ -78,67 +79,75 @@ const DicasCarreira = () => {
             </p>
           </header>
 
-          <section className="mb-12">
-            <h2 className="text-2xl font-semibold mb-6">Artigos em Destaque</h2>
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {articles.map((article, index) => {
-                const IconComponent = article.icon;
-                return (
-                  <Card key={index} className="hover:shadow-lg transition-shadow cursor-pointer">
-                    <CardHeader>
-                      <div className="flex items-center justify-between mb-2">
-                        <Badge variant="secondary">{article.category}</Badge>
-                        <div className="flex items-center text-sm text-muted-foreground">
-                          <Clock className="w-4 h-4 mr-1" />
-                          {article.readTime}
-                        </div>
-                      </div>
-                      <div className="flex items-center gap-3">
-                        <IconComponent className="w-8 h-8 text-primary" />
-                        <CardTitle className="text-lg">{article.title}</CardTitle>
-                      </div>
-                    </CardHeader>
-                    <CardContent>
-                      <CardDescription>{article.description}</CardDescription>
-                    </CardContent>
-                  </Card>
-                );
-              })}
-            </div>
-          </section>
+          <div className="flex gap-8">
+            <div className="flex-1">
+              <section className="mb-12">
+                <h2 className="text-2xl font-semibold mb-6">Artigos em Destaque</h2>
+                <div className="grid md:grid-cols-2 gap-6">
+                  {articles.map((article, index) => {
+                    const IconComponent = article.icon;
+                    return (
+                      <Card key={index} className="hover:shadow-lg transition-shadow cursor-pointer">
+                        <CardHeader>
+                          <div className="flex items-center justify-between mb-2">
+                            <Badge variant="secondary">{article.category}</Badge>
+                            <div className="flex items-center text-sm text-muted-foreground">
+                              <Clock className="w-4 h-4 mr-1" />
+                              {article.readTime}
+                            </div>
+                          </div>
+                          <div className="flex items-center gap-3">
+                            <IconComponent className="w-8 h-8 text-primary" />
+                            <CardTitle className="text-lg">{article.title}</CardTitle>
+                          </div>
+                        </CardHeader>
+                        <CardContent>
+                          <CardDescription>{article.description}</CardDescription>
+                        </CardContent>
+                      </Card>
+                    );
+                  })}
+                </div>
+              </section>
 
-          <section className="mb-12">
-            <div className="bg-primary/5 rounded-lg p-8 text-center">
-              <Lightbulb className="w-16 h-16 text-primary mx-auto mb-4" />
-              <h2 className="text-2xl font-semibold mb-4">Receba Dicas Semanais</h2>
-              <p className="text-muted-foreground mb-6">
-                Cadastre-se para receber dicas exclusivas de carreira diretamente no seu e-mail
-              </p>
-              <div className="max-w-md mx-auto flex gap-4">
-                <input
-                  type="email"
-                  placeholder="Seu melhor e-mail"
-                  className="flex-1 px-4 py-2 border border-border rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
-                />
-                <button className="px-6 py-2 bg-primary text-primary-foreground rounded-md hover:bg-primary/90 transition-colors">
-                  Inscrever
-                </button>
-              </div>
-            </div>
-          </section>
+              <section className="mb-12">
+                <div className="bg-primary/5 rounded-lg p-8 text-center">
+                  <Lightbulb className="w-16 h-16 text-primary mx-auto mb-4" />
+                  <h2 className="text-2xl font-semibold mb-4">Receba Dicas Semanais</h2>
+                  <p className="text-muted-foreground mb-6">
+                    Cadastre-se para receber dicas exclusivas de carreira diretamente no seu e-mail
+                  </p>
+                  <div className="max-w-md mx-auto flex gap-4">
+                    <input
+                      type="email"
+                      placeholder="Seu melhor e-mail"
+                      className="flex-1 px-4 py-2 border border-border rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
+                    />
+                    <button className="px-6 py-2 bg-primary text-primary-foreground rounded-md hover:bg-primary/90 transition-colors">
+                      Inscrever
+                    </button>
+                  </div>
+                </div>
+              </section>
 
-          <section>
-            <h2 className="text-2xl font-semibold mb-6">Categorias</h2>
-            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
-              {["Currículo", "Entrevista", "Networking", "Carreira", "Salário", "Desenvolvimento", "Liderança", "Produtividade"].map((category) => (
-                <Card key={category} className="hover:shadow-md transition-shadow cursor-pointer">
-                  <CardContent className="p-6 text-center">
-                    <h3 className="font-semibold">{category}</h3>
-                  </CardContent>
-                </Card>
-              ))}
+              <section>
+                <h2 className="text-2xl font-semibold mb-6">Categorias</h2>
+                <div className="grid md:grid-cols-2 gap-4">
+                  {["Currículo", "Entrevista", "Networking", "Carreira", "Salário", "Desenvolvimento", "Liderança", "Produtividade"].map((category) => (
+                    <Card key={category} className="hover:shadow-md transition-shadow cursor-pointer">
+                      <CardContent className="p-6 text-center">
+                        <h3 className="font-semibold">{category}</h3>
+                      </CardContent>
+                    </Card>
+                  ))}
+                </div>
+              </section>
             </div>
-          </section>
+
+            <aside className="hidden lg:block w-80">
+              <CurriculoCard />
+            </aside>
+          </div>
         </main>
         
         <Footer />
