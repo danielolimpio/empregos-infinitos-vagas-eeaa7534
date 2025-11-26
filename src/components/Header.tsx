@@ -42,7 +42,7 @@ const Header = () => {
                 alt="Logo Vagas de Trabalhos - vagas de emprego no Brasil"
                 width={160}
                 height={40}
-                className="h-12 w-auto"
+                className="h-8 sm:h-10 md:h-12 w-auto object-contain"
                 loading="eager"
                 decoding="async"
               />
