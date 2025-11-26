@@ -42,8 +42,12 @@ export const RichTextEditor: React.FC<RichTextEditorProps> = ({
     },
   });
 
+  // Sync external value changes only when component is not focused
   React.useEffect(() => {
-    if (editor && value !== editor.getHTML()) {
+    if (!editor) return;
+    
+    const currentContent = editor.getHTML();
+    if (value !== currentContent && !editor.isFocused) {
       editor.commands.setContent(value);
     }
   }, [value, editor]);
