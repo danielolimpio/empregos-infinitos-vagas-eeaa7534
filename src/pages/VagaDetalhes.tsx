@@ -296,11 +296,10 @@ const VagaDetalhes: React.FC = () => {
               <Card>
                 <CardContent className="pt-6">
                   <h2 className="text-2xl font-semibold mb-4">Sobre a vaga</h2>
-                  <div className="prose prose-sm max-w-none">
-                    <p className="text-muted-foreground whitespace-pre-wrap leading-relaxed">
-                      {job.description}
-                    </p>
-                  </div>
+                  <div 
+                    className="prose prose-sm max-w-none text-muted-foreground [&_ul]:list-disc [&_ul]:ml-4 [&_ol]:list-decimal [&_ol]:ml-4"
+                    dangerouslySetInnerHTML={{ __html: job.description }}
+                  />
                 </CardContent>
               </Card>
 
@@ -309,11 +308,10 @@ const VagaDetalhes: React.FC = () => {
                 <Card>
                   <CardContent className="pt-6">
                     <h2 className="text-2xl font-semibold mb-4">Requisitos</h2>
-                    <div className="prose prose-sm max-w-none">
-                      <p className="text-muted-foreground whitespace-pre-wrap leading-relaxed">
-                        {job.requirements}
-                      </p>
-                    </div>
+                    <div 
+                      className="prose prose-sm max-w-none text-muted-foreground [&_ul]:list-disc [&_ul]:ml-4 [&_ol]:list-decimal [&_ol]:ml-4"
+                      dangerouslySetInnerHTML={{ __html: job.requirements }}
+                    />
                   </CardContent>
                 </Card>
               )}
@@ -323,11 +321,10 @@ const VagaDetalhes: React.FC = () => {
                 <Card>
                   <CardContent className="pt-6">
                     <h2 className="text-2xl font-semibold mb-4">Benefícios</h2>
-                    <div className="prose prose-sm max-w-none">
-                      <p className="text-muted-foreground whitespace-pre-wrap leading-relaxed">
-                        {job.benefits}
-                      </p>
-                    </div>
+                    <div 
+                      className="prose prose-sm max-w-none text-muted-foreground [&_ul]:list-disc [&_ul]:ml-4 [&_ol]:list-decimal [&_ol]:ml-4"
+                      dangerouslySetInnerHTML={{ __html: job.benefits }}
+                    />
                   </CardContent>
                 </Card>
               )}
