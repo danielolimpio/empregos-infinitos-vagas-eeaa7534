@@ -77,7 +77,8 @@ const Dashboard: React.FC = () => {
         if (profile) {
           setAccountType(profile.account_type);
 
-          if (profile.account_type === "candidate") {
+          if (profile.account_type !== "recruiter") {
+            // Tratar qualquer valor nulo ou inválido como candidato
             setCandidateData({
               photoUrl: profile.avatar_url || "",
               fullName: profile.full_name || "",
@@ -138,6 +139,7 @@ const Dashboard: React.FC = () => {
         .upsert(
           {
             id: user.id,
+            account_type: "candidate",
             avatar_url: data.photoUrl,
             full_name: data.fullName,
             city: data.city,
@@ -183,6 +185,7 @@ const Dashboard: React.FC = () => {
         .upsert(
           {
             id: user.id,
+            account_type: "recruiter",
             avatar_url: data.logoUrl,
             company_name: data.name,
             location: data.location,
