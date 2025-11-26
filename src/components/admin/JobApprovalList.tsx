@@ -338,24 +338,27 @@ export const JobApprovalList: React.FC = () => {
               </div>
               <div>
                 <h4 className="font-medium mb-2">Descrição</h4>
-                <p className="text-muted-foreground whitespace-pre-wrap">
-                  {selectedJob.description}
-                </p>
+                <div
+                  className="prose prose-sm max-w-none text-muted-foreground [&_ul]:list-disc [&_ul]:ml-4 [&_ol]:list-decimal [&_ol]:ml-4"
+                  dangerouslySetInnerHTML={{ __html: selectedJob.description }}
+                />
               </div>
               {selectedJob.requirements && (
                 <div>
                   <h4 className="font-medium mb-2">Requisitos</h4>
-                  <p className="text-muted-foreground whitespace-pre-wrap">
-                    {selectedJob.requirements}
-                  </p>
+                  <div
+                    className="prose prose-sm max-w-none text-muted-foreground [&_ul]:list-disc [&_ul]:ml-4 [&_ol]:list-decimal [&_ol]:ml-4"
+                    dangerouslySetInnerHTML={{ __html: selectedJob.requirements }}
+                  />
                 </div>
               )}
               {selectedJob.benefits && (
                 <div>
                   <h4 className="font-medium mb-2">Benefícios</h4>
-                  <p className="text-muted-foreground whitespace-pre-wrap">
-                    {selectedJob.benefits}
-                  </p>
+                  <div
+                    className="prose prose-sm max-w-none text-muted-foreground [&_ul]:list-disc [&_ul]:ml-4 [&_ol]:list-decimal [&_ol]:ml-4"
+                    dangerouslySetInnerHTML={{ __html: selectedJob.benefits }}
+                  />
                 </div>
               )}
               {selectedJob.rejection_reason && (
