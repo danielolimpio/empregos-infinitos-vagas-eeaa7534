@@ -189,6 +189,12 @@ const VagaDetalhes: React.FC = () => {
     }
   };
 
+  const decodeHtml = (html: string) => {
+    const txt = document.createElement("textarea");
+    txt.innerHTML = html;
+    return txt.value;
+  };
+
   const formatDate = (dateString: string) => {
     const date = new Date(dateString);
     const now = new Date();
@@ -298,7 +304,7 @@ const VagaDetalhes: React.FC = () => {
                   <h2 className="text-2xl font-semibold mb-4">Sobre a vaga</h2>
                   <div 
                     className="prose prose-sm max-w-none text-muted-foreground [&_ul]:list-disc [&_ul]:ml-4 [&_ol]:list-decimal [&_ol]:ml-4"
-                    dangerouslySetInnerHTML={{ __html: job.description }}
+                    dangerouslySetInnerHTML={{ __html: decodeHtml(job.description) }}
                   />
                 </CardContent>
               </Card>
@@ -310,7 +316,7 @@ const VagaDetalhes: React.FC = () => {
                     <h2 className="text-2xl font-semibold mb-4">Requisitos</h2>
                     <div 
                       className="prose prose-sm max-w-none text-muted-foreground [&_ul]:list-disc [&_ul]:ml-4 [&_ol]:list-decimal [&_ol]:ml-4"
-                      dangerouslySetInnerHTML={{ __html: job.requirements }}
+                      dangerouslySetInnerHTML={{ __html: decodeHtml(job.requirements || "") }}
                     />
                   </CardContent>
                 </Card>
@@ -323,7 +329,7 @@ const VagaDetalhes: React.FC = () => {
                     <h2 className="text-2xl font-semibold mb-4">Benefícios</h2>
                     <div 
                       className="prose prose-sm max-w-none text-muted-foreground [&_ul]:list-disc [&_ul]:ml-4 [&_ol]:list-decimal [&_ol]:ml-4"
-                      dangerouslySetInnerHTML={{ __html: job.benefits }}
+                      dangerouslySetInnerHTML={{ __html: decodeHtml(job.benefits || "") }}
                     />
                   </CardContent>
                 </Card>

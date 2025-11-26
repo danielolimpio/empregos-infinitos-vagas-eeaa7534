@@ -24,6 +24,12 @@ interface JobCardProps {
   };
 }
 
+const decodeHtml = (html: string) => {
+  const txt = document.createElement("textarea");
+  txt.innerHTML = html;
+  return txt.value;
+};
+
 const JobCard = ({ job }: JobCardProps) => {
   const { toast } = useToast();
   const navigate = useNavigate();
@@ -183,7 +189,7 @@ const JobCard = ({ job }: JobCardProps) => {
 
           <div 
             className="text-sm text-muted-foreground line-clamp-2 [&_ul]:list-disc [&_ul]:ml-4 [&_ol]:list-decimal [&_ol]:ml-4"
-            dangerouslySetInnerHTML={{ __html: job.description }}
+            dangerouslySetInnerHTML={{ __html: decodeHtml(job.description) }}
           />
 
           <div className="flex flex-wrap gap-2">
