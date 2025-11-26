@@ -181,9 +181,10 @@ const JobCard = ({ job }: JobCardProps) => {
             </div>
           </div>
 
-          <p className="text-sm text-muted-foreground line-clamp-2">
-            {job.description}
-          </p>
+          <div 
+            className="text-sm text-muted-foreground line-clamp-2 [&_ul]:list-disc [&_ul]:ml-4 [&_ol]:list-decimal [&_ol]:ml-4"
+            dangerouslySetInnerHTML={{ __html: job.description }}
+          />
 
           <div className="flex flex-wrap gap-2">
             {job.requirements.slice(0, 3).map((req, index) => (
