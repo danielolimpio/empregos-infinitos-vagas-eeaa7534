@@ -3,6 +3,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import SEO from "@/components/SEO";
+import CurriculoCard from "@/components/CurriculoCard";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -404,6 +405,9 @@ const VagaDetalhes: React.FC = () => {
                     </ul>
                   </CardContent>
                 </Card>
+
+                {/* Card de gerador de currículo */}
+                <CurriculoCard />
               </div>
             </div>
           </div>

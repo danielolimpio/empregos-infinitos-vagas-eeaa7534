@@ -4,6 +4,7 @@ import HeroSection from "@/components/HeroSection";
 import JobFilters from "@/components/JobFilters";
 import JobList from "@/components/JobList";
 import Footer from "@/components/Footer";
+import CurriculoCard from "@/components/CurriculoCard";
 import type { JobFilters as JobFiltersType } from "@/pages/BuscarVagas";
 
 const Index = () => {
@@ -22,7 +23,8 @@ const Index = () => {
       
       <main className="container mx-auto px-4 py-12">
         <div className="flex gap-8">
-          <aside className="hidden lg:block">
+          <aside className="hidden lg:block w-80 space-y-6">
+            <CurriculoCard />
             <JobFilters filters={filters} setFilters={setFilters} />
           </aside>
           <div className="flex-1">
