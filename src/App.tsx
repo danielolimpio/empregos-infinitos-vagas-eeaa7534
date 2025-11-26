@@ -23,6 +23,7 @@ import BuscarCandidatos from "./pages/BuscarCandidatos";
 import Planos from "./pages/Planos";
 import Ferramentas from "./pages/Ferramentas";
 import Suporte from "./pages/Suporte";
+import VagaDetalhes from "./pages/VagaDetalhes";
 
 const queryClient = new QueryClient();
 
@@ -43,6 +44,7 @@ const App = () => (
           <Route path="/login" element={<Login />} />
           <Route path="/cadastro" element={<Cadastro />} />
           <Route path="/buscar-vagas" element={<BuscarVagas />} />
+          <Route path="/vaga/:id" element={<VagaDetalhes />} />
           <Route path="/criar-perfil" element={<CriarPerfil />} />
           <Route path="/dicas-carreira" element={<DicasCarreira />} />
           <Route path="/salarios" element={<Salarios />} />

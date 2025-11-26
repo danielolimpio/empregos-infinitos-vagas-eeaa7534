@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { MapPin, Building, Clock, DollarSign, Bookmark } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card";
@@ -30,6 +30,11 @@ const JobCard = ({ job }: JobCardProps) => {
   const [isApplicationDialogOpen, setIsApplicationDialogOpen] = useState(false);
   const [isApplying, setIsApplying] = useState(false);
   const [hasApplied, setHasApplied] = useState(false);
+
+  // Check if user has already applied on mount
+  useEffect(() => {
+    checkIfApplied();
+  }, [job.id]);
 
   const checkIfApplied = async () => {
     try {
@@ -196,7 +201,11 @@ const JobCard = ({ job }: JobCardProps) => {
 
         <CardFooter className="pt-3">
           <div className="flex items-center gap-2 w-full">
-            <Button variant="outline" className="flex-1">
+            <Button 
+              variant="outline" 
+              className="flex-1"
+              onClick={() => navigate(`/vaga/${job.id}`)}
+            >
               Ver Detalhes
             </Button>
             <Button 
