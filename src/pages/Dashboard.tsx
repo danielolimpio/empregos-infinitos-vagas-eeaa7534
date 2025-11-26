@@ -132,21 +132,25 @@ const Dashboard: React.FC = () => {
 
       const { error } = await supabase
         .from("profiles")
-        .update({
-          avatar_url: data.photoUrl,
-          full_name: data.fullName,
-          city: data.city,
-          country: data.country,
-          profession: data.profession,
-          status: data.status,
-          bio: data.bio,
-          salary_expectation: data.salaryExpectation,
-          seniority: data.seniority,
-          skills: data.skills,
-          experiences: data.experiences,
-          portfolio: data.portfolio,
-        })
-        .eq("id", user.id);
+        .upsert(
+          {
+            id: user.id,
+            avatar_url: data.photoUrl,
+            full_name: data.fullName,
+            city: data.city,
+            country: data.country,
+            profession: data.profession,
+            status: data.status,
+            bio: data.bio,
+            salary_expectation: data.salaryExpectation,
+            seniority: data.seniority,
+            skills: data.skills,
+            experiences: data.experiences,
+            portfolio: data.portfolio,
+          },
+          { onConflict: "id" }
+        );
+
 
       if (error) throw error;
 
@@ -173,16 +177,20 @@ const Dashboard: React.FC = () => {
 
       const { error } = await supabase
         .from("profiles")
-        .update({
-          avatar_url: data.logoUrl,
-          company_name: data.name,
-          location: data.location,
-          description: data.description,
-          seals: data.seals,
-          email: data.email,
-          phone: data.phone,
-        })
-        .eq("id", user.id);
+        .upsert(
+          {
+            id: user.id,
+            avatar_url: data.logoUrl,
+            company_name: data.name,
+            location: data.location,
+            description: data.description,
+            seals: data.seals,
+            email: data.email,
+            phone: data.phone,
+          },
+          { onConflict: "id" }
+        );
+
 
       if (error) throw error;
 
