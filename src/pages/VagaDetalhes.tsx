@@ -3,6 +3,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import SEO from "@/components/SEO";
+import Breadcrumbs from "@/components/Breadcrumbs";
 import CurriculoCard from "@/components/CurriculoCard";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -232,9 +233,44 @@ const VagaDetalhes: React.FC = () => {
         title={`${job.title} na ${job.company_name} | Vagas de Trabalhos`}
         description={job.description.substring(0, 160)}
         canonical={`https://vagasdetrabalhos.com/vaga/${job.id}`}
+        keywords={`vaga ${job.title}, emprego ${job.location}, ${job.company_name}, vagas de trabalho`}
+        structuredData={{
+          "@context": "https://schema.org",
+          "@type": "JobPosting",
+          "title": job.title,
+          "description": job.description,
+          "datePosted": job.created_at,
+          "hiringOrganization": {
+            "@type": "Organization",
+            "name": job.company_name
+          },
+          "jobLocation": {
+            "@type": "Place",
+            "address": {
+              "@type": "PostalAddress",
+              "addressLocality": job.location
+            }
+          },
+          "employmentType": job.type.toUpperCase(),
+          ...(job.salary && {
+            "baseSalary": {
+              "@type": "MonetaryAmount",
+              "currency": "BRL",
+              "value": {
+                "@type": "QuantitativeValue",
+                "value": job.salary,
+                "unitText": "MONTH"
+              }
+            }
+          })
+        }}
       />
       <div className="min-h-screen bg-background">
         <Header />
+        <Breadcrumbs items={[
+          { label: "Buscar Vagas", href: "/buscar-vagas" },
+          { label: job.title }
+        ]} />
 
         <main className="container mx-auto px-4 py-8">
           {/* Breadcrumb e botão voltar */}

@@ -1,3 +1,15 @@
+# Robots.txt for VagasTrabalhos.com
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://vagasdetrabalhos.com/sitemap.xml
+
+# Disallow admin and dashboard areas from indexing
+Disallow: /admin
+Disallow: /dashboard
+
+# Allow all major search engine bots
 User-agent: Googlebot
 Allow: /
 
@@ -10,5 +22,5 @@ Allow: /
 User-agent: facebookexternalhit
 Allow: /
 
-User-agent: *
-Allow: /
+# Crawl delay for all bots (in seconds)
+Crawl-delay: 1
