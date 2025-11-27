@@ -7,9 +7,11 @@ interface SEOProps {
   structuredData?: Record<string, any> | Record<string, any>[];
   keywords?: string;
   image?: string;
+  imageAlt?: string;
+  isPrivatePage?: boolean;
 }
 
-const SEO = ({ title, description, canonical, structuredData, keywords, image }: SEOProps) => {
+const SEO = ({ title, description, canonical, structuredData, keywords, image, imageAlt, isPrivatePage = false }: SEOProps) => {
   useEffect(() => {
     // Title
     document.title = title;
@@ -44,16 +46,18 @@ const SEO = ({ title, description, canonical, structuredData, keywords, image }:
     link.setAttribute('href', canonical);
 
     // Open Graph tags
+    const defaultImage = 'https://vagasdetrabalhos.com/og-image.jpg';
+    const defaultImageAlt = 'Imagem representativa do Vagas de Trabalhos';
+    
     const ogTags = [
       { property: 'og:title', content: title },
       { property: 'og:description', content: description },
       { property: 'og:url', content: canonical },
       { property: 'og:type', content: 'website' },
+      { property: 'og:image', content: image || defaultImage },
+      { property: 'og:image:alt', content: imageAlt || defaultImageAlt },
+      { property: 'og:locale', content: 'pt_BR' },
     ];
-
-    if (image) {
-      ogTags.push({ property: 'og:image', content: image });
-    }
 
     ogTags.forEach(({ property, content }) => {
       let ogMeta = document.querySelector(`meta[property="${property}"]`) as HTMLMetaElement | null;
@@ -66,14 +70,18 @@ const SEO = ({ title, description, canonical, structuredData, keywords, image }:
     });
 
     // Twitter Card tags
+    const twitterCardType = isPrivatePage ? 'summary' : 'summary_large_image';
     const twitterTags = [
-      { name: 'twitter:card', content: 'summary_large_image' },
+      { name: 'twitter:card', content: twitterCardType },
       { name: 'twitter:title', content: title },
       { name: 'twitter:description', content: description },
     ];
 
-    if (image) {
-      twitterTags.push({ name: 'twitter:image', content: image });
+    if (!isPrivatePage) {
+      twitterTags.push(
+        { name: 'twitter:image', content: image || defaultImage },
+        { name: 'twitter:image:alt', content: imageAlt || defaultImageAlt }
+      );
     }
 
     twitterTags.forEach(({ name, content }) => {
@@ -97,7 +105,7 @@ const SEO = ({ title, description, canonical, structuredData, keywords, image }:
       script.text = JSON.stringify(structuredData);
       document.head.appendChild(script);
     }
-  }, [title, description, canonical, structuredData, keywords, image]);
+  }, [title, description, canonical, structuredData, keywords, image, imageAlt, isPrivatePage]);
 
   return null;
 };

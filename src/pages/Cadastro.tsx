@@ -106,7 +106,12 @@ const Cadastro: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      <SEO title="Cadastro | Vagas de Trabalhos" description="Crie sua conta de candidato ou recrutador." canonical="https://vagasdetrabalhos.com/cadastro" />
+      <SEO 
+        title="Cadastro | Vagas de Trabalhos" 
+        description="Área restrita para usuários cadastrados." 
+        canonical="https://vagasdetrabalhos.com/cadastro"
+        isPrivatePage={true}
+      />
       <Header />
       <main className="container mx-auto px-4 py-12">
         <section className="mx-auto w-full max-w-md rounded-lg border bg-card p-6 shadow-sm">
