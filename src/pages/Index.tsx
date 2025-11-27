@@ -62,18 +62,32 @@ const Index = () => {
       <SEO
         title={pageTitle}
         description={pageDescription}
-        canonical="https://seusite.com/"
-        structuredData={{
-          "@context": "https://schema.org",
-          "@type": "WebSite",
-          "name": "Portal de Empregos",
-          "url": "https://seusite.com/",
-          "potentialAction": {
-            "@type": "SearchAction",
-            "target": "https://seusite.com/buscar-vagas?q={search_term_string}",
-            "query-input": "required name=search_term_string"
+        canonical={`https://vagasdetrabalhos.com/`}
+        keywords={`vagas de emprego ${location ? `em ${location.city}` : ''}, trabalho ${location?.city || ''}, oportunidades de carreira, emprego Brasil`}
+        structuredData={[
+          {
+            "@context": "https://schema.org",
+            "@type": "WebSite",
+            "name": "VagasTrabalhos",
+            "description": "Conectamos talentos com as melhores empresas do Brasil",
+            "url": "https://vagasdetrabalhos.com",
+            "potentialAction": {
+              "@type": "SearchAction",
+              "target": "https://vagasdetrabalhos.com/buscar-vagas?q={search_term_string}",
+              "query-input": "required name=search_term_string"
+            }
+          },
+          {
+            "@context": "https://schema.org",
+            "@type": "Organization",
+            "name": "VagasTrabalhos",
+            "url": "https://vagasdetrabalhos.com",
+            "logo": "https://vagasdetrabalhos.com/lovable-uploads/1fa56c21-6b55-4b67-8c13-7a683944082d.png",
+            "sameAs": [
+              "https://twitter.com/vagasdetrabalhos"
+            ]
           }
-        }}
+        ]}
       />
       <Header />
       <LocationBanner

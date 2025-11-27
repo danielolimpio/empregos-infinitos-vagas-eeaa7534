@@ -1,20 +1,13 @@
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import SEO from "@/components/SEO";
+import Breadcrumbs from "@/components/Breadcrumbs";
 import CurriculoCard from "@/components/CurriculoCard";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Clock, User, TrendingUp, Target, Lightbulb, Users } from "lucide-react";
 
 const DicasCarreira = () => {
-  const structuredData = {
-    "@context": "https://schema.org",
-    "@type": "Blog",
-    "name": "Dicas de Carreira",
-    "description": "Dicas e orientações profissionais para impulsionar sua carreira e encontrar as melhores oportunidades de trabalho.",
-    "url": "https://vagasdetrabalhos.com/dicas-carreira"
-  };
-
   const articles = [
     {
       title: "Como Criar um Currículo que Atrai Recrutadores",
@@ -60,16 +53,43 @@ const DicasCarreira = () => {
     }
   ];
 
+  const structuredData = [
+    {
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      "name": "Dicas de Carreira",
+      "description": "Dicas e orientações profissionais para impulsionar sua carreira e encontrar as melhores oportunidades de trabalho.",
+      "url": "https://vagasdetrabalhos.com/dicas-carreira"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "ItemList",
+      "itemListElement": articles.map((article, index) => ({
+        "@type": "ListItem",
+        "position": index + 1,
+        "item": {
+          "@type": "Article",
+          "name": article.title,
+          "description": article.description
+        }
+      }))
+    }
+  ];
+
   return (
     <>
       <SEO
         title="Dicas de Carreira | Guias e Orientações Profissionais"
         description="Encontre dicas valiosas para impulsionar sua carreira. Orientações sobre currículo, entrevistas, networking e desenvolvimento profissional."
         canonical="https://vagasdetrabalhos.com/dicas-carreira"
+        keywords="dicas de carreira, orientação profissional, como fazer currículo, preparação entrevista emprego, networking profissional"
         structuredData={structuredData}
       />
       <div className="min-h-screen bg-background">
         <Header />
+        <Breadcrumbs items={[
+          { label: "Dicas de Carreira" }
+        ]} />
         
         <main className="container mx-auto px-4 py-12">
           <header className="text-center mb-12">
