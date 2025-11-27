@@ -1,4 +1,4 @@
-import { LogOut, User } from "lucide-react";
+import { LogOut, User, Moon, Sun } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { supabase } from "@/integrations/supabase/client";
@@ -12,7 +12,7 @@ const Header = () => {
   const [user, setUser] = useState<SupabaseUser | null>(null);
   const navigate = useNavigate();
   const { toast } = useToast();
-  const { theme, resolvedTheme } = useTheme();
+  const { theme, resolvedTheme, setTheme } = useTheme();
   const [logoSrc, setLogoSrc] = useState("/logo.png");
 
   useEffect(() => {
@@ -36,6 +36,10 @@ const Header = () => {
     await supabase.auth.signOut();
     toast({ title: "Logout", description: "Você saiu da conta." });
     navigate("/");
+  };
+
+  const toggleTheme = () => {
+    setTheme(theme === "dark" ? "light" : "dark");
   };
 
   return (
@@ -69,9 +73,6 @@ const Header = () => {
             <Button variant="ghost" size="sm" onClick={() => navigate("/ferramentas")}>
               Ferramentas
             </Button>
-            <Button variant="ghost" size="sm" onClick={() => navigate("/planos")}>
-              Planos
-            </Button>
             <Button variant="ghost" size="sm" onClick={() => navigate("/publicar-vaga")}>
               Publicar Vaga
             </Button>
@@ -94,6 +95,19 @@ const Header = () => {
 
           {/* User Actions */}
           <div className="flex items-center gap-3">
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={toggleTheme}
+              className="gap-2"
+              aria-label={theme === "dark" ? "Ativar modo claro" : "Ativar modo escuro"}
+            >
+              {theme === "dark" ? (
+                <Sun className="h-5 w-5" />
+              ) : (
+                <Moon className="h-5 w-5" />
+              )}
+            </Button>
             {user ? (
               <>
                 <Button variant="ghost" size="sm" className="gap-2" onClick={() => navigate("/dashboard")}>
