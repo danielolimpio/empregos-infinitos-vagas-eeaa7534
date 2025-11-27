@@ -3,6 +3,7 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { ThemeProvider } from "next-themes";
 import ScrollToTop from "@/components/ScrollToTop";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
@@ -30,37 +31,39 @@ const queryClient = new QueryClient();
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
-    <TooltipProvider>
-      <Toaster />
-      <Sonner />
-      <BrowserRouter>
-        <ScrollToTop />
-        <Routes>
-          <Route path="/" element={<Index />} />
-          <Route path="/politica-de-uso" element={<PoliticaDeUso />} />
-          <Route path="/politica-de-privacidade" element={<PoliticaDePrivacidade />} />
-          <Route path="/politica-de-cookies" element={<PoliticaDeCookies />} />
-          <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/admin" element={<Admin />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/cadastro" element={<Cadastro />} />
-          <Route path="/buscar-vagas" element={<BuscarVagas />} />
-          <Route path="/vaga/:id" element={<VagaDetalhes />} />
-          <Route path="/criar-perfil" element={<CriarPerfil />} />
-          <Route path="/dicas-carreira" element={<DicasCarreira />} />
-          <Route path="/dicas-carreira/:slug" element={<ArtigoCarreira />} />
-          <Route path="/salarios" element={<Salarios />} />
-          <Route path="/empresas" element={<Empresas />} />
-          <Route path="/publicar-vaga" element={<PublicarVaga />} />
-          <Route path="/buscar-candidatos" element={<BuscarCandidatos />} />
-          <Route path="/planos" element={<Planos />} />
-          <Route path="/ferramentas" element={<Ferramentas />} />
-          <Route path="/suporte" element={<Suporte />} />
-          {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-      </BrowserRouter>
-    </TooltipProvider>
+    <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+      <TooltipProvider>
+        <Toaster />
+        <Sonner />
+        <BrowserRouter>
+          <ScrollToTop />
+          <Routes>
+            <Route path="/" element={<Index />} />
+            <Route path="/politica-de-uso" element={<PoliticaDeUso />} />
+            <Route path="/politica-de-privacidade" element={<PoliticaDePrivacidade />} />
+            <Route path="/politica-de-cookies" element={<PoliticaDeCookies />} />
+            <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/admin" element={<Admin />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/cadastro" element={<Cadastro />} />
+            <Route path="/buscar-vagas" element={<BuscarVagas />} />
+            <Route path="/vaga/:id" element={<VagaDetalhes />} />
+            <Route path="/criar-perfil" element={<CriarPerfil />} />
+            <Route path="/dicas-carreira" element={<DicasCarreira />} />
+            <Route path="/dicas-carreira/:slug" element={<ArtigoCarreira />} />
+            <Route path="/salarios" element={<Salarios />} />
+            <Route path="/empresas" element={<Empresas />} />
+            <Route path="/publicar-vaga" element={<PublicarVaga />} />
+            <Route path="/buscar-candidatos" element={<BuscarCandidatos />} />
+            <Route path="/planos" element={<Planos />} />
+            <Route path="/ferramentas" element={<Ferramentas />} />
+            <Route path="/suporte" element={<Suporte />} />
+            {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </BrowserRouter>
+      </TooltipProvider>
+    </ThemeProvider>
   </QueryClientProvider>
 );
 
