@@ -5,12 +5,15 @@ import { supabase } from "@/integrations/supabase/client";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useToast } from "@/hooks/use-toast";
+import { useTheme } from "next-themes";
 import type { User as SupabaseUser } from "@supabase/supabase-js";
 
 const Header = () => {
   const [user, setUser] = useState<SupabaseUser | null>(null);
   const navigate = useNavigate();
   const { toast } = useToast();
+  const { theme, resolvedTheme } = useTheme();
+  const [logoSrc, setLogoSrc] = useState("/logo.png");
 
   useEffect(() => {
     const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
@@ -23,6 +26,11 @@ const Header = () => {
 
     return () => subscription.unsubscribe();
   }, []);
+
+  useEffect(() => {
+    const currentTheme = theme === "system" ? resolvedTheme : theme;
+    setLogoSrc(currentTheme === "dark" ? "/logo-dark.png" : "/logo.png");
+  }, [theme, resolvedTheme]);
 
   const handleLogout = async () => {
     await supabase.auth.signOut();
@@ -38,7 +46,7 @@ const Header = () => {
           <div className="flex items-center gap-2">
             <a href="/" className="flex items-center" aria-label="Vagas de Trabalhos - Página inicial">
               <img
-                src="/logo.png"
+                src={logoSrc}
                 alt="Logo Vagas de Trabalhos - vagas de emprego no Brasil"
                 width={160}
                 height={40}
