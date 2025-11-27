@@ -1,7 +1,17 @@
 import { Mail, Phone, MapPin, Facebook, Twitter, Instagram, Linkedin } from "lucide-react";
 import { Link } from "react-router-dom";
+import { useTheme } from "next-themes";
+import { useEffect, useState } from "react";
 
 const Footer = () => {
+  const { theme, resolvedTheme } = useTheme();
+  const [logoSrc, setLogoSrc] = useState("/logo.png");
+
+  useEffect(() => {
+    const currentTheme = theme === "system" ? resolvedTheme : theme;
+    setLogoSrc(currentTheme === "dark" ? "/logo-dark.png" : "/logo.png");
+  }, [theme, resolvedTheme]);
+
   return (
     <footer className="bg-card border-t border-border mt-20">
       <div className="container mx-auto px-4 py-12">
@@ -11,7 +21,7 @@ const Footer = () => {
             <div className="flex items-center gap-2">
               <a href="/" className="flex items-center" aria-label="Vagas de Trabalhos - Página inicial">
                 <img
-                  src="/logo.png"
+                  src={logoSrc}
                   alt="Logo Vagas de Trabalhos - vagas de emprego"
                   width={160}
                   height={40}
