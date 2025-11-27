@@ -38,7 +38,7 @@ const Header = () => {
           <div className="flex items-center gap-2">
             <a href="/" className="flex items-center" aria-label="Vagas de Trabalhos - Página inicial">
               <img
-                src="/lovable-uploads/0fb39e57-ff37-438d-945d-7b1bc027b381.png"
+                src="/logo.png"
                 alt="Logo Vagas de Trabalhos - vagas de emprego no Brasil"
                 width={160}
                 height={40}

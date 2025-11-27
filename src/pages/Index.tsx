@@ -82,7 +82,7 @@ const Index = () => {
             "@type": "Organization",
             "name": "VagasTrabalhos",
             "url": "https://vagasdetrabalhos.com",
-            "logo": "https://vagasdetrabalhos.com/lovable-uploads/1fa56c21-6b55-4b67-8c13-7a683944082d.png",
+            "logo": "https://vagasdetrabalhos.com/favicon.ico",
             "sameAs": [
               "https://twitter.com/vagasdetrabalhos"
             ]
