@@ -98,7 +98,12 @@ const Login: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      <SEO title="Login | Vagas de Trabalhos" description="Acesse sua conta para gerenciar candidaturas e vagas." canonical="https://vagasdetrabalhos.com/login" />
+      <SEO 
+        title="Login | Vagas de Trabalhos" 
+        description="Área restrita para usuários cadastrados." 
+        canonical="https://vagasdetrabalhos.com/login"
+        isPrivatePage={true}
+      />
       <Header />
       <main className="container mx-auto px-4 py-12">
         <section className="mx-auto w-full max-w-md rounded-lg border bg-card p-6 shadow-sm">

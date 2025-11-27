@@ -231,8 +231,9 @@ const Dashboard: React.FC = () => {
     <div className="min-h-screen bg-background">
       <SEO
         title="Dashboard de Vagas | Vagas de Trabalhos"
-        description="Dashboard profissional para Candidato e Recrutador, com perfil, candidaturas, chat interno e gestão de vagas."
+        description="Área restrita para usuários cadastrados."
         canonical="https://vagasdetrabalhos.com/dashboard"
+        isPrivatePage={true}
       />
       <Header />
       <main className="container mx-auto px-4 py-8">
