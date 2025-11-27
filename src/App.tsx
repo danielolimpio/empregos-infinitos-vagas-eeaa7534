@@ -16,6 +16,7 @@ import Cadastro from "./pages/Cadastro";
 import BuscarVagas from "./pages/BuscarVagas";
 import CriarPerfil from "./pages/CriarPerfil";
 import DicasCarreira from "./pages/DicasCarreira";
+import ArtigoCarreira from "./pages/ArtigoCarreira";
 import Salarios from "./pages/Salarios";
 import Empresas from "./pages/Empresas";
 import PublicarVaga from "./pages/PublicarVaga";
@@ -47,6 +48,7 @@ const App = () => (
           <Route path="/vaga/:id" element={<VagaDetalhes />} />
           <Route path="/criar-perfil" element={<CriarPerfil />} />
           <Route path="/dicas-carreira" element={<DicasCarreira />} />
+          <Route path="/dicas-carreira/:slug" element={<ArtigoCarreira />} />
           <Route path="/salarios" element={<Salarios />} />
           <Route path="/empresas" element={<Empresas />} />
           <Route path="/publicar-vaga" element={<PublicarVaga />} />

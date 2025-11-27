@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import SEO from "@/components/SEO";
@@ -5,53 +6,11 @@ import Breadcrumbs from "@/components/Breadcrumbs";
 import CurriculoCard from "@/components/CurriculoCard";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Clock, User, TrendingUp, Target, Lightbulb, Users } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Clock, Lightbulb, ArrowRight } from "lucide-react";
+import { articles } from "@/data/articles";
 
 const DicasCarreira = () => {
-  const articles = [
-    {
-      title: "Como Criar um Currículo que Atrai Recrutadores",
-      description: "Aprenda as melhores práticas para destacar suas experiências e habilidades no currículo.",
-      category: "Currículo",
-      readTime: "5 min",
-      icon: Target
-    },
-    {
-      title: "Preparação para Entrevistas de Emprego",
-      description: "Dicas essenciais para se destacar nas entrevistas e conquistar a vaga dos seus sonhos.",
-      category: "Entrevista",
-      readTime: "7 min",
-      icon: Users
-    },
-    {
-      title: "Networking: Como Construir uma Rede Profissional",
-      description: "Estratégias para ampliar sua rede de contatos e encontrar novas oportunidades.",
-      category: "Networking",
-      readTime: "6 min",
-      icon: Users
-    },
-    {
-      title: "Negociação Salarial: Como Pedir Aumento",
-      description: "Técnicas para negociar salário e benefícios de forma eficaz e profissional.",
-      category: "Salário",
-      readTime: "8 min",
-      icon: TrendingUp
-    },
-    {
-      title: "Transição de Carreira: Mudando de Área",
-      description: "Guia completo para quem deseja mudar de área profissional com segurança.",
-      category: "Carreira",
-      readTime: "10 min",
-      icon: Target
-    },
-    {
-      title: "Habilidades do Futuro: O que Desenvolver",
-      description: "As competências mais valorizadas pelo mercado de trabalho atual e futuro.",
-      category: "Desenvolvimento",
-      readTime: "6 min",
-      icon: Lightbulb
-    }
-  ];
 
   const structuredData = [
     {
@@ -104,27 +63,37 @@ const DicasCarreira = () => {
               <section className="mb-12">
                 <h2 className="text-2xl font-semibold mb-6">Artigos em Destaque</h2>
                 <div className="grid md:grid-cols-2 gap-6">
-                  {articles.map((article, index) => {
+                  {articles.map((article) => {
                     const IconComponent = article.icon;
                     return (
-                      <Card key={index} className="hover:shadow-lg transition-shadow cursor-pointer">
-                        <CardHeader>
-                          <div className="flex items-center justify-between mb-2">
-                            <Badge variant="secondary">{article.category}</Badge>
-                            <div className="flex items-center text-sm text-muted-foreground">
-                              <Clock className="w-4 h-4 mr-1" />
-                              {article.readTime}
+                      <Link 
+                        key={article.slug} 
+                        to={`/dicas-carreira/${article.slug}`}
+                        className="block"
+                      >
+                        <Card className="hover:shadow-lg transition-shadow h-full">
+                          <CardHeader>
+                            <div className="flex items-center justify-between mb-2">
+                              <Badge variant="secondary">{article.category}</Badge>
+                              <div className="flex items-center text-sm text-muted-foreground">
+                                <Clock className="w-4 h-4 mr-1" />
+                                {article.readTime}
+                              </div>
                             </div>
-                          </div>
-                          <div className="flex items-center gap-3">
-                            <IconComponent className="w-8 h-8 text-primary" />
-                            <CardTitle className="text-lg">{article.title}</CardTitle>
-                          </div>
-                        </CardHeader>
-                        <CardContent>
-                          <CardDescription>{article.description}</CardDescription>
-                        </CardContent>
-                      </Card>
+                            <div className="flex items-center gap-3">
+                              <IconComponent className="w-8 h-8 text-primary" />
+                              <CardTitle className="text-lg">{article.title}</CardTitle>
+                            </div>
+                          </CardHeader>
+                          <CardContent>
+                            <CardDescription className="mb-4">{article.description}</CardDescription>
+                            <Button variant="link" className="p-0 h-auto gap-1">
+                              Ler artigo completo
+                              <ArrowRight className="w-4 h-4" />
+                            </Button>
+                          </CardContent>
+                        </Card>
+                      </Link>
                     );
                   })}
                 </div>
