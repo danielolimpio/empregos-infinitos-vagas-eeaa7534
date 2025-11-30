@@ -8,14 +8,6 @@ import { Badge } from "@/components/ui/badge";
 import { Search, Building2, MapPin, Users, Star, Briefcase } from "lucide-react";
 
 const Empresas = () => {
-  const structuredData = {
-    "@context": "https://schema.org",
-    "@type": "WebPage",
-    "name": "Empresas que Contratam",
-    "description": "Conheça as melhores empresas para trabalhar no Brasil. Veja avaliações, benefícios e vagas disponíveis.",
-    "url": "https://vagasdetrabalhos.com/empresas"
-  };
-
   const companies = [
     {
       name: "TechCorp Brasil",
@@ -76,6 +68,40 @@ const Empresas = () => {
       openJobs: 6,
       logo: "🎨",
       description: "Agência criativa especializada em marketing digital e branding."
+    }
+  ];
+
+  const structuredData = [
+    {
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      "name": "Empresas que Contratam",
+      "description": "Conheça as melhores empresas para trabalhar no Brasil. Veja avaliações, benefícios e vagas disponíveis.",
+      "url": "https://vagasdetrabalhos.com/empresas"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "ItemList",
+      "name": "Empresas em Destaque",
+      "itemListElement": companies.map((company, index) => ({
+        "@type": "ListItem",
+        "position": index + 1,
+        "item": {
+          "@type": "Organization",
+          "name": company.name,
+          "description": company.description,
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": company.location
+          },
+          "aggregateRating": {
+            "@type": "AggregateRating",
+            "ratingValue": company.rating,
+            "bestRating": 5,
+            "worstRating": 1
+          }
+        }
+      }))
     }
   ];
 
