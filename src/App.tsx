@@ -5,6 +5,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { ThemeProvider } from "next-themes";
 import ScrollToTop from "@/components/ScrollToTop";
+import Redirect301 from "@/components/Redirect301";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import PoliticaDeUso from "./pages/PoliticaDeUso";
@@ -37,6 +38,7 @@ const App = () => (
         <Sonner />
         <BrowserRouter>
           <ScrollToTop />
+          <Redirect301 />
           <Routes>
             <Route path="/" element={<Index />} />
             <Route path="/politica-de-uso" element={<PoliticaDeUso />} />
