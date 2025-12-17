@@ -3,12 +3,9 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import SEO from "@/components/SEO";
 import Breadcrumbs from "@/components/Breadcrumbs";
-import CurriculoCard from "@/components/CurriculoCard";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import { Clock, Lightbulb, ArrowRight } from "lucide-react";
-import { articles } from "@/data/articles";
+import { Lightbulb } from "lucide-react";
+import { categories } from "@/data/articles";
 
 const DicasCarreira = () => {
 
@@ -23,13 +20,13 @@ const DicasCarreira = () => {
     {
       "@context": "https://schema.org",
       "@type": "ItemList",
-      "itemListElement": articles.map((article, index) => ({
+      "itemListElement": categories.map((category, index) => ({
         "@type": "ListItem",
         "position": index + 1,
         "item": {
-          "@type": "Article",
-          "name": article.title,
-          "description": article.description
+          "@type": "Thing",
+          "name": category.name,
+          "description": category.description
         }
       }))
     }
@@ -61,36 +58,27 @@ const DicasCarreira = () => {
           <div className="flex gap-8">
             <div className="flex-1">
               <section className="mb-12">
-                <h2 className="text-2xl font-semibold mb-6">Artigos em Destaque</h2>
+                <h2 className="text-2xl font-semibold mb-6">Explore por Categoria</h2>
                 <div className="grid md:grid-cols-2 gap-6">
-                  {articles.map((article) => {
-                    const IconComponent = article.icon;
+                  {categories.map((category) => {
+                    const IconComponent = category.icon;
                     return (
                       <Link 
-                        key={article.slug} 
-                        to={`/dicas-carreira/${article.slug}`}
+                        key={category.id} 
+                        to={`/dicas-carreira/categoria/${category.id}`}
                         className="block"
                       >
                         <Card className="hover:shadow-lg transition-shadow h-full">
                           <CardHeader>
-                            <div className="flex items-center justify-between mb-2">
-                              <Badge variant="secondary">{article.category}</Badge>
-                              <div className="flex items-center text-sm text-muted-foreground">
-                                <Clock className="w-4 h-4 mr-1" />
-                                {article.readTime}
-                              </div>
-                            </div>
                             <div className="flex items-center gap-3">
-                              <IconComponent className="w-8 h-8 text-primary" />
-                              <CardTitle className="text-lg">{article.title}</CardTitle>
+                              <div className="p-3 rounded-lg bg-primary/10">
+                                <IconComponent className="w-6 h-6 text-primary" />
+                              </div>
+                              <CardTitle className="text-lg">{category.name}</CardTitle>
                             </div>
                           </CardHeader>
                           <CardContent>
-                            <CardDescription className="mb-4">{article.description}</CardDescription>
-                            <Button variant="link" className="p-0 h-auto gap-1">
-                              Ler artigo completo
-                              <ArrowRight className="w-4 h-4" />
-                            </Button>
+                            <CardDescription>{category.description}</CardDescription>
                           </CardContent>
                         </Card>
                       </Link>
@@ -118,23 +106,31 @@ const DicasCarreira = () => {
                   </div>
                 </div>
               </section>
-
-              <section>
-                <h2 className="text-2xl font-semibold mb-6">Categorias</h2>
-                <div className="grid md:grid-cols-2 gap-4">
-                  {["Currículo", "Entrevista", "Networking", "Carreira", "Salário", "Desenvolvimento", "Liderança", "Produtividade"].map((category) => (
-                    <Card key={category} className="hover:shadow-md transition-shadow cursor-pointer">
-                      <CardContent className="p-6 text-center">
-                        <h3 className="font-semibold">{category}</h3>
-                      </CardContent>
-                    </Card>
-                  ))}
-                </div>
-              </section>
             </div>
 
             <aside className="hidden lg:block w-80">
-              <CurriculoCard />
+              <div className="sticky top-4">
+                <Card>
+                  <CardHeader>
+                    <CardTitle className="text-lg">Categorias</CardTitle>
+                  </CardHeader>
+                  <CardContent className="space-y-3">
+                    {categories.map((category) => {
+                      const IconComponent = category.icon;
+                      return (
+                        <Link
+                          key={category.id}
+                          to={`/dicas-carreira/categoria/${category.id}`}
+                          className="flex items-center gap-3 p-2 rounded-md hover:bg-muted transition-colors"
+                        >
+                          <IconComponent className="w-5 h-5 text-primary" />
+                          <span className="text-sm font-medium">{category.name}</span>
+                        </Link>
+                      );
+                    })}
+                  </CardContent>
+                </Card>
+              </div>
             </aside>
           </div>
         </main>
