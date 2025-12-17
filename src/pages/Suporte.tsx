@@ -41,7 +41,7 @@ const Suporte = () => {
       icon: Phone,
       title: "Telefone",
       description: "Ligue para nossa central de atendimento",
-      availability: "(11) 4000-0000",
+      availability: "(11) 99736-1698",
       response: "Horário comercial",
       action: "Ligar Agora"
     },
