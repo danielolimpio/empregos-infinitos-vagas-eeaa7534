@@ -19,16 +19,15 @@ import BuscarVagas from "./pages/BuscarVagas";
 import CriarPerfil from "./pages/CriarPerfil";
 import DicasCarreira from "./pages/DicasCarreira";
 import ArtigoCarreira from "./pages/ArtigoCarreira";
+import CategoriaCarreira from "./pages/CategoriaCarreira";
 import Salarios from "./pages/Salarios";
 import Empresas from "./pages/Empresas";
 import PublicarVaga from "./pages/PublicarVaga";
 import BuscarCandidatos from "./pages/BuscarCandidatos";
-import Planos from "./pages/Planos";
 import Ferramentas from "./pages/Ferramentas";
 import Suporte from "./pages/Suporte";
 import VagaDetalhes from "./pages/VagaDetalhes";
 import Sitemap from "./pages/Sitemap";
-
 const queryClient = new QueryClient();
 
 const App = () => (
@@ -53,12 +52,12 @@ const App = () => (
             <Route path="/vaga/:id" element={<VagaDetalhes />} />
             <Route path="/criar-perfil" element={<CriarPerfil />} />
             <Route path="/dicas-carreira" element={<DicasCarreira />} />
+            <Route path="/dicas-carreira/categoria/:categoryId" element={<CategoriaCarreira />} />
             <Route path="/dicas-carreira/:slug" element={<ArtigoCarreira />} />
             <Route path="/salarios" element={<Salarios />} />
             <Route path="/empresas" element={<Empresas />} />
             <Route path="/publicar-vaga" element={<PublicarVaga />} />
             <Route path="/buscar-candidatos" element={<BuscarCandidatos />} />
-            <Route path="/planos" element={<Planos />} />
             <Route path="/ferramentas" element={<Ferramentas />} />
             <Route path="/suporte" element={<Suporte />} />
             <Route path="/sitemap" element={<Sitemap />} />
