@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Buscar Vagas de Emprego | VagasTrabalhos</title>
+  <meta name="description" content="Encontre as melhores vagas de emprego no Brasil. Busque por área, salário, localização e tipo de trabalho. Milhares de oportunidades em todo o país.">
+  <meta name="keywords" content="buscar vagas, emprego, trabalho, vagas de emprego, oportunidades, carreira">
+  <meta name="author" content="VagasTrabalhos">
+  <meta name="robots" content="index, follow">
+  
+  <link rel="icon" href="/favicon.ico" type="image/x-icon">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="canonical" href="https://vagasdetrabalhos.com/buscar-vagas/">
+  
+  <meta property="og:title" content="Buscar Vagas de Emprego | VagasTrabalhos">
+  <meta property="og:description" content="Encontre as melhores vagas de emprego no Brasil. Busque por área, salário, localização e tipo de trabalho.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://vagasdetrabalhos.com/buscar-vagas/">
+  <meta property="og:image" content="https://vagasdetrabalhos.com/og-image.jpg">
+  <meta property="og:locale" content="pt_BR">
+  
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Buscar Vagas de Emprego | VagasTrabalhos">
+  <meta name="twitter:description" content="Encontre as melhores vagas de emprego no Brasil. Busque por área, salário, localização e tipo de trabalho.">
+  <meta name="twitter:image" content="https://vagasdetrabalhos.com/og-image.jpg">
+  
+  <link rel="stylesheet" href="/static-styles.css">
+  
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "name": "Buscar Vagas de Emprego",
+    "description": "Encontre as melhores vagas de emprego no Brasil. Busque por área, localização e tipo de trabalho.",
+    "url": "https://vagasdetrabalhos.com/buscar-vagas/"
+  }
+  </script>
+</head>
+<body>
+  <header class="header">
+    <div class="container header-content">
+      <a href="/" class="logo">
+        <img src="/logo.png" alt="VagasTrabalhos" width="32" height="32">
+        VagasTrabalhos
+      </a>
+      <nav class="nav">
+        <a href="/buscar-vagas/">Buscar Vagas</a>
+        <a href="/empresas/">Empresas</a>
+        <a href="/salarios/">Salários</a>
+        <a href="/dicas-carreira/">Dicas de Carreira</a>
+        <a href="/ferramentas/">Ferramentas</a>
+      </nav>
+      <div class="nav-buttons">
+        <a href="/login/" class="btn btn-outline">Entrar</a>
+        <a href="/cadastro/" class="btn btn-primary">Criar Conta</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <div class="container py-4">
+      <nav class="breadcrumbs">
+        <a href="/">Início</a>
+        <span>›</span>
+        <span>Buscar Vagas</span>
+      </nav>
+    </div>
+
+    <section class="section" style="padding-top: 0;">
+      <div class="container">
+        <header class="text-center mb-8">
+          <h1 class="section-title">Buscar Vagas de Emprego</h1>
+          <p class="section-subtitle">Encontre as melhores oportunidades de carreira em todo o Brasil</p>
+        </header>
+
+        <div class="hero-search mb-8" style="max-width: 700px; margin: 0 auto;">
+          <input type="text" placeholder="Busque por cargo, empresa ou palavra-chave..." aria-label="Buscar vagas">
+          <button class="btn btn-primary">Buscar</button>
+        </div>
+
+        <div class="flex gap-6" style="flex-wrap: wrap;">
+          <aside style="width: 280px; flex-shrink: 0;">
+            <div class="card mb-4">
+              <h3 class="card-title mb-4">Filtros</h3>
+              
+              <div class="form-group">
+                <label class="form-label">Tipo de Vaga</label>
+                <div class="flex flex-col gap-2">
+                  <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer;">
+                    <input type="checkbox" name="tipo" value="clt"> CLT
+                  </label>
+                  <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer;">
+                    <input type="checkbox" name="tipo" value="pj"> PJ
+                  </label>
+                  <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer;">
+                    <input type="checkbox" name="tipo" value="estagio"> Estágio
+                  </label>
+                  <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer;">
+                    <input type="checkbox" name="tipo" value="freelancer"> Freelancer
+                  </label>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label">Localização</label>
+                <div class="flex flex-col gap-2">
+                  <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer;">
+                    <input type="checkbox" name="local" value="remoto"> Remoto
+                  </label>
+                  <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer;">
+                    <input type="checkbox" name="local" value="sp"> São Paulo
+                  </label>
+                  <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer;">
+                    <input type="checkbox" name="local" value="rj"> Rio de Janeiro
+                  </label>
+                  <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer;">
+                    <input type="checkbox" name="local" value="mg"> Minas Gerais
+                  </label>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label">Faixa Salarial</label>
+                <div class="flex flex-col gap-2">
+                  <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer;">
+                    <input type="checkbox" name="salario" value="3000"> Até R$ 3.000
+                  </label>
+                  <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer;">
+                    <input type="checkbox" name="salario" value="5000"> R$ 3.000 - R$ 5.000
+                  </label>
+                  <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer;">
+                    <input type="checkbox" name="salario" value="10000"> R$ 5.000 - R$ 10.000
+                  </label>
+                  <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer;">
+                    <input type="checkbox" name="salario" value="15000"> Acima de R$ 10.000
+                  </label>
+                </div>
+              </div>
+            </div>
+          </aside>
+
+          <section style="flex: 1; min-width: 0;">
+            <div class="flex justify-between items-center mb-4">
+              <p class="text-muted">Mostrando vagas disponíveis</p>
+            </div>
+
+            <div class="flex flex-col gap-4">
+              <article class="job-card">
+                <div class="job-card-header">
+                  <div class="job-card-logo">🏢</div>
+                  <div class="job-card-info">
+                    <h3>Desenvolvedor Full Stack</h3>
+                    <span class="job-card-company">TechCorp Brasil</span>
+                  </div>
+                </div>
+                <p class="text-muted" style="font-size: 0.875rem;">Buscamos desenvolvedor full stack com experiência em React, Node.js e bancos de dados. Trabalho remoto com equipe distribuída.</p>
+                <div class="job-card-meta">
+                  <span class="badge">Remoto</span>
+                  <span class="badge">CLT</span>
+                  <span class="badge">Sênior</span>
+                </div>
+                <div class="job-card-footer">
+                  <span class="job-card-salary">R$ 15.000 - R$ 20.000</span>
+                  <a href="/buscar-vagas/" class="btn btn-primary">Candidatar-se</a>
+                </div>
+              </article>
+
+              <article class="job-card">
+                <div class="job-card-header">
+                  <div class="job-card-logo">🏢</div>
+                  <div class="job-card-info">
+                    <h3>Product Manager</h3>
+                    <span class="job-card-company">Startup Inovadora</span>
+                  </div>
+                </div>
+                <p class="text-muted" style="font-size: 0.875rem;">Procuramos PM para liderar squad de produto. Experiência com metodologias ágeis e visão de negócio são essenciais.</p>
+                <div class="job-card-meta">
+                  <span class="badge">São Paulo</span>
+                  <span class="badge">CLT</span>
+                  <span class="badge">Pleno</span>
+                </div>
+                <div class="job-card-footer">
+                  <span class="job-card-salary">R$ 12.000 - R$ 18.000</span>
+                  <a href="/buscar-vagas/" class="btn btn-primary">Candidatar-se</a>
+                </div>
+              </article>
+
+              <article class="job-card">
+                <div class="job-card-header">
+                  <div class="job-card-logo">🏢</div>
+                  <div class="job-card-info">
+                    <h3>UX/UI Designer</h3>
+                    <span class="job-card-company">Design Studio</span>
+                  </div>
+                </div>
+                <p class="text-muted" style="font-size: 0.875rem;">Designer para criar interfaces incríveis para produtos digitais. Domínio de Figma e conhecimento em design systems.</p>
+                <div class="job-card-meta">
+                  <span class="badge">Híbrido</span>
+                  <span class="badge">PJ</span>
+                  <span class="badge">Sênior</span>
+                </div>
+                <div class="job-card-footer">
+                  <span class="job-card-salary">R$ 10.000 - R$ 15.000</span>
+                  <a href="/buscar-vagas/" class="btn btn-primary">Candidatar-se</a>
+                </div>
+              </article>
+
+              <article class="job-card">
+                <div class="job-card-header">
+                  <div class="job-card-logo">🏢</div>
+                  <div class="job-card-info">
+                    <h3>Analista de Marketing Digital</h3>
+                    <span class="job-card-company">E-commerce Líder</span>
+                  </div>
+                </div>
+                <p class="text-muted" style="font-size: 0.875rem;">Profissional para gerenciar campanhas de mídia paga e estratégias de growth. Experiência com Google Ads e Meta Ads.</p>
+                <div class="job-card-meta">
+                  <span class="badge">Rio de Janeiro</span>
+                  <span class="badge">CLT</span>
+                  <span class="badge">Pleno</span>
+                </div>
+                <div class="job-card-footer">
+                  <span class="job-card-salary">R$ 6.000 - R$ 9.000</span>
+                  <a href="/buscar-vagas/" class="btn btn-primary">Candidatar-se</a>
+                </div>
+              </article>
+
+              <article class="job-card">
+                <div class="job-card-header">
+                  <div class="job-card-logo">🏢</div>
+                  <div class="job-card-info">
+                    <h3>DevOps Engineer</h3>
+                    <span class="job-card-company">FinTech Brasil</span>
+                  </div>
+                </div>
+                <p class="text-muted" style="font-size: 0.875rem;">Engenheiro DevOps para automatizar infraestrutura e pipelines CI/CD. Experiência com AWS, Kubernetes e Terraform.</p>
+                <div class="job-card-meta">
+                  <span class="badge">Remoto</span>
+                  <span class="badge">CLT</span>
+                  <span class="badge">Sênior</span>
+                </div>
+                <div class="job-card-footer">
+                  <span class="job-card-salary">R$ 18.000 - R$ 25.000</span>
+                  <a href="/buscar-vagas/" class="btn btn-primary">Candidatar-se</a>
+                </div>
+              </article>
+            </div>
+          </section>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" style="background: var(--muted);">
+      <div class="container">
+        <h2 class="section-title">Perguntas Frequentes sobre Busca de Vagas</h2>
+        
+        <div style="max-width: 800px; margin: 0 auto;">
+          <div class="faq-item">
+            <h3 class="faq-question">Como filtrar vagas por localização?</h3>
+            <p class="faq-answer">Use os filtros na barra lateral para selecionar a localização desejada. Você pode escolher entre trabalho remoto, híbrido ou presencial em cidades específicas como São Paulo, Rio de Janeiro e outras capitais.</p>
+          </div>
+          <div class="faq-item">
+            <h3 class="faq-question">Posso salvar vagas para ver depois?</h3>
+            <p class="faq-answer">Sim! Crie uma conta gratuita e você poderá salvar vagas favoritas, receber alertas de novas oportunidades e acompanhar suas candidaturas.</p>
+          </div>
+          <div class="faq-item">
+            <h3 class="faq-question">Com que frequência novas vagas são publicadas?</h3>
+            <p class="faq-answer">Novas vagas são publicadas diariamente. Recomendamos configurar alertas para receber notificações quando vagas compatíveis com seu perfil forem adicionadas.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-section">
+          <h4>Para Candidatos</h4>
+          <ul>
+            <li><a href="/buscar-vagas/">Buscar Vagas</a></li>
+            <li><a href="/criar-perfil/">Criar Perfil</a></li>
+            <li><a href="/salarios/">Guia de Salários</a></li>
+            <li><a href="/dicas-carreira/">Dicas de Carreira</a></li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h4>Para Empresas</h4>
+          <ul>
+            <li><a href="/publicar-vaga/">Publicar Vaga</a></li>
+            <li><a href="/buscar-candidatos/">Buscar Candidatos</a></li>
+            <li><a href="/ferramentas/">Ferramentas</a></li>
+            <li><a href="/empresas/">Empresas</a></li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h4>Recursos</h4>
+          <ul>
+            <li><a href="/dicas-carreira/categoria/curriculo/">Modelos de Currículo</a></li>
+            <li><a href="/dicas-carreira/categoria/entrevista/">Dicas de Entrevista</a></li>
+            <li><a href="/dicas-carreira/categoria/carreira/">Desenvolvimento de Carreira</a></li>
+            <li><a href="/dicas-carreira/categoria/mercado/">Tendências de Mercado</a></li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h4>Suporte</h4>
+          <ul>
+            <li><a href="/suporte/">Central de Ajuda</a></li>
+            <li><a href="/sitemap/">Mapa do Site</a></li>
+            <li><a href="/politica-de-privacidade/">Privacidade</a></li>
+            <li><a href="/politica-de-uso/">Termos de Uso</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2025 VagasTrabalhos. Todos os direitos reservados.</p>
+        <div class="footer-links">
+          <a href="/politica-de-privacidade/">Privacidade</a>
+          <a href="/politica-de-uso/">Termos</a>
+          <a href="/politica-de-cookies/">Cookies</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
