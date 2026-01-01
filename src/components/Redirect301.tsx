@@ -35,9 +35,6 @@ const redirects: Record<string, string> = {
   "/help": "/suporte",
   "/contato": "/suporte",
   "/contact": "/suporte",
-  "/precos": "/planos",
-  "/pricing": "/planos",
-  "/assinatura": "/planos",
 };
 
 const Redirect301 = () => {

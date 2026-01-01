@@ -71,7 +71,6 @@ const Sitemap = () => {
       links: [
         { name: "Publicar Vaga", url: "/publicar-vaga", icon: Briefcase },
         { name: "Buscar Candidatos", url: "/buscar-candidatos", icon: Users },
-        { name: "Planos e Preços", url: "/planos", icon: DollarSign },
         { name: "Ferramentas", url: "/ferramentas", icon: Settings },
         { name: "Suporte", url: "/suporte", icon: HelpCircle },
       ]
@@ -82,7 +81,7 @@ const Sitemap = () => {
       description: "Conteúdo organizado por tema",
       links: categories.map(cat => ({
         name: cat.name,
-        url: `/dicas-carreira?categoria=${cat.id}`,
+        url: `/dicas-carreira/categoria/${cat.id}`,
         icon: cat.icon,
         description: cat.description
       }))
@@ -119,14 +118,13 @@ const Sitemap = () => {
     { url: "/dashboard", name: "Dashboard" },
     { url: "/publicar-vaga", name: "Publicar Vaga" },
     { url: "/buscar-candidatos", name: "Buscar Candidatos" },
-    { url: "/planos", name: "Planos e Preços" },
     { url: "/ferramentas", name: "Ferramentas" },
     { url: "/suporte", name: "Suporte" },
     { url: "/politica-de-uso", name: "Termos de Uso" },
     { url: "/politica-de-privacidade", name: "Política de Privacidade" },
     { url: "/politica-de-cookies", name: "Política de Cookies" },
     { url: "/sitemap", name: "Sitemap" },
-    ...categories.map(cat => ({ url: `/dicas-carreira?categoria=${cat.id}`, name: `Artigos: ${cat.name}` })),
+    ...categories.map(cat => ({ url: `/dicas-carreira/categoria/${cat.id}`, name: `Artigos: ${cat.name}` })),
   ];
 
   return (
