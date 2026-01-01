@@ -27,6 +27,7 @@ import Planos from "./pages/Planos";
 import Ferramentas from "./pages/Ferramentas";
 import Suporte from "./pages/Suporte";
 import VagaDetalhes from "./pages/VagaDetalhes";
+import Sitemap from "./pages/Sitemap";
 
 const queryClient = new QueryClient();
 
@@ -60,6 +61,7 @@ const App = () => (
             <Route path="/planos" element={<Planos />} />
             <Route path="/ferramentas" element={<Ferramentas />} />
             <Route path="/suporte" element={<Suporte />} />
+            <Route path="/sitemap" element={<Sitemap />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
