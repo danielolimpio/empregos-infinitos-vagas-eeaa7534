@@ -12,19 +12,27 @@ jobs:
       - name: Clonar o repositório
         uses: actions/checkout@v3
 
-      - name: Configurar Node.js 18
+      - name: Configurar Node.js 20
         uses: actions/setup-node@v3
         with:
-          node-version: '18'
+          node-version: '20'
 
       - name: Instalar dependências
-        run: npm install
+        run: npm install --legacy-peer-deps
 
-      - name: Build do projeto
+      - name: Build do projeto (Vite)
         run: npm run build
 
+      - name: Pré-renderizar rotas com react-snap (HTML estático por URL)
+        run: npx react-snap
+        env:
+          PUPPETEER_SKIP_DOWNLOAD: 'false'
+
       - name: Mostrar arquivos gerados
-        run: ls -la dist/
+        run: |
+          ls -la dist/
+          echo "--- Pastas pré-renderizadas ---"
+          find dist -name "index.html" -type f
 
       - name: Deploy FTP para Hostinger
         uses: SamKirkland/FTP-Deploy-Action@v4.3.4
