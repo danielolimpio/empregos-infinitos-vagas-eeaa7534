@@ -98,7 +98,7 @@ const HeroSection = () => {
                     <stat.icon className="w-6 h-6 text-white drop-shadow-sm" />
                   </div>
                   <p className="text-3xl font-bold text-white mb-1 drop-shadow-sm">{stat.value}</p>
-                  <p className="text-white/90 font-medium">{stat.label}</p>
+                  <p className="text-white font-medium">{stat.label}</p>
                 </CardContent>
               </Card>
             ))}
