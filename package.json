@@ -8,42 +8,10 @@
     "build": "vite build",
     "build:dev": "vite build --mode development",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "prerender": "node scripts/prerender.mjs"
   },
-  "reactSnap": {
-    "source": "dist",
-    "destination": "dist",
-    "include": [
-      "/",
-      "/buscar-vagas",
-      "/empresas",
-      "/salarios",
-      "/criar-perfil",
-      "/dicas-carreira",
-      "/dicas-carreira/categoria/carreira",
-      "/dicas-carreira/categoria/entrevista",
-      "/dicas-carreira/categoria/mercado",
-      "/dicas-carreira/categoria/curriculo",
-      "/dicas-carreira/categoria/recrutamento",
-      "/publicar-vaga",
-      "/buscar-candidatos",
-      "/ferramentas",
-      "/suporte",
-      "/politica-de-uso",
-      "/politica-de-privacidade",
-      "/politica-de-cookies",
-      "/sitemap",
-      "/login",
-      "/cadastro"
-    ],
-    "puppeteerArgs": ["--no-sandbox", "--disable-setuid-sandbox"],
-    "skipThirdPartyRequests": true,
-    "inlineCss": true,
-    "minifyHtml": {
-      "collapseWhitespace": true,
-      "removeComments": true
-    }
-  },
+
   "dependencies": {
     "@hookform/resolvers": "^3.9.0",
     "@radix-ui/react-accordion": "^1.2.0",
