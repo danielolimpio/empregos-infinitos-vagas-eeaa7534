@@ -51,16 +51,16 @@ const HeroSection = () => {
               oportunidade
             </span>
           </h1>
-          <p className="text-xl md:text-2xl mb-8 text-white/90 max-w-2xl mx-auto">
+          <p className="text-xl md:text-2xl mb-8 text-white max-w-2xl mx-auto">
             Conectamos talentos com as melhores empresas do Brasil. Sua carreira dos sonhos está a um clique de distância.
           </p>
 
           {/* Search Section */}
-          <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 mb-12 border border-white/20">
+          <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 mb-12 border border-white/30">
             <div className="flex flex-col md:flex-row gap-4">
               <div className="relative flex-1">
-                <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-white/70 w-5 h-5" />
-                <Input placeholder="Qual vaga você está procurando?" className="pl-12 pr-4 h-14 bg-white/20 border-white/30 text-white placeholder:text-white/70 focus:border-white/50 text-lg" />
+                <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-white w-5 h-5" />
+                <Input placeholder="Qual vaga você está procurando?" className="pl-12 pr-4 h-14 bg-white/20 border-white/40 text-white placeholder:text-white focus:border-white text-lg" />
               </div>
               <div className="relative md:w-64">
                 <MapPin className="absolute left-4 top-1/2 transform -translate-y-1/2 text-white/70 w-5 h-5" />
