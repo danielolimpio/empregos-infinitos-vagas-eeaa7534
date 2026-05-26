@@ -63,8 +63,8 @@ const HeroSection = () => {
                 <Input placeholder="Qual vaga você está procurando?" className="pl-12 pr-4 h-14 bg-white/20 border-white/40 text-white placeholder:text-white focus:border-white text-lg" />
               </div>
               <div className="relative md:w-64">
-                <MapPin className="absolute left-4 top-1/2 transform -translate-y-1/2 text-white/70 w-5 h-5" />
-                <Input placeholder="Onde?" className="pl-12 pr-4 h-14 bg-white/20 border-white/30 text-white placeholder:text-white/70 focus:border-white/50 text-lg" />
+                <MapPin className="absolute left-4 top-1/2 transform -translate-y-1/2 text-white w-5 h-5" />
+                <Input placeholder="Onde?" className="pl-12 pr-4 h-14 bg-white/20 border-white/40 text-white placeholder:text-white focus:border-white text-lg" />
               </div>
               <Button size="xl" className="bg-white text-primary hover:bg-white/90 h-14 px-8 font-semibold">
                 Buscar Vagas
@@ -74,7 +74,7 @@ const HeroSection = () => {
 
           {/* Popular Searches */}
           <div className="mb-12">
-            <p className="text-white/80 mb-4">Buscas populares:</p>
+            <p className="text-white mb-4">Buscas populares:</p>
             <div className="flex flex-wrap justify-center gap-2">
               {popularSearches.map((search, index) => (
                 <Button 
