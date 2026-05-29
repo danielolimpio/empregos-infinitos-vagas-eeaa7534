@@ -227,11 +227,26 @@ const VagaDetalhes: React.FC = () => {
     return null;
   }
 
+  // Build SEO title (max 60 chars)
+  const baseTitle = `${job.title} - ${job.company_name}`;
+  const seoTitle = baseTitle.length > 57 ? baseTitle.substring(0, 57) + "..." : `${baseTitle} | Vagas`;
+
+  // Build SEO description (50-160 chars) — strip HTML, ensure suffix fallback
+  const plainDesc = job.description.replace(/<[^>]*>/g, " ").replace(/\s+/g, " ").trim();
+  const suffix = ` Vaga em ${job.location}. Candidate-se agora na ${job.company_name}.`;
+  let seoDescription = plainDesc;
+  if (seoDescription.length < 50) {
+    seoDescription = `${job.title} na ${job.company_name}.${suffix}`;
+  }
+  if (seoDescription.length > 160) {
+    seoDescription = seoDescription.substring(0, 157).trimEnd() + "...";
+  }
+
   return (
     <>
       <SEO
-        title={`${job.title} na ${job.company_name} | Vagas de Trabalhos`}
-        description={job.description.substring(0, 160)}
+        title={seoTitle}
+        description={seoDescription}
         canonical={`https://vagasdetrabalhos.com/vaga/${job.id}`}
         keywords={`vaga ${job.title}, emprego ${job.location}, ${job.company_name}, vagas de trabalho`}
         structuredData={{
