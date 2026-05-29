@@ -1,0 +1,28 @@
+# Vagas de Trabalhos
+
+> Portal de empregos do Brasil. Encontre vagas de trabalho, publique oportunidades, consulte salários e leia dicas de carreira para impulsionar sua trajetória profissional.
+
+Vagas de Trabalhos é um portal brasileiro de empregos que conecta candidatos a oportunidades de trabalho em todo o país. Empresas e recrutadores podem publicar vagas gratuitamente, enquanto candidatos buscam posições por cargo, localização e categoria. O site também oferece recursos como dicas de carreira, pesquisa salarial, ferramentas profissionais e suporte ao usuário.
+
+## Pages
+
+- [Início](/): Busca principal de vagas de emprego com filtros por cargo e localização. Acesso rápido às principais categorias de trabalho.
+- [Buscar Vagas](/buscar-vagas): Listagem completa de vagas disponíveis com filtros avançados por cidade, estado, categoria e tipo de contratação.
+- [Detalhes da Vaga](/vaga/exemplo): Página individual de uma vaga com descrição completa, requisitos, benefícios, localização e formulário de candidatura.
+- [Publicar Vaga](/publicar-vaga): Formulário para empresas e recrutadores cadastrarem novas oportunidades de emprego no portal.
+- [Buscar Candidatos](/buscar-candidatos): Área para recrutadores visualizarem perfis de candidatos disponíveis no banco de talentos.
+- [Dicas de Carreira](/dicas-carreira): Artigos, guias e conteúdos educativos sobre desenvolvimento profissional, entrevistas e currículo.
+- [Categoria de Dicas](/dicas-carreira/categoria/curriculo): Artigos organizados por tema, como currículo, entrevistas, planejamento de carreira e desenvolvimento profissional.
+- [Artigo de Carreira](/dicas-carreira/como-montar-um-curriculo): Página individual de artigo com conteúdo completo sobre temas de carreira e desenvolvimento profissional.
+- [Pesquisa Salarial](/salarios): Consulte faixas salariais por cargo, região e nível de experiência no mercado de trabalho brasileiro.
+- [Empresas](/empresas): Conheça as empresas que recrutam pelo portal e explore vagas por organização.
+- [Ferramentas](/ferramentas): Recursos e utilitários para candidatos e recrutadores, incluindo geradores de currículo e calculadoras.
+- [Suporte](/suporte): Central de ajuda com perguntas frequentes, canais de atendimento e informações de contato.
+- [Sitemap](/sitemap): Mapa completo do site com links para todas as páginas e seções do portal.
+- [Política de Uso](/politica-de-uso): Termos e condições de uso do portal, regras para publicação de vagas e conduta dos usuários.
+- [Política de Privacidade](/politica-de-privacidade): Informações sobre coleta, uso e proteção de dados pessoais dos usuários do portal.
+- [Política de Cookies](/politica-de-cookies): Explicação sobre o uso de cookies, tecnologias de rastreamento e opções de controle do usuário.
+
+## Optional
+
+- [Gerador de Currículo](https://geradordecurriculo.netlify.app/): Ferramenta externa parceira para criação de currículos profissionais.
