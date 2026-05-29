@@ -29,11 +29,15 @@ const HeroSection = () => {
     { name: "Marketing Digital", bg: "bg-gradient-to-r from-orange-500 to-yellow-500", border: "border-orange-400", hover: "hover:from-orange-600 hover:to-yellow-600" }
   ];
    return <section className="relative bg-gradient-hero text-white py-20 overflow-hidden">
-      {/* Background Image with Dark Overlay */}
-      <div 
-        className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-        style={{ backgroundImage: `url(${diversityBackground})` }}
-      ></div>
+      {/* Hero image - optimized as <img> for LCP with explicit dimensions and high fetch priority */}
+      <img
+        src={diversityBackground}
+        alt="Profissionais diversos trabalhando juntos"
+        width={1920}
+        height={1080}
+        fetchPriority="high"
+        className="absolute inset-0 w-full h-full object-cover"
+      />
       <div className="absolute inset-0 bg-gradient-to-br from-primary/90 via-primary/85 to-secondary/90"></div>
       
       {/* Enhanced Background Pattern */}
