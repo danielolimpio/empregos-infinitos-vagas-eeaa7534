@@ -98,6 +98,28 @@ const Suporte = () => {
     }
   ];
 
+  const structuredData = [
+    {
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      "name": "Suporte ao Cliente",
+      "description": "Central de ajuda e suporte técnico. Tire suas dúvidas e receba assistência para usar nossa plataforma de recrutamento.",
+      "url": "https://vagasdetrabalhos.com/suporte"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": faqItems.map(item => ({
+        "@type": "Question",
+        "name": item.question,
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": item.answer
+        }
+      }))
+    }
+  ];
+
   return (
     <>
       <SEO
