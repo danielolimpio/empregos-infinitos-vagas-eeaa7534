@@ -43,7 +43,17 @@ const Header = () => {
   };
 
   return (
-    <header className="sticky top-0 z-50 w-full bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 border-b border-border">
+    <header className="sticky top-0 z-50 w-full bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/85 border-b border-border">
+      {/* Top eyebrow bar */}
+      <div className="hidden md:block border-b border-border">
+        <div className="container mx-auto px-4 h-8 flex items-center justify-between text-[10px] font-semibold tracking-[0.22em] uppercase text-muted-foreground">
+          <span>Portal Nacional de Carreiras</span>
+          <span>
+            {new Date().toLocaleDateString("pt-BR", { weekday: "long", day: "2-digit", month: "long", year: "numeric" })}
+          </span>
+        </div>
+      </div>
+
       <div className="container mx-auto px-4 py-4">
         <div className="flex items-center justify-between gap-4">
           {/* Logo */}
@@ -54,7 +64,7 @@ const Header = () => {
                 alt="Logo Vagas de Trabalhos - vagas de emprego no Brasil"
                 width={160}
                 height={40}
-                className="h-8 sm:h-10 md:h-12 w-auto object-contain"
+                className="h-8 sm:h-10 md:h-11 w-auto object-contain"
                 loading="eager"
                 decoding="async"
               />
@@ -63,68 +73,56 @@ const Header = () => {
           </div>
 
           {/* Navigation Menu */}
-          <nav className="hidden md:flex items-center gap-2 lg:gap-3">
-            <Button variant="ghost" size="sm" onClick={() => navigate("/")}>
-              Home
-            </Button>
-            <Button variant="ghost" size="sm" onClick={() => navigate("/empresas")}>
-              Sobre
-            </Button>
-            <Button variant="ghost" size="sm" onClick={() => navigate("/ferramentas")}>
-              Ferramentas
-            </Button>
-            <Button variant="ghost" size="sm" onClick={() => navigate("/publicar-vaga")}>
-              Publicar Vaga
-            </Button>
-            <Button variant="ghost" size="sm" onClick={() => navigate("/buscar-candidatos")}>
-              Candidatos
-            </Button>
-            <Button variant="ghost" size="sm" onClick={() => navigate("/salarios")}>
-              Salários
-            </Button>
-            <Button variant="ghost" size="sm" onClick={() => navigate("/empresas")}>
-              Empresas
-            </Button>
-            <Button variant="ghost" size="sm" onClick={() => navigate("/dicas-carreira")}>
-              Blog
-            </Button>
-            <Button variant="ghost" size="sm" onClick={() => navigate("/suporte")}>
-              Contato
-            </Button>
+          <nav className="hidden md:flex items-center gap-1 lg:gap-2 text-[13px] font-medium tracking-wide">
+            {[
+              { label: "Home", to: "/" },
+              { label: "Vagas", to: "/buscar-vagas" },
+              { label: "Ferramentas", to: "/ferramentas" },
+              { label: "Publicar Vaga", to: "/publicar-vaga" },
+              { label: "Candidatos", to: "/buscar-candidatos" },
+              { label: "Salários", to: "/salarios" },
+              { label: "Empresas", to: "/empresas" },
+              { label: "Blog", to: "/dicas-carreira" },
+              { label: "Contato", to: "/suporte" },
+            ].map((item) => (
+              <button
+                key={item.to}
+                onClick={() => navigate(item.to)}
+                className="px-2.5 py-2 text-foreground/80 hover:text-foreground border-b border-transparent hover:border-foreground transition-colors uppercase text-[11px] tracking-[0.14em] font-semibold"
+              >
+                {item.label}
+              </button>
+            ))}
           </nav>
 
           {/* User Actions */}
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2">
             <Button
               variant="ghost"
               size="sm"
               onClick={toggleTheme}
-              className="gap-2"
+              className="gap-2 rounded-none"
               aria-label={theme === "dark" ? "Ativar modo claro" : "Ativar modo escuro"}
             >
-              {theme === "dark" ? (
-                <Sun className="h-5 w-5" />
-              ) : (
-                <Moon className="h-5 w-5" />
-              )}
+              {theme === "dark" ? <Sun className="h-4 w-4" strokeWidth={1.5} /> : <Moon className="h-4 w-4" strokeWidth={1.5} />}
             </Button>
             {user ? (
               <>
-                <Button variant="ghost" size="sm" className="gap-2" onClick={() => navigate("/dashboard")}>
-                  <User className="h-4 w-4" />
+                <Button variant="ghost" size="sm" className="gap-2 rounded-none uppercase text-[11px] tracking-[0.14em] font-semibold" onClick={() => navigate("/dashboard")}>
+                  <User className="h-4 w-4" strokeWidth={1.5} />
                   {user.email?.split("@")[0]}
                 </Button>
-                <Button variant="outline" size="sm" onClick={handleLogout} className="gap-2">
-                  <LogOut className="h-4 w-4" />
+                <Button variant="outline" size="sm" onClick={handleLogout} className="gap-2 rounded-none border-foreground uppercase text-[11px] tracking-[0.14em] font-semibold">
+                  <LogOut className="h-4 w-4" strokeWidth={1.5} />
                   Sair
                 </Button>
               </>
             ) : (
               <>
-                <Button variant="outline" size="sm" onClick={() => navigate("/login")}>
+                <Button variant="outline" size="sm" onClick={() => navigate("/login")} className="rounded-none border-foreground uppercase text-[11px] tracking-[0.14em] font-semibold">
                   Entrar
                 </Button>
-                <Button variant="default" size="sm" onClick={() => navigate("/cadastro")}>
+                <Button size="sm" onClick={() => navigate("/cadastro")} className="rounded-none bg-foreground text-background hover:bg-foreground/90 uppercase text-[11px] tracking-[0.14em] font-semibold">
                   Cadastrar
                 </Button>
               </>
