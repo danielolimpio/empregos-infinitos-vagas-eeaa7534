@@ -106,7 +106,7 @@ const SEO = ({ title, description, canonical, structuredData, keywords, image, i
       script.text = JSON.stringify(structuredData);
       document.head.appendChild(script);
     }
-  }, [title, description, canonical, structuredData, keywords, image, imageAlt, isPrivatePage]);
+  }, [title, description, canonical, structuredData, keywords, image, imageAlt, isPrivatePage, ogType]);
 
   return null;
 };
