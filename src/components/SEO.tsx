@@ -9,9 +9,10 @@ interface SEOProps {
   image?: string;
   imageAlt?: string;
   isPrivatePage?: boolean;
+  ogType?: string;
 }
 
-const SEO = ({ title, description, canonical, structuredData, keywords, image, imageAlt, isPrivatePage = false }: SEOProps) => {
+const SEO = ({ title, description, canonical, structuredData, keywords, image, imageAlt, isPrivatePage = false, ogType = 'website' }: SEOProps) => {
   useEffect(() => {
     // Title
     document.title = title;
@@ -53,7 +54,7 @@ const SEO = ({ title, description, canonical, structuredData, keywords, image, i
       { property: 'og:title', content: title },
       { property: 'og:description', content: description },
       { property: 'og:url', content: canonical },
-      { property: 'og:type', content: 'website' },
+      { property: 'og:type', content: ogType },
       { property: 'og:image', content: image || defaultImage },
       { property: 'og:image:alt', content: imageAlt || defaultImageAlt },
       { property: 'og:locale', content: 'pt_BR' },
@@ -105,7 +106,7 @@ const SEO = ({ title, description, canonical, structuredData, keywords, image, i
       script.text = JSON.stringify(structuredData);
       document.head.appendChild(script);
     }
-  }, [title, description, canonical, structuredData, keywords, image, imageAlt, isPrivatePage]);
+  }, [title, description, canonical, structuredData, keywords, image, imageAlt, isPrivatePage, ogType]);
 
   return null;
 };
