@@ -18,6 +18,10 @@ export default {
 			}
 		},
 		extend: {
+			fontFamily: {
+				sans: ['"Inter Tight"', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+				serif: ['"Playfair Display"', '"Times New Roman"', 'ui-serif', 'Georgia', 'serif'],
+			},
 			colors: {
 				border: 'hsl(var(--border))',
 				input: 'hsl(var(--input))',
