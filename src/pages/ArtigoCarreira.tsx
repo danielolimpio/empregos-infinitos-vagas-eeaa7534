@@ -93,6 +93,7 @@ const ArtigoCarreira = () => {
         keywords={article.keywords}
         image={`https://vagasdetrabalhos.com${article.image}`}
         structuredData={structuredData}
+        ogType="article"
       />
       <div className="min-h-screen bg-background">
         <Header />
