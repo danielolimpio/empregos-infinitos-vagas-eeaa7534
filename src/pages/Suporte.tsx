@@ -20,13 +20,6 @@ import {
 } from "lucide-react";
 
 const Suporte = () => {
-  const structuredData = {
-    "@context": "https://schema.org",
-    "@type": "WebPage",
-    "name": "Suporte ao Cliente",
-    "description": "Central de ajuda e suporte técnico. Tire suas dúvidas e receba assistência para usar nossa plataforma de recrutamento.",
-    "url": "https://vagasdetrabalhos.com/suporte"
-  };
 
   const supportChannels = [
     {
@@ -102,6 +95,28 @@ const Suporte = () => {
     {
       question: "Qual a diferença entre os planos?",
       answer: "O plano gratuito permite 1 vaga ativa, o Profissional oferece 5 vagas e recursos avançados, e o Empresarial tem vagas ilimitadas e suporte dedicado."
+    }
+  ];
+
+  const structuredData = [
+    {
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      "name": "Suporte ao Cliente",
+      "description": "Central de ajuda e suporte técnico. Tire suas dúvidas e receba assistência para usar nossa plataforma de recrutamento.",
+      "url": "https://vagasdetrabalhos.com/suporte"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": faqItems.map(item => ({
+        "@type": "Question",
+        "name": item.question,
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": item.answer
+        }
+      }))
     }
   ];
 
