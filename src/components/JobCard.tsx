@@ -145,87 +145,84 @@ const JobCard = ({ job }: JobCardProps) => {
 
   return (
     <>
-      <Card className="group hover:shadow-lg transition-all duration-300 hover:scale-[1.02] border-2 hover:border-primary/20">
-        <CardHeader className="pb-3">
-          <div className="flex items-start justify-between">
-            <div className="flex items-center gap-3">
-              <div className="w-12 h-12 bg-gradient-primary rounded-lg flex items-center justify-center">
-                <Building className="w-6 h-6 text-white" />
+      <article className="group card-editorial p-6 md:p-7">
+        {/* Header row */}
+        <div className="flex items-start justify-between gap-4 mb-5">
+          <div className="flex items-start gap-4 min-w-0">
+            <div className="w-14 h-14 shrink-0 border border-foreground flex items-center justify-center bg-foreground text-background">
+              <span className="font-serif text-xl font-semibold leading-none">
+                {job.company?.charAt(0).toUpperCase() || "•"}
+              </span>
+            </div>
+            <div className="min-w-0">
+              <div className="text-[10px] font-semibold tracking-[0.22em] uppercase text-muted-foreground mb-1.5">
+                {job.company}
               </div>
-              <div>
-                <h3 className="font-semibold text-lg group-hover:text-primary transition-colors">
-                  {job.title}
-                </h3>
-                <p className="text-muted-foreground font-medium">{job.company}</p>
-              </div>
-            </div>
-            <Button variant="ghost" size="icon" className="hover:bg-primary/10">
-              <Bookmark className="w-4 h-4" />
-            </Button>
-          </div>
-        </CardHeader>
-
-        <CardContent className="space-y-4">
-          <div className="flex items-center gap-4 text-sm text-muted-foreground">
-            <div className="flex items-center gap-1">
-              <MapPin className="w-4 h-4" />
-              {job.location}
-            </div>
-            <div className="flex items-center gap-1">
-              <Clock className="w-4 h-4" />
-              {job.posted}
+              <h3 className="font-serif text-2xl md:text-[1.6rem] leading-tight text-foreground group-hover:underline underline-offset-4 decoration-1">
+                {job.title}
+              </h3>
             </div>
           </div>
+          <Button variant="ghost" size="icon" className="shrink-0 rounded-none border border-transparent hover:border-border hover:bg-transparent">
+            <Bookmark className="w-4 h-4" strokeWidth={1.5} />
+          </Button>
+        </div>
 
-          <div className="flex items-center gap-2">
-            <Badge variant="secondary" className="bg-primary/10 text-primary hover:bg-primary/20">
-              {job.type}
-            </Badge>
-            <div className="flex items-center gap-1 text-success font-semibold">
-              <DollarSign className="w-4 h-4" />
-              {job.salary}
-            </div>
-          </div>
+        {/* Meta row */}
+        <div className="flex flex-wrap items-center gap-x-6 gap-y-2 text-sm text-muted-foreground mb-5 pb-5 border-b border-border">
+          <span className="inline-flex items-center gap-1.5">
+            <MapPin className="w-3.5 h-3.5" strokeWidth={1.5} />
+            {job.location}
+          </span>
+          <span className="inline-flex items-center gap-1.5">
+            <Clock className="w-3.5 h-3.5" strokeWidth={1.5} />
+            {job.posted}
+          </span>
+          <span className="inline-flex items-center gap-1.5 text-foreground font-medium">
+            <DollarSign className="w-3.5 h-3.5" strokeWidth={1.5} />
+            {job.salary}
+          </span>
+        </div>
 
-          <div 
-            className="text-sm text-muted-foreground line-clamp-2 [&_ul]:list-disc [&_ul]:ml-4 [&_ol]:list-decimal [&_ol]:ml-4"
-            dangerouslySetInnerHTML={{ __html: decodeHtml(job.description) }}
-          />
+        {/* Badges */}
+        <div className="flex flex-wrap items-center gap-2 mb-5">
+          <span className="badge-editorial badge-editorial--solid">{job.type}</span>
+          {job.requirements.slice(0, 3).map((req, index) => (
+            <span key={index} className="badge-editorial">
+              {req}
+            </span>
+          ))}
+          {job.requirements.length > 3 && (
+            <span className="badge-editorial badge-editorial--muted">
+              +{job.requirements.length - 3}
+            </span>
+          )}
+        </div>
 
-          <div className="flex flex-wrap gap-2">
-            {job.requirements.slice(0, 3).map((req, index) => (
-              <Badge key={index} variant="outline" className="text-xs">
-                {req}
-              </Badge>
-            ))}
-            {job.requirements.length > 3 && (
-              <Badge variant="outline" className="text-xs">
-                +{job.requirements.length - 3} mais
-              </Badge>
-            )}
-          </div>
-        </CardContent>
+        {/* Description */}
+        <div
+          className="text-[15px] leading-relaxed text-muted-foreground line-clamp-2 [&_ul]:list-disc [&_ul]:ml-4 [&_ol]:list-decimal [&_ol]:ml-4 mb-6"
+          dangerouslySetInnerHTML={{ __html: decodeHtml(job.description) }}
+        />
 
-        <CardFooter className="pt-3">
-          <div className="flex items-center gap-2 w-full">
-            <Button 
-              variant="outline" 
-              className="flex-1"
-              onClick={() => navigate(`/vaga/${job.id}`)}
-            >
-              Ver Detalhes
-            </Button>
-            <Button 
-              variant="default" 
-              className="flex-1"
-              onClick={handleApplyClick}
-              disabled={hasApplied}
-            >
-              {hasApplied ? "Já Candidatado" : "Candidatar-se"}
-            </Button>
-          </div>
-        </CardFooter>
-      </Card>
+        {/* Actions */}
+        <div className="flex items-center gap-3 pt-1">
+          <Button
+            variant="outline"
+            className="flex-1 h-11 rounded-none border-foreground text-foreground hover:bg-foreground hover:text-background uppercase text-xs tracking-[0.15em] font-semibold"
+            onClick={() => navigate(`/vaga/${job.id}`)}
+          >
+            Ver Detalhes
+          </Button>
+          <Button
+            className="flex-1 h-11 rounded-none bg-foreground text-background hover:bg-foreground/90 uppercase text-xs tracking-[0.15em] font-semibold"
+            onClick={handleApplyClick}
+            disabled={hasApplied}
+          >
+            {hasApplied ? "Candidatura Enviada" : "Candidatar-se"}
+          </Button>
+        </div>
+      </article>
 
       <Dialog open={isApplicationDialogOpen} onOpenChange={setIsApplicationDialogOpen}>
         <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto">

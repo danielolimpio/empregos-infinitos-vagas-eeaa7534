@@ -1,36 +1,34 @@
-import { FileText } from "lucide-react";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
+import { FileText, ArrowUpRight } from "lucide-react";
 
 const CurriculoCard = () => {
   return (
-    <Card className="border-2 border-success/20 bg-success/5 shadow-lg">
-      <CardHeader className="pb-3">
-        <div className="flex items-center gap-2 mb-2">
-          <FileText className="w-5 h-5 text-success" />
-          <CardTitle className="text-lg">Crie seu Currículo</CardTitle>
-        </div>
-        <CardDescription className="text-sm">
-          Destaque-se com um currículo profissional e aumente suas chances de ser contratado
-        </CardDescription>
-      </CardHeader>
-      <CardContent className="pt-0">
-        <Button
-          variant="success"
-          className="w-full"
-          size="lg"
-          asChild
-        >
-          <a 
-            href="https://fazercurriculo.com" 
-            target="_blank" 
-            rel="noopener noreferrer"
-          >
-            Criar Currículo Grátis
-          </a>
-        </Button>
-      </CardContent>
-    </Card>
+    <aside className="card-editorial bg-foreground text-background p-6">
+      <div className="flex items-center gap-3 mb-4">
+        <FileText className="w-4 h-4" strokeWidth={1.5} />
+        <span className="text-[10px] font-semibold tracking-[0.24em] uppercase">
+          Recurso Profissional
+        </span>
+      </div>
+
+      <h3 className="font-serif text-2xl leading-tight mb-3">
+        Construa seu currículo executivo
+      </h3>
+
+      <p className="text-sm leading-relaxed text-background/75 mb-6">
+        Modelos editoriais, revisão automatizada e exportação em PDF de alta qualidade —
+        pensados para processos seletivos exigentes.
+      </p>
+
+      <a
+        href="https://fazercurriculo.com"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="group inline-flex items-center justify-between w-full h-12 px-4 border border-background bg-transparent hover:bg-background hover:text-foreground transition-colors uppercase text-xs tracking-[0.18em] font-semibold"
+      >
+        <span>Criar Currículo Grátis</span>
+        <ArrowUpRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" strokeWidth={1.5} />
+      </a>
+    </aside>
   );
 };
 
