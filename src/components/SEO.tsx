@@ -9,9 +9,10 @@ interface SEOProps {
   image?: string;
   imageAlt?: string;
   isPrivatePage?: boolean;
+  ogType?: string;
 }
 
-const SEO = ({ title, description, canonical, structuredData, keywords, image, imageAlt, isPrivatePage = false }: SEOProps) => {
+const SEO = ({ title, description, canonical, structuredData, keywords, image, imageAlt, isPrivatePage = false, ogType = 'website' }: SEOProps) => {
   useEffect(() => {
     // Title
     document.title = title;
