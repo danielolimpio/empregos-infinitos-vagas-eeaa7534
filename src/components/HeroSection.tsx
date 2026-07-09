@@ -35,7 +35,7 @@ const HeroSection = () => {
         {/* Eyebrow */}
         <div className="flex items-center gap-4 mb-10">
           <span className="h-px w-10 bg-background/40" />
-          <span className="text-[11px] font-semibold tracking-[0.28em] uppercase text-background/70">
+          <span className="text-[11px] font-semibold tracking-[0.28em] uppercase text-background">
             Portal Nacional de Carreiras · Edição {new Date().getFullYear()}
           </span>
         </div>
@@ -48,10 +48,10 @@ const HeroSection = () => {
               <br />
               da sua carreira
               <br />
-              <span className="italic font-normal text-background/70">começa aqui.</span>
+              <span className="italic font-normal text-background">começa aqui.</span>
             </h1>
 
-            <p className="mt-10 max-w-2xl text-lg md:text-xl leading-relaxed text-background/75 font-light">
+            <p className="mt-10 max-w-2xl text-lg md:text-xl leading-relaxed text-background font-light">
               Conectamos profissionais qualificados às principais companhias do Brasil.
               Oportunidades verificadas, processos transparentes, resultados mensuráveis.
             </p>
@@ -64,7 +64,7 @@ const HeroSection = () => {
                 <div className="font-serif text-5xl md:text-6xl font-medium tracking-tight">
                   {stat.value}
                 </div>
-                <div className="mt-2 text-[11px] font-semibold tracking-[0.22em] uppercase text-background/60">
+                <div className="mt-2 text-[11px] font-semibold tracking-[0.22em] uppercase text-background">
                   {stat.label}
                 </div>
               </div>
@@ -74,22 +74,22 @@ const HeroSection = () => {
 
         {/* Search bar */}
         <div className="mt-16 border-t border-background/20 pt-10">
-          <div className="text-[11px] font-semibold tracking-[0.22em] uppercase text-background/60 mb-4">
+          <div className="text-[11px] font-semibold tracking-[0.22em] uppercase text-background mb-4">
             Buscar Oportunidades
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-12 gap-0 border border-background/30 bg-background/[0.03]">
-            <div className="relative md:col-span-6 border-b md:border-b-0 md:border-r border-background/20">
-              <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-background/50" strokeWidth={1.5} />
+          <div className="grid grid-cols-1 md:grid-cols-12 gap-0 border border-background/30 bg-black/50">
+            <div className="relative md:col-span-6 border-b md:border-b-0 md:border-r border-background/20 bg-black/25">
+              <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-background/70" strokeWidth={1.5} />
               <Input
                 placeholder="Cargo, palavra-chave ou empresa"
-                className="h-16 pl-11 rounded-none border-0 bg-transparent text-background placeholder:text-background/50 text-base focus-visible:ring-0 focus-visible:ring-offset-0"
+                className="h-16 pl-11 rounded-none border-0 bg-transparent text-background placeholder:text-background/60 text-base focus-visible:ring-0 focus-visible:ring-offset-0"
               />
             </div>
-            <div className="relative md:col-span-4 border-b md:border-b-0 md:border-r border-background/20">
-              <MapPin className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-background/50" strokeWidth={1.5} />
+            <div className="relative md:col-span-4 border-b md:border-b-0 md:border-r border-background/20 bg-black/25">
+              <MapPin className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-background/70" strokeWidth={1.5} />
               <Input
                 placeholder="Cidade ou estado"
-                className="h-16 pl-11 rounded-none border-0 bg-transparent text-background placeholder:text-background/50 text-base focus-visible:ring-0 focus-visible:ring-offset-0"
+                className="h-16 pl-11 rounded-none border-0 bg-transparent text-background placeholder:text-background/60 text-base focus-visible:ring-0 focus-visible:ring-offset-0"
               />
             </div>
             <Button className="md:col-span-2 h-16 rounded-none bg-background text-foreground hover:bg-background/90 font-semibold tracking-wide uppercase text-xs">
@@ -99,13 +99,13 @@ const HeroSection = () => {
 
           {/* Popular */}
           <div className="mt-8 flex flex-wrap items-center gap-x-3 gap-y-3">
-            <span className="text-[11px] font-semibold tracking-[0.22em] uppercase text-background/60 mr-2">
+            <span className="text-[11px] font-semibold tracking-[0.22em] uppercase text-background mr-2">
               Buscas frequentes
             </span>
             {popularSearches.map((term) => (
               <button
                 key={term}
-                className="text-sm text-background/85 hover:text-background border border-background/30 hover:border-background px-4 py-2 transition-colors tracking-wide"
+                className="text-sm text-background bg-black/50 hover:bg-black/70 border border-background/30 hover:border-background px-4 py-2 transition-colors tracking-wide"
               >
                 {term}
               </button>
