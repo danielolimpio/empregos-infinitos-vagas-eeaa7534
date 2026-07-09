@@ -51,7 +51,7 @@ const HeroSection = () => {
               <span className="italic font-normal text-background">começa aqui.</span>
             </h1>
 
-            <p className="mt-10 max-w-2xl text-lg md:text-xl leading-relaxed text-background/75 font-light">
+            <p className="mt-10 max-w-2xl text-lg md:text-xl leading-relaxed text-background font-light">
               Conectamos profissionais qualificados às principais companhias do Brasil.
               Oportunidades verificadas, processos transparentes, resultados mensuráveis.
             </p>
