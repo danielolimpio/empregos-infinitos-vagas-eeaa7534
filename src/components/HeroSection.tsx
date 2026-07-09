@@ -1,6 +1,7 @@
 import { Search, MapPin, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import heroBackground from "@/assets/vagas_de_trabalho.jpg.asset.json";
 
 const HeroSection = () => {
   const stats = [
