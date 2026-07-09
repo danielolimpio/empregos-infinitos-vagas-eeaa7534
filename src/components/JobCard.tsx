@@ -215,11 +215,13 @@ const JobCard = ({ job }: JobCardProps) => {
             Ver Detalhes
           </Button>
           <Button
-            className="flex-1 h-11 rounded-none bg-foreground text-background hover:bg-foreground/90 uppercase text-xs tracking-[0.15em] font-semibold"
+            variant="default"
+            className="flex-1 h-11 rounded-none uppercase text-sm tracking-[0.12em] font-semibold"
             onClick={handleApplyClick}
             disabled={hasApplied}
           >
             {hasApplied ? "Candidatura Enviada" : "Candidatar-se"}
+            <Send className="ml-2 w-4 h-4" strokeWidth={1.5} />
           </Button>
         </div>
       </article>
