@@ -64,7 +64,7 @@ const HeroSection = () => {
                 <div className="font-serif text-5xl md:text-6xl font-medium tracking-tight">
                   {stat.value}
                 </div>
-                <div className="mt-2 text-[11px] font-semibold tracking-[0.22em] uppercase text-background/60">
+                <div className="mt-2 text-[11px] font-semibold tracking-[0.22em] uppercase text-background">
                   {stat.label}
                 </div>
               </div>
