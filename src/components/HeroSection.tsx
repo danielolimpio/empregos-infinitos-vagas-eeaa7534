@@ -99,13 +99,13 @@ const HeroSection = () => {
 
           {/* Popular */}
           <div className="mt-8 flex flex-wrap items-center gap-x-3 gap-y-3">
-            <span className="text-[11px] font-semibold tracking-[0.22em] uppercase text-background/60 mr-2">
+            <span className="text-[11px] font-semibold tracking-[0.22em] uppercase text-background mr-2">
               Buscas frequentes
             </span>
             {popularSearches.map((term) => (
               <button
                 key={term}
-                className="text-sm text-background/85 hover:text-background border border-background/30 hover:border-background px-4 py-2 transition-colors tracking-wide"
+                className="text-sm text-background bg-black/50 hover:bg-black/70 border border-background/30 hover:border-background px-4 py-2 transition-colors tracking-wide"
               >
                 {term}
               </button>
