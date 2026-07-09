@@ -19,8 +19,19 @@ const HeroSection = () => {
   ];
 
   return (
-    <section className="relative bg-foreground text-background border-b border-foreground/20">
-      <div className="container mx-auto px-4 py-24 lg:py-32">
+    <section className="relative overflow-hidden bg-foreground text-background border-b border-foreground/20">
+      {/* Background image */}
+      <div
+        className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+        style={{ backgroundImage: "url('/hero-bg.jpg')" }}
+        aria-hidden="true"
+      />
+      {/* Dark gradient mask for text contrast */}
+      <div
+        className="absolute inset-0 bg-gradient-to-b from-black/85 via-black/55 to-black/70"
+        aria-hidden="true"
+      />
+      <div className="relative container mx-auto px-4 py-24 lg:py-32">
         {/* Eyebrow */}
         <div className="flex items-center gap-4 mb-10">
           <span className="h-px w-10 bg-background/40" />
