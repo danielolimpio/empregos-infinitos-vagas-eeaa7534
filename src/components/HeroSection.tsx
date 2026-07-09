@@ -74,22 +74,22 @@ const HeroSection = () => {
 
         {/* Search bar */}
         <div className="mt-16 border-t border-background/20 pt-10">
-          <div className="text-[11px] font-semibold tracking-[0.22em] uppercase text-background/60 mb-4">
+          <div className="text-[11px] font-semibold tracking-[0.22em] uppercase text-background mb-4">
             Buscar Oportunidades
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-12 gap-0 border border-background/30 bg-background/[0.03]">
-            <div className="relative md:col-span-6 border-b md:border-b-0 md:border-r border-background/20">
-              <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-background/50" strokeWidth={1.5} />
+          <div className="grid grid-cols-1 md:grid-cols-12 gap-0 border border-background/30 bg-black/50">
+            <div className="relative md:col-span-6 border-b md:border-b-0 md:border-r border-background/20 bg-black/25">
+              <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-background/70" strokeWidth={1.5} />
               <Input
                 placeholder="Cargo, palavra-chave ou empresa"
-                className="h-16 pl-11 rounded-none border-0 bg-transparent text-background placeholder:text-background/50 text-base focus-visible:ring-0 focus-visible:ring-offset-0"
+                className="h-16 pl-11 rounded-none border-0 bg-transparent text-background placeholder:text-background/60 text-base focus-visible:ring-0 focus-visible:ring-offset-0"
               />
             </div>
-            <div className="relative md:col-span-4 border-b md:border-b-0 md:border-r border-background/20">
-              <MapPin className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-background/50" strokeWidth={1.5} />
+            <div className="relative md:col-span-4 border-b md:border-b-0 md:border-r border-background/20 bg-black/25">
+              <MapPin className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-background/70" strokeWidth={1.5} />
               <Input
                 placeholder="Cidade ou estado"
-                className="h-16 pl-11 rounded-none border-0 bg-transparent text-background placeholder:text-background/50 text-base focus-visible:ring-0 focus-visible:ring-offset-0"
+                className="h-16 pl-11 rounded-none border-0 bg-transparent text-background placeholder:text-background/60 text-base focus-visible:ring-0 focus-visible:ring-offset-0"
               />
             </div>
             <Button className="md:col-span-2 h-16 rounded-none bg-background text-foreground hover:bg-background/90 font-semibold tracking-wide uppercase text-xs">
