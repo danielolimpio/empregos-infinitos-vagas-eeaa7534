@@ -23,7 +23,7 @@ const HeroSection = () => {
       {/* Background image */}
       <div
         className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-        style={{ backgroundImage: `url(${heroBackground.url})` }}
+        style={{ backgroundImage: "url('/hero-bg.jpg')" }}
         aria-hidden="true"
       />
       {/* Dark gradient mask for text contrast */}
