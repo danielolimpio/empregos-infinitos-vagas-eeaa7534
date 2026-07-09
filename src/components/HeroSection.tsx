@@ -28,7 +28,7 @@ const HeroSection = () => {
       />
       {/* Dark gradient mask for text contrast */}
       <div
-        className="absolute inset-0 bg-gradient-to-b from-black/85 via-black/55 to-black/70"
+        className="absolute inset-0 bg-gradient-to-b from-black/90 via-black/75 to-black/85"
         aria-hidden="true"
       />
       <div className="relative container mx-auto px-4 py-24 lg:py-32">
