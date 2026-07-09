@@ -48,7 +48,7 @@ const HeroSection = () => {
               <br />
               da sua carreira
               <br />
-              <span className="italic font-normal text-background/70">começa aqui.</span>
+              <span className="italic font-normal text-background">começa aqui.</span>
             </h1>
 
             <p className="mt-10 max-w-2xl text-lg md:text-xl leading-relaxed text-background/75 font-light">
