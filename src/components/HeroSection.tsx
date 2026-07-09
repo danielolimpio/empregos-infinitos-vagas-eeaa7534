@@ -35,7 +35,7 @@ const HeroSection = () => {
         {/* Eyebrow */}
         <div className="flex items-center gap-4 mb-10">
           <span className="h-px w-10 bg-background/40" />
-          <span className="text-[11px] font-semibold tracking-[0.28em] uppercase text-background/70">
+          <span className="text-[11px] font-semibold tracking-[0.28em] uppercase text-background">
             Portal Nacional de Carreiras · Edição {new Date().getFullYear()}
           </span>
         </div>
