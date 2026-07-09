@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { MapPin, Building, Clock, DollarSign, Bookmark } from "lucide-react";
+import { MapPin, Building, Clock, DollarSign, Bookmark, Send } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
