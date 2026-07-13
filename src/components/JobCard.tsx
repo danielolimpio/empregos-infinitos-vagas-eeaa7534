@@ -185,11 +185,11 @@ const JobCard = ({ job }: JobCardProps) => {
         </div>
 
         {/* Badges */}
-        <div className="flex flex-wrap items-center gap-2 mb-5">
+        <div className="flex flex-wrap items-center gap-2 mb-5 min-w-0">
           <span className="badge-editorial badge-editorial--solid">{job.type}</span>
           {job.requirements.slice(0, 3).map((req, index) => (
-            <span key={index} className="badge-editorial">
-              {req}
+            <span key={index} className="badge-editorial" title={req}>
+              {req.length > 40 ? req.slice(0, 40) + "…" : req}
             </span>
           ))}
           {job.requirements.length > 3 && (
