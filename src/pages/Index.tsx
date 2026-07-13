@@ -100,14 +100,14 @@ const Index = () => {
       <HeroSection />
       
       <main className="container mx-auto px-4 py-12">
-        <div className="flex gap-8">
-          <aside className="hidden lg:block w-80 space-y-6">
+        <div className="flex flex-col lg:flex-row gap-8">
+          <aside className="hidden lg:block w-80 shrink-0 space-y-6">
             <CurriculoCard />
             <div data-location-filters>
               <JobFilters filters={filters} setFilters={setFilters} />
             </div>
           </aside>
-          <div className="flex-1">
+          <div className="flex-1 min-w-0">
             <JobList filters={filters} />
           </div>
         </div>

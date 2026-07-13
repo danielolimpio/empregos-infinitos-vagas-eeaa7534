@@ -145,6 +145,11 @@
     @apply border-border;
   }
 
+  html, body {
+    overflow-x: hidden;
+    max-width: 100%;
+  }
+
   html {
     font-feature-settings: "ss01", "cv11", "kern";
   }
@@ -209,8 +214,8 @@
   .badge-editorial {
     display: inline-flex;
     align-items: center;
-    height: 1.75rem;
-    padding: 0 0.75rem;
+    min-height: 1.75rem;
+    padding: 0.25rem 0.75rem;
     border: 1px solid hsl(var(--foreground));
     background: transparent;
     color: hsl(var(--foreground));
@@ -220,6 +225,9 @@
     letter-spacing: 0.18em;
     text-transform: uppercase;
     white-space: nowrap;
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
   .badge-editorial--solid {
     background: hsl(var(--foreground));

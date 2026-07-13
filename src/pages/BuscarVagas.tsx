@@ -64,11 +64,11 @@ const BuscarVagas = () => {
             </div>
           </header>
 
-          <div className="flex gap-8">
-            <aside className="hidden lg:block">
+          <div className="flex flex-col lg:flex-row gap-8">
+            <aside className="hidden lg:block shrink-0">
               <JobFilters filters={filters} setFilters={setFilters} />
             </aside>
-            <div className="flex-1">
+            <div className="flex-1 min-w-0">
               <JobList filters={filters} />
             </div>
           </div>
