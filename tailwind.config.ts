@@ -19,8 +19,9 @@ export default {
 		},
 		extend: {
 			fontFamily: {
-				sans: ['"Inter Tight"', 'ui-sans-serif', 'system-ui', 'sans-serif'],
-				serif: ['"Playfair Display"', '"Times New Roman"', 'ui-serif', 'Georgia', 'serif'],
+				sans: ['Roboto', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+				serif: ['"Roboto Serif"', '"Times New Roman"', 'ui-serif', 'Georgia', 'serif'],
+				mono: ['"Roboto Mono"', 'ui-monospace', 'SFMono-Regular', 'Menlo', 'monospace'],
 			},
 			colors: {
 				border: 'hsl(var(--border))',
