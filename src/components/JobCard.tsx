@@ -145,47 +145,59 @@ const JobCard = ({ job }: JobCardProps) => {
 
   return (
     <>
-      <article className="group card-editorial p-6 md:p-7">
+      <article className="group card-premium p-6 md:p-8">
         {/* Header row */}
-        <div className="flex items-start justify-between gap-4 mb-5">
+        <div className="flex items-start justify-between gap-4 mb-6">
           <div className="flex items-start gap-4 min-w-0">
-            <div className="w-14 h-14 shrink-0 border border-foreground flex items-center justify-center bg-foreground text-background">
-              <span className="font-serif text-xl font-semibold leading-none">
+            <div className="relative w-16 h-16 shrink-0 border border-foreground flex items-center justify-center bg-foreground text-background">
+              <span className="font-serif text-2xl font-semibold leading-none">
                 {job.company?.charAt(0).toUpperCase() || "•"}
               </span>
+              <span className="absolute -top-1 -left-1 w-2 h-2 border-t border-l border-foreground" />
+              <span className="absolute -bottom-1 -right-1 w-2 h-2 border-b border-r border-foreground" />
             </div>
             <div className="min-w-0">
-              <div className="text-[10px] font-semibold tracking-[0.22em] uppercase text-muted-foreground mb-1.5">
+              <div className="font-mono text-[10px] font-medium tracking-[0.26em] uppercase text-muted-foreground mb-2 inline-flex items-center gap-2">
+                <span className="inline-block w-4 h-px bg-muted-foreground" />
                 {job.company}
               </div>
-              <h3 className="font-serif text-2xl md:text-[1.6rem] leading-tight text-foreground group-hover:underline underline-offset-4 decoration-1">
+              <h3 className="font-serif text-2xl md:text-[1.7rem] leading-tight text-foreground group-hover:underline underline-offset-4 decoration-1">
                 {job.title}
               </h3>
             </div>
           </div>
-          <Button variant="ghost" size="icon" className="shrink-0 rounded-none border border-transparent hover:border-border hover:bg-transparent">
-            <Bookmark className="w-4 h-4" strokeWidth={1.5} />
+          <Button variant="ghost" size="icon" className="shrink-0 rounded-none border border-border hover:border-foreground hover:bg-transparent">
+            <Bookmark className="w-4 h-4" strokeWidth={1.25} />
           </Button>
         </div>
 
         {/* Meta row */}
-        <div className="flex flex-wrap items-center gap-x-6 gap-y-2 text-sm text-muted-foreground mb-5 pb-5 border-b border-border">
-          <span className="inline-flex items-center gap-1.5">
-            <MapPin className="w-3.5 h-3.5" strokeWidth={1.5} />
-            {job.location}
-          </span>
-          <span className="inline-flex items-center gap-1.5">
-            <Clock className="w-3.5 h-3.5" strokeWidth={1.5} />
-            {job.posted}
-          </span>
-          <span className="inline-flex items-center gap-1.5 text-foreground font-medium">
-            <DollarSign className="w-3.5 h-3.5" strokeWidth={1.5} />
-            {job.salary}
-          </span>
+        <div className="grid grid-cols-3 gap-4 mb-6 py-4 border-y border-border">
+          <div className="flex flex-col gap-1 min-w-0">
+            <span className="font-mono text-[9px] font-medium tracking-[0.24em] uppercase text-muted-foreground">Local</span>
+            <span className="inline-flex items-center gap-1.5 text-sm text-foreground truncate">
+              <MapPin className="w-3.5 h-3.5 shrink-0" strokeWidth={1.25} />
+              <span className="truncate">{job.location}</span>
+            </span>
+          </div>
+          <div className="flex flex-col gap-1 min-w-0 border-l border-border pl-4">
+            <span className="font-mono text-[9px] font-medium tracking-[0.24em] uppercase text-muted-foreground">Publicada</span>
+            <span className="inline-flex items-center gap-1.5 text-sm text-foreground truncate">
+              <Clock className="w-3.5 h-3.5 shrink-0" strokeWidth={1.25} />
+              <span className="truncate">{job.posted}</span>
+            </span>
+          </div>
+          <div className="flex flex-col gap-1 min-w-0 border-l border-border pl-4">
+            <span className="font-mono text-[9px] font-medium tracking-[0.24em] uppercase text-muted-foreground">Faixa</span>
+            <span className="inline-flex items-center gap-1.5 text-sm text-foreground font-medium truncate">
+              <DollarSign className="w-3.5 h-3.5 shrink-0" strokeWidth={1.25} />
+              <span className="truncate">{job.salary}</span>
+            </span>
+          </div>
         </div>
 
         {/* Badges */}
-        <div className="flex flex-wrap items-center gap-2 mb-5 min-w-0">
+        <div className="flex flex-wrap items-center gap-2 mb-6 min-w-0">
           <span className="badge-editorial badge-editorial--solid">{job.type}</span>
           {job.requirements.slice(0, 3).map((req, index) => (
             <span key={index} className="badge-editorial" title={req}>
@@ -201,7 +213,7 @@ const JobCard = ({ job }: JobCardProps) => {
 
         {/* Description */}
         <div
-          className="text-[15px] leading-relaxed text-muted-foreground line-clamp-2 [&_ul]:list-disc [&_ul]:ml-4 [&_ol]:list-decimal [&_ol]:ml-4 mb-6"
+          className="text-[15px] leading-relaxed text-muted-foreground line-clamp-2 [&_ul]:list-disc [&_ul]:ml-4 [&_ol]:list-decimal [&_ol]:ml-4 mb-7"
           dangerouslySetInnerHTML={{ __html: decodeHtml(job.description) }}
         />
 
@@ -209,19 +221,19 @@ const JobCard = ({ job }: JobCardProps) => {
         <div className="flex items-center gap-3 pt-1">
           <Button
             variant="outline"
-            className="flex-1 h-11 rounded-none border-foreground text-foreground hover:bg-foreground hover:text-background uppercase text-xs tracking-[0.15em] font-semibold"
+            className="flex-1 h-12 rounded-none border-foreground text-foreground hover:bg-foreground hover:text-background uppercase text-xs tracking-[0.18em] font-medium"
             onClick={() => navigate(`/vaga/${job.id}`)}
           >
             Ver Detalhes
           </Button>
           <Button
             variant="default"
-            className="flex-1 h-11 rounded-none uppercase text-sm tracking-[0.12em] font-semibold"
+            className="flex-1 h-12 rounded-none uppercase text-xs tracking-[0.18em] font-medium"
             onClick={handleApplyClick}
             disabled={hasApplied}
           >
-            {hasApplied ? "Candidatura Enviada" : "Candidatar-se"}
-            <Send className="ml-2 w-4 h-4" strokeWidth={1.5} />
+            {hasApplied ? "Enviada" : "Candidatar-se"}
+            <Send className="ml-2 w-4 h-4" strokeWidth={1.25} />
           </Button>
         </div>
       </article>
