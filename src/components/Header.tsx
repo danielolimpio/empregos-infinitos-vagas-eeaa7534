@@ -108,28 +108,28 @@ const Header = () => {
               variant="ghost"
               size="sm"
               onClick={toggleTheme}
-              className="gap-2 rounded-none"
+              className="gap-2 rounded-none h-10 w-10 p-0 border border-border hover:border-foreground hover:bg-transparent"
               aria-label={theme === "dark" ? "Ativar modo claro" : "Ativar modo escuro"}
             >
-              {theme === "dark" ? <Sun className="h-4 w-4" strokeWidth={1.5} /> : <Moon className="h-4 w-4" strokeWidth={1.5} />}
+              {theme === "dark" ? <Sun className="h-4 w-4" strokeWidth={1.25} /> : <Moon className="h-4 w-4" strokeWidth={1.25} />}
             </Button>
             {user ? (
               <>
-                <Button variant="ghost" size="sm" className="gap-2 rounded-none uppercase text-[11px] tracking-[0.14em] font-semibold" onClick={() => navigate("/dashboard")}>
-                  <User className="h-4 w-4" strokeWidth={1.5} />
+                <Button variant="ghost" size="sm" className="gap-2 rounded-none h-10 border border-border hover:border-foreground font-mono uppercase text-[10px] tracking-[0.22em] font-medium" onClick={() => navigate("/dashboard")}>
+                  <User className="h-4 w-4" strokeWidth={1.25} />
                   {user.email?.split("@")[0]}
                 </Button>
-                <Button variant="outline" size="sm" onClick={handleLogout} className="gap-2 rounded-none border-foreground uppercase text-[11px] tracking-[0.14em] font-semibold">
-                  <LogOut className="h-4 w-4" strokeWidth={1.5} />
+                <Button variant="outline" size="sm" onClick={handleLogout} className="gap-2 rounded-none h-10 border-foreground font-mono uppercase text-[10px] tracking-[0.22em] font-medium">
+                  <LogOut className="h-4 w-4" strokeWidth={1.25} />
                   Sair
                 </Button>
               </>
             ) : (
               <>
-                <Button variant="outline" size="sm" onClick={() => navigate("/login")} className="rounded-none border-foreground uppercase text-[11px] tracking-[0.14em] font-semibold">
+                <Button variant="outline" size="sm" onClick={() => navigate("/login")} className="rounded-none h-10 border-foreground font-mono uppercase text-[10px] tracking-[0.22em] font-medium px-4">
                   Entrar
                 </Button>
-                <Button size="sm" onClick={() => navigate("/cadastro")} className="rounded-none bg-foreground text-background hover:bg-foreground/90 uppercase text-[11px] tracking-[0.14em] font-semibold">
+                <Button size="sm" onClick={() => navigate("/cadastro")} className="rounded-none h-10 bg-foreground text-background hover:bg-foreground/90 font-mono uppercase text-[10px] tracking-[0.22em] font-medium px-4">
                   Cadastrar
                 </Button>
               </>
