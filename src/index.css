@@ -156,27 +156,36 @@
 
   body {
     @apply bg-background text-foreground;
-    font-family: "Inter Tight", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+    font-family: "Roboto", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
     font-size: 17px;
-    line-height: 1.65;
+    line-height: 1.7;
+    font-weight: 400;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    letter-spacing: -0.005em;
+    letter-spacing: 0.005em;
   }
 
   h1, h2, h3, h4, h5, h6, .font-serif {
-    font-family: "Playfair Display", "Times New Roman", ui-serif, Georgia, serif;
+    font-family: "Roboto Serif", "Times New Roman", ui-serif, Georgia, serif;
     font-feature-settings: "lnum", "kern";
-    letter-spacing: -0.015em;
+    letter-spacing: -0.018em;
+    font-weight: 500;
   }
 
-  h1 { line-height: 1.05; }
-  h2 { line-height: 1.15; }
+  h1 { line-height: 1.04; }
+  h2 { line-height: 1.14; }
 
-  p { font-size: 1.0625rem; line-height: 1.7; }
+  p { font-size: 1.0625rem; line-height: 1.75; }
+
+  .font-mono, code, kbd, samp {
+    font-family: "Roboto Mono", ui-monospace, "SF Mono", Menlo, monospace;
+  }
 
   /* Editorial link — thin underline offset, ink-colored */
   a { text-underline-offset: 3px; }
+
+  /* Selection */
+  ::selection { background: hsl(var(--foreground)); color: hsl(var(--background)); }
 }
 
 @layer components {
@@ -198,50 +207,68 @@
   .backdrop-blur-sm { backdrop-filter: blur(4px); }
   .backdrop-blur { backdrop-filter: blur(8px); }
 
-  /* ------ Editorial utilities ------ */
+  /* ------ Editorial utilities (premium refinement) ------ */
 
-  /* Uppercase eyebrow / kicker used above headlines */
+  /* Uppercase eyebrow — mono, extra tracking */
   .eyebrow {
-    font-family: "Inter Tight", sans-serif;
+    font-family: "Roboto Mono", ui-monospace, monospace;
     font-size: 0.6875rem;
-    font-weight: 600;
-    letter-spacing: 0.22em;
+    font-weight: 500;
+    letter-spacing: 0.26em;
     text-transform: uppercase;
     color: hsl(var(--muted-foreground));
   }
 
-  /* Premium rectangular badge — big, uppercase, spaced */
+  /* Premium rectangular badge — larger, framed, with mono type */
   .badge-editorial {
     display: inline-flex;
     align-items: center;
-    min-height: 1.75rem;
-    padding: 0.25rem 0.75rem;
-    border: 1px solid hsl(var(--foreground));
-    background: transparent;
+    gap: 0.5rem;
+    min-height: 2rem;
+    padding: 0.375rem 0.875rem;
+    border: 1px solid hsl(var(--border));
+    background: hsl(var(--card));
     color: hsl(var(--foreground));
-    font-family: "Inter Tight", sans-serif;
+    font-family: "Roboto Mono", ui-monospace, monospace;
     font-size: 0.6875rem;
-    font-weight: 600;
-    letter-spacing: 0.18em;
+    font-weight: 500;
+    letter-spacing: 0.2em;
     text-transform: uppercase;
     white-space: nowrap;
     max-width: 100%;
     overflow: hidden;
     text-overflow: ellipsis;
+    position: relative;
+    transition: border-color 0.2s ease, background-color 0.2s ease, color 0.2s ease;
+  }
+  .badge-editorial:hover {
+    border-color: hsl(var(--foreground));
   }
   .badge-editorial--solid {
     background: hsl(var(--foreground));
     color: hsl(var(--background));
+    border-color: hsl(var(--foreground));
   }
   .badge-editorial--muted {
     border-color: hsl(var(--border));
     color: hsl(var(--muted-foreground));
+    background: transparent;
+  }
+  .badge-editorial--outline {
+    background: transparent;
+    border-color: hsl(var(--foreground));
   }
 
-  /* Thin editorial rule */
+  /* Thin editorial rules */
   .rule-hair {
     height: 1px;
     background-color: hsl(var(--border));
+    width: 100%;
+  }
+  .rule-hair-double {
+    height: 4px;
+    border-top: 1px solid hsl(var(--foreground));
+    border-bottom: 1px solid hsl(var(--foreground));
     width: 100%;
   }
   .rule-accent {
@@ -249,14 +276,124 @@
     width: 3rem;
     background-color: hsl(var(--foreground));
   }
+  .rule-tick {
+    position: relative;
+    height: 1px;
+    background: hsl(var(--border));
+  }
+  .rule-tick::before,
+  .rule-tick::after {
+    content: "";
+    position: absolute;
+    top: -3px;
+    width: 1px;
+    height: 7px;
+    background: hsl(var(--foreground));
+  }
+  .rule-tick::before { left: 0; }
+  .rule-tick::after { right: 0; }
 
-  /* Editorial card — sharp corners, hairline border, quiet hover */
+  /* Premium editorial card — layered borders, corner ticks, quiet hover */
   .card-editorial {
     background: hsl(var(--card));
     border: 1px solid hsl(var(--border));
-    transition: border-color 0.2s ease, background-color 0.2s ease;
+    position: relative;
+    transition: border-color 0.25s ease, background-color 0.25s ease, transform 0.25s ease;
   }
   .card-editorial:hover {
     border-color: hsl(var(--foreground));
+  }
+
+  /* Ornamental corner ticks on premium cards */
+  .card-premium {
+    background: hsl(var(--card));
+    border: 1px solid hsl(var(--border));
+    position: relative;
+    transition: border-color 0.25s ease;
+  }
+  .card-premium::before,
+  .card-premium::after {
+    content: "";
+    position: absolute;
+    width: 14px;
+    height: 14px;
+    border: 1px solid hsl(var(--foreground));
+    pointer-events: none;
+    transition: border-color 0.25s ease;
+  }
+  .card-premium::before {
+    top: -1px;
+    left: -1px;
+    border-right: none;
+    border-bottom: none;
+  }
+  .card-premium::after {
+    bottom: -1px;
+    right: -1px;
+    border-left: none;
+    border-top: none;
+  }
+  .card-premium:hover {
+    border-color: hsl(var(--foreground));
+  }
+
+  /* Number/index counter — mono */
+  .counter-mono {
+    font-family: "Roboto Mono", ui-monospace, monospace;
+    font-size: 0.6875rem;
+    letter-spacing: 0.18em;
+    font-weight: 500;
+    color: hsl(var(--muted-foreground));
+  }
+
+  /* Section eyebrow with rule */
+  .section-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-family: "Roboto Mono", ui-monospace, monospace;
+    font-size: 0.6875rem;
+    font-weight: 500;
+    letter-spacing: 0.26em;
+    text-transform: uppercase;
+    color: hsl(var(--muted-foreground));
+  }
+  .section-eyebrow::before {
+    content: "";
+    display: inline-block;
+    width: 2rem;
+    height: 1px;
+    background: hsl(var(--foreground));
+  }
+
+  /* Premium button — sharp, framed, tracked */
+  .btn-premium {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.625rem;
+    height: 3rem;
+    padding: 0 1.5rem;
+    border: 1px solid hsl(var(--foreground));
+    background: hsl(var(--foreground));
+    color: hsl(var(--background));
+    font-family: "Roboto", sans-serif;
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    transition: background-color 0.2s ease, color 0.2s ease;
+  }
+  .btn-premium:hover {
+    background: transparent;
+    color: hsl(var(--foreground));
+  }
+  .btn-premium--ghost {
+    background: transparent;
+    color: hsl(var(--foreground));
+  }
+  .btn-premium--ghost:hover {
+    background: hsl(var(--foreground));
+    color: hsl(var(--background));
   }
 }
