@@ -33,11 +33,12 @@ const HeroSection = () => {
       />
       <div className="relative container mx-auto px-4 py-24 lg:py-32">
         {/* Eyebrow */}
-        <div className="flex items-center gap-4 mb-10">
-          <span className="h-px w-10 bg-background/40" />
-          <span className="text-[11px] font-semibold tracking-[0.28em] uppercase text-background">
-            Portal Nacional de Carreiras · Edição {new Date().getFullYear()}
+        <div className="flex items-center gap-4 mb-12">
+          <span className="h-px w-12 bg-background" />
+          <span className="font-mono text-[11px] font-medium tracking-[0.28em] uppercase text-background">
+            N.º 01 · Portal Nacional de Carreiras · Edição {new Date().getFullYear()}
           </span>
+          <span className="hidden md:inline-block h-px flex-1 bg-background/25" />
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-end">
@@ -58,13 +59,16 @@ const HeroSection = () => {
           </div>
 
           {/* Right: Stats stack */}
-          <aside className="lg:col-span-4 lg:border-l lg:border-background/20 lg:pl-10 space-y-8">
-            {stats.map((stat) => (
+          <aside className="lg:col-span-4 lg:border-l lg:border-background/25 lg:pl-10 space-y-8">
+            {stats.map((stat, i) => (
               <div key={stat.label} className="border-b border-background/15 pb-6 last:border-b-0 last:pb-0">
+                <div className="font-mono text-[10px] tracking-[0.28em] text-background/70 mb-2">
+                  0{i + 1} / 0{stats.length}
+                </div>
                 <div className="font-serif text-5xl md:text-6xl font-medium tracking-tight">
                   {stat.value}
                 </div>
-                <div className="mt-2 text-[11px] font-semibold tracking-[0.22em] uppercase text-background">
+                <div className="mt-3 font-mono text-[11px] font-medium tracking-[0.24em] uppercase text-background">
                   {stat.label}
                 </div>
               </div>
@@ -73,39 +77,45 @@ const HeroSection = () => {
         </div>
 
         {/* Search bar */}
-        <div className="mt-16 border-t border-background/20 pt-10">
-          <div className="text-[11px] font-semibold tracking-[0.22em] uppercase text-background mb-4">
-            Buscar Oportunidades
+        <div className="mt-16 border-t border-background/25 pt-10">
+          <div className="flex items-center justify-between mb-5">
+            <div className="font-mono text-[11px] font-medium tracking-[0.28em] uppercase text-background inline-flex items-center gap-3">
+              <span className="inline-block w-6 h-px bg-background" />
+              Buscar Oportunidades
+            </div>
+            <span className="hidden md:inline font-mono text-[10px] tracking-[0.28em] text-background/60 uppercase">
+              §01
+            </span>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-12 gap-0 border border-background/30 bg-black/50">
-            <div className="relative md:col-span-6 border-b md:border-b-0 md:border-r border-background/20 bg-black/25">
-              <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-background/70" strokeWidth={1.5} />
+          <div className="grid grid-cols-1 md:grid-cols-12 gap-0 border border-background/40 bg-black/50">
+            <div className="relative md:col-span-6 border-b md:border-b-0 md:border-r border-background/25 bg-black/25">
+              <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-background/70" strokeWidth={1.25} />
               <Input
                 placeholder="Cargo, palavra-chave ou empresa"
                 className="h-16 pl-11 rounded-none border-0 bg-transparent text-background placeholder:text-background/60 text-base focus-visible:ring-0 focus-visible:ring-offset-0"
               />
             </div>
-            <div className="relative md:col-span-4 border-b md:border-b-0 md:border-r border-background/20 bg-black/25">
-              <MapPin className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-background/70" strokeWidth={1.5} />
+            <div className="relative md:col-span-4 border-b md:border-b-0 md:border-r border-background/25 bg-black/25">
+              <MapPin className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-background/70" strokeWidth={1.25} />
               <Input
                 placeholder="Cidade ou estado"
                 className="h-16 pl-11 rounded-none border-0 bg-transparent text-background placeholder:text-background/60 text-base focus-visible:ring-0 focus-visible:ring-offset-0"
               />
             </div>
-            <Button className="md:col-span-2 h-16 rounded-none bg-background text-foreground hover:bg-background/90 font-semibold tracking-wide uppercase text-xs">
-              Buscar <ArrowRight className="ml-2 w-4 h-4" strokeWidth={1.75} />
+            <Button className="md:col-span-2 h-16 rounded-none bg-background text-foreground hover:bg-background/90 font-mono font-medium tracking-[0.2em] uppercase text-xs">
+              Buscar <ArrowRight className="ml-2 w-4 h-4" strokeWidth={1.5} />
             </Button>
           </div>
 
           {/* Popular */}
           <div className="mt-8 flex flex-wrap items-center gap-x-3 gap-y-3">
-            <span className="text-[11px] font-semibold tracking-[0.22em] uppercase text-background mr-2">
-              Buscas frequentes
+            <span className="font-mono text-[11px] font-medium tracking-[0.24em] uppercase text-background mr-2">
+              Buscas frequentes —
             </span>
             {popularSearches.map((term) => (
               <button
                 key={term}
-                className="text-sm text-background bg-black/50 hover:bg-black/70 border border-background/30 hover:border-background px-4 py-2 transition-colors tracking-wide"
+                className="text-sm text-background bg-black/50 hover:bg-black/75 border border-background/40 hover:border-background px-4 py-2 transition-colors tracking-wide"
               >
                 {term}
               </button>

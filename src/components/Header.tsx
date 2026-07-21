@@ -46,15 +46,20 @@ const Header = () => {
     <header className="sticky top-0 z-50 w-full bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/85 border-b border-border">
       {/* Top eyebrow bar */}
       <div className="hidden md:block border-b border-border">
-        <div className="container mx-auto px-4 h-8 flex items-center justify-between text-[10px] font-semibold tracking-[0.22em] uppercase text-muted-foreground">
-          <span>Portal Nacional de Carreiras</span>
-          <span>
+        <div className="container mx-auto px-4 h-9 flex items-center justify-between font-mono text-[10px] font-medium tracking-[0.26em] uppercase text-muted-foreground">
+          <span className="inline-flex items-center gap-3">
+            <span className="inline-block w-1 h-1 bg-foreground" />
+            Portal Nacional de Carreiras
+          </span>
+          <span className="inline-flex items-center gap-3">
+            Edição {new Date().getFullYear()}
+            <span className="inline-block w-px h-3 bg-border" />
             {new Date().toLocaleDateString("pt-BR", { weekday: "long", day: "2-digit", month: "long", year: "numeric" })}
           </span>
         </div>
       </div>
 
-      <div className="container mx-auto px-4 py-4">
+      <div className="container mx-auto px-4 py-5">
         <div className="flex items-center justify-between gap-4">
           {/* Logo */}
           <div className="flex items-center gap-2">
@@ -73,7 +78,7 @@ const Header = () => {
           </div>
 
           {/* Navigation Menu */}
-          <nav className="hidden md:flex items-center gap-1 lg:gap-2 text-[13px] font-medium tracking-wide">
+          <nav className="hidden md:flex items-center gap-0 text-[13px]">
             {[
               { label: "Home", to: "/" },
               { label: "Vagas", to: "/buscar-vagas" },
@@ -84,14 +89,16 @@ const Header = () => {
               { label: "Empresas", to: "/empresas" },
               { label: "Blog", to: "/dicas-carreira" },
               { label: "Contato", to: "/suporte" },
-            ].map((item) => (
-              <button
-                key={item.to}
-                onClick={() => navigate(item.to)}
-                className="px-2.5 py-2 text-foreground/80 hover:text-foreground border-b border-transparent hover:border-foreground transition-colors uppercase text-[11px] tracking-[0.14em] font-semibold"
-              >
-                {item.label}
-              </button>
+            ].map((item, i, arr) => (
+              <div key={item.to} className="flex items-center">
+                <button
+                  onClick={() => navigate(item.to)}
+                  className="px-3 py-2 text-foreground/75 hover:text-foreground border-b-2 border-transparent hover:border-foreground transition-colors font-mono uppercase text-[10px] tracking-[0.22em] font-medium"
+                >
+                  {item.label}
+                </button>
+                {i < arr.length - 1 && <span className="w-px h-3 bg-border/70" />}
+              </div>
             ))}
           </nav>
 
@@ -101,28 +108,28 @@ const Header = () => {
               variant="ghost"
               size="sm"
               onClick={toggleTheme}
-              className="gap-2 rounded-none"
+              className="gap-2 rounded-none h-10 w-10 p-0 border border-border hover:border-foreground hover:bg-transparent"
               aria-label={theme === "dark" ? "Ativar modo claro" : "Ativar modo escuro"}
             >
-              {theme === "dark" ? <Sun className="h-4 w-4" strokeWidth={1.5} /> : <Moon className="h-4 w-4" strokeWidth={1.5} />}
+              {theme === "dark" ? <Sun className="h-4 w-4" strokeWidth={1.25} /> : <Moon className="h-4 w-4" strokeWidth={1.25} />}
             </Button>
             {user ? (
               <>
-                <Button variant="ghost" size="sm" className="gap-2 rounded-none uppercase text-[11px] tracking-[0.14em] font-semibold" onClick={() => navigate("/dashboard")}>
-                  <User className="h-4 w-4" strokeWidth={1.5} />
+                <Button variant="ghost" size="sm" className="gap-2 rounded-none h-10 border border-border hover:border-foreground font-mono uppercase text-[10px] tracking-[0.22em] font-medium" onClick={() => navigate("/dashboard")}>
+                  <User className="h-4 w-4" strokeWidth={1.25} />
                   {user.email?.split("@")[0]}
                 </Button>
-                <Button variant="outline" size="sm" onClick={handleLogout} className="gap-2 rounded-none border-foreground uppercase text-[11px] tracking-[0.14em] font-semibold">
-                  <LogOut className="h-4 w-4" strokeWidth={1.5} />
+                <Button variant="outline" size="sm" onClick={handleLogout} className="gap-2 rounded-none h-10 border-foreground font-mono uppercase text-[10px] tracking-[0.22em] font-medium">
+                  <LogOut className="h-4 w-4" strokeWidth={1.25} />
                   Sair
                 </Button>
               </>
             ) : (
               <>
-                <Button variant="outline" size="sm" onClick={() => navigate("/login")} className="rounded-none border-foreground uppercase text-[11px] tracking-[0.14em] font-semibold">
+                <Button variant="outline" size="sm" onClick={() => navigate("/login")} className="rounded-none h-10 border-foreground font-mono uppercase text-[10px] tracking-[0.22em] font-medium px-4">
                   Entrar
                 </Button>
-                <Button size="sm" onClick={() => navigate("/cadastro")} className="rounded-none bg-foreground text-background hover:bg-foreground/90 uppercase text-[11px] tracking-[0.14em] font-semibold">
+                <Button size="sm" onClick={() => navigate("/cadastro")} className="rounded-none h-10 bg-foreground text-background hover:bg-foreground/90 font-mono uppercase text-[10px] tracking-[0.22em] font-medium px-4">
                   Cadastrar
                 </Button>
               </>
